@@ -1,1 +1,62 @@
+name: AZ Voice - Compiler APK
 
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-apk.yml'
+      - 'AZVoice_IHU007B_StandaloneBuild_project.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+
+      - name: Extraire le projet Android
+        run: |
+          unzip -oq AZVoice_IHU007B_StandaloneBuild_project.zip -d .
+          test -f settings.gradle
+          test -f app/build.gradle
+
+      - name: Installer Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Installer Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Installer Android 34
+        run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0'
+
+      - name: Installer Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Ajouter le modele vocal francais
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 -o "$RUNNER_TEMP/fr.zip" https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip
+          mkdir -p "$RUNNER_TEMP/model" app/src/main/assets/model-fr
+          unzip -q "$RUNNER_TEMP/fr.zip" -d "$RUNNER_TEMP/model"
+          cp -a "$RUNNER_TEMP/model/vosk-model-small-fr-0.22/." app/src/main/assets/model-fr/
+          printf 'fr-0.22-standalone-1\n' > app/src/main/assets/model-fr/uuid
+          test -f app/src/main/assets/model-fr/am/final.mdl
+
+      - name: Compiler AZ Voice
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Fournir APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AZVoice-IHU007B-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
