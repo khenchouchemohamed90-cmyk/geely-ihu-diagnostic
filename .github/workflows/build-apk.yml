@@ -21,7 +21,7 @@ jobs:
       - name: unzip -oq 'AZVoice_IHU007B_StandaloneBuild_project .zip' -d .
         run: |
           set -euo pipefail
-          unzip -oq AZVoice_IHU007B_StandaloneBuild_project.zip -d .
+          unzip -oq 'AZVoice_IHU007B_StandaloneBuild_project .zip' -d .
           test -f settings.gradle
           test -f app/build.gradle
 
