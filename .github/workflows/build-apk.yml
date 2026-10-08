@@ -20,6 +20,7 @@ jobs:
 
       - name: Extraire le projet Android
         run: |
+          set -euo pipefail
           unzip -oq AZVoice_IHU007B_StandaloneBuild_project.zip -d .
           test -f settings.gradle
           test -f app/build.gradle
@@ -30,8 +31,25 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Installer Android 34
-        run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0'
+      - name: Installer les outils et le SDK Android 34
+        shell: bash
+        run: |
+          set -euo pipefail
+          export ANDROID_HOME="$RUNNER_TEMP/az-android-sdk"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          mkdir -p "$ANDROID_HOME/cmdline-tools"
+          curl -fL --retry 3 -o "$RUNNER_TEMP/android-tools.zip" \
+            https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip
+          echo "4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583  $RUNNER_TEMP/android-tools.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/android-tools.zip" -d "$ANDROID_HOME/cmdline-tools"
+          mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
+          set +o pipefail
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses > /dev/null
+          set -o pipefail
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --install \
+            'platforms;android-34' 'build-tools;34.0.0'
 
       - name: Installer Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
@@ -41,7 +59,8 @@ jobs:
       - name: Ajouter le modele vocal francais
         run: |
           set -euo pipefail
-          curl -fL --retry 3 -o "$RUNNER_TEMP/fr.zip" https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip
+          curl -fL --retry 3 -o "$RUNNER_TEMP/fr.zip" \
+            https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip
           mkdir -p "$RUNNER_TEMP/model" app/src/main/assets/model-fr
           unzip -q "$RUNNER_TEMP/fr.zip" -d "$RUNNER_TEMP/model"
           cp -a "$RUNNER_TEMP/model/vosk-model-small-fr-0.22/." app/src/main/assets/model-fr/
