@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/build-apk.yml'
-      - 'AZVoice_IHU007B_StandaloneBuild_project.zip'
+      - 'AZVoice_IHU007B_StandaloneBuild_project .zip'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +18,7 @@ jobs:
       - name: Recuperer le depot
         uses: actions/checkout@v4
 
-      - name: Extraire le projet Android
+      - name: unzip -oq 'AZVoice_IHU007B_StandaloneBuild_project .zip' -d .
         run: |
           set -euo pipefail
           unzip -oq AZVoice_IHU007B_StandaloneBuild_project.zip -d .
