@@ -9,6 +9,7 @@ import sys
 
 PHRASES = {
     "test": "Bonjour. Je suis Jarvis, votre assistant vocal français.",
+    "reponse_affichee": "Je vous ai répondu en français à l’écran. La synthèse vocale connectée est indisponible.",
     "bonjour": "Bonjour. Je suis à votre écoute.",
     "identite": "Je suis Jarvis F R, votre assistant embarqué sur Geely Emgrand.",
     "etat": "Je vais bien, merci. Je suis prêt à vous aider.",
