@@ -38,6 +38,7 @@ jobs:
           sh tools/test_audio.sh | tee reports/tests-audio.txt
           sh tools/test_tts.sh | tee reports/tests-tts.txt
           sh tools/test_diagnostics.sh | tee reports/tests-diagnostics.txt
+          python3 tools/verify_free_hybrid.py | tee reports/tests-gratuit.txt
       - name: Produire les réponses françaises embarquées (obligatoires)
         run: |
           sudo apt-get update -qq
