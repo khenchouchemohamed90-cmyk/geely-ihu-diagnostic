@@ -116,6 +116,8 @@ public class MainActivity extends Activity {
                 "MUSIQUE", () -> runQuick("lance la musique"));
         quickRow(content, "AUTONOMIE", () -> requestRead(EcarxReadOnly.AUTONOMIE_KM, getString(R.string.range_label)),
                 "ÉTAT CLIM", () -> requestRead(EcarxReadOnly.COMPRESSEUR_A_C, getString(R.string.ac_label)));
+        quickRow(content, "TEMP. EXT. (BRUT)", () -> requestRead(EcarxReadOnly.TEMPERATURE_EXTERIEURE, "Température extérieure brute"),
+                "VITESSE (BRUT)", () -> requestRead(EcarxReadOnly.VITESSE_BRUTE, "Vitesse véhicule brute"));
         quickRow(content, "PISTE SUIV.", () -> runQuick("piste suivante"),
                 "PAUSE", () -> runQuick("pause"));
 
@@ -462,7 +464,8 @@ public class MainActivity extends Activity {
         try {
             worker.execute(() -> {
                 EcarxReadOnly.Value value = id == EcarxReadOnly.AUTONOMIE_KM
-                        ? ecarx.readEnduranceSensor() : ecarx.read(id, 0);
+                        || id == EcarxReadOnly.TEMPERATURE_EXTERIEURE || id == EcarxReadOnly.VITESSE_BRUTE
+                        ? ecarx.readKnownSensor(id) : ecarx.read(id, 0);
                 mainHandler.post(() -> {
                     if (!alive()) return;
                     readInProgress = false;
@@ -532,8 +535,12 @@ public class MainActivity extends Activity {
             case COMMANDE_VEHICULE_NON_VALIDEE:
                 answer = getString(R.string.body_disabled);
                 break;
-            case NIVEAU_CARBURANT:
             case TEMPERATURE_EXTERIEURE:
+                answer = "Lecture de la température extérieure brute.";
+                readId = EcarxReadOnly.TEMPERATURE_EXTERIEURE;
+                readLabel = "Température extérieure brute";
+                break;
+            case NIVEAU_CARBURANT:
                 answer = getString(R.string.reading_disabled);
                 break;
             default:
