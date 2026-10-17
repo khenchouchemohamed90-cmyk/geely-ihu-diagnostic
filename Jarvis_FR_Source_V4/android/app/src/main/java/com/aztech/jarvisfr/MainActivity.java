@@ -202,7 +202,7 @@ public class MainActivity extends Activity {
         TextView privacy = text(diagnosticsPanel,
                 "Option facultative : seule la question transcrite est envoyée à Google Gemini. "
                 + "La réponse peut ensuite être envoyée au service Gemini de voix française. "
-                + "Offre gratuite limitée : si le quota est atteint, Jarvis reste hors ligne. Les textes envoyés peuvent servir à améliorer les produits Google. N'activez pas la facturation du projet.", 12);
+                + "Aucune commande ECARX n'est transmise à l'IA. Offre gratuite limitée : si le quota est atteint, Jarvis reste hors ligne. Les textes envoyés peuvent servir à améliorer les produits Google. N'activez pas la facturation du projet.", 12);
         privacy.setTextColor(0xffb3c9d9);
         final EditText apiKeyInput = new EditText(this);
         apiKeyInput.setSingleLine(true);
