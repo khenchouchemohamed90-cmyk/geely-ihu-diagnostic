@@ -500,6 +500,15 @@ public class MainActivity extends Activity {
     private void dispatch(String phrase, String origin) {
         if (!alive() || !foreground) return;
         journal.record("COMMAND", "origine=" + origin + " ; phrase=" + phrase);
+        FrenchConversation.Response conversation = FrenchConversation.reply(phrase);
+        if (conversation != null) {
+            ++resultGeneration;
+            journal.record("DIALOGUE", "réponse=" + conversation.voiceKey);
+            status.setText(getString(R.string.command_origin, origin, phrase));
+            result.setText(conversation.text);
+            say(conversation.text, conversation.voiceKey);
+            return;
+        }
         FrenchIntentParser.Command command = FrenchIntentParser.parseCommand(phrase);
         FrenchIntentParser.Intent intent = command.intent;
         journal.record("COMMAND", "intention=" + intent + " ; argument=" + command.argument);
@@ -608,6 +617,7 @@ public class MainActivity extends Activity {
                 if (decision == VoiceTranscriptPolicy.Decision.UNKNOWN) {
                     status.setText(getString(R.string.command_origin, getString(R.string.origin_voice), phrase));
                     result.setText(getString(R.string.voice_rejected, phrase));
+                    if (kind == VoiceTranscriptPolicy.Kind.FINAL) say(getString(R.string.command_unknown), "inconnu");
                     // Un premier endpoint imprécis ne masque pas une phrase finale exploitable.
                     if (kind == VoiceTranscriptPolicy.Kind.FINAL && sessions.consume(token)) stopSpeech();
                     return;
