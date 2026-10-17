@@ -17,6 +17,8 @@ public class TestAndroidActions {
         app.lastIntent=null;
         AndroidActions.perform(app,Intent.OUVRIR_TELEPHONE);
         check(app.lastIntent!=null && "android.intent.action.DIAL".equals(app.lastIntent.action), "dialer only, never call");
+        check((app.lastIntent.getFlags() & android.content.Intent.FLAG_ACTIVITY_NEW_TASK) != 0,
+                "dialer launched in separate task to protect Jarvis FR return");
         app.lastIntent=null;
         AndroidActions.perform(app,Intent.OUVRIR_NAVIGATEUR);
         check(app.lastIntent!=null && "android.intent.action.VIEW".equals(app.lastIntent.action), "browser view");
