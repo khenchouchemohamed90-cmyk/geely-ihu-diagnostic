@@ -146,6 +146,20 @@ public final class TestEcarxReadOnly {
         yes(!ecarx.readEnduranceSensor().available, "refus de permission du capteur journalisé");
         ecarx.close();
 
+        // Acces supplementaire exclusivement en lecture via ISensor ;
+        // les valeurs sont brutes tant que l'unite n'est pas validee sur IHU007B.
+        ecarx = fresh();
+        EcarxReadOnly.Value outside = ecarx.readKnownSensor(EcarxReadOnly.TEMPERATURE_EXTERIEURE);
+        yes(outside.available && outside.raw == 23
+                && outside.supportStatus.contains("22.7"), "temperature brute via ISensor");
+        EcarxReadOnly.Value speed = ecarx.readKnownSensor(EcarxReadOnly.VITESSE_BRUTE);
+        yes(speed.available && speed.raw == 44
+                && speed.supportStatus.contains("44.1"), "vitesse brute via ISensor");
+        yes(!ecarx.readKnownSensor(0x12345678).available, "identifiant capteur arbitraire refuse");
+        yes(Car.sensorReadCount == 2 && Car.writeCount == 0,
+                "deux lectures, aucune action constructeur");
+        ecarx.close();
+
         Car.reset();
         List<String> logs = new ArrayList<>();
         ecarx = new EcarxReadOnly(new Context(), logs::add);
