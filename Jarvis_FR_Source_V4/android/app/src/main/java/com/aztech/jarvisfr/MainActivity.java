@@ -487,6 +487,14 @@ public class MainActivity extends Activity {
                     if (resultToken != resultGeneration) return;
                     result.setText(getString(R.string.read_value, label, value.available ? (value.rawExact == null ? Integer.toString(value.raw) : value.rawExact)
                             : getString(R.string.read_value_unavailable, value.detail), value.supportStatus));
+                    if (foreground) {
+                        String key = value.available ? "capteur_disponible"
+                                : id == EcarxReadOnly.AUTONOMIE_KM ? "autonomie_absente"
+                                : id == EcarxReadOnly.TEMPERATURE_EXTERIEURE ? "temperature_absente"
+                                : id == EcarxReadOnly.VITESSE_BRUTE ? "vitesse_absente"
+                                : "clim_absente";
+                        say(result.getText().toString(), key);
+                    }
                 });
             });
         } catch (RejectedExecutionException error) {
