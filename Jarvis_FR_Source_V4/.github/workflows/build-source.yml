@@ -34,6 +34,9 @@ jobs:
           mkdir -p reports
           python3 tools/verify_model.py | tee reports/model-verification.json
           sh tools/test_parser.sh | tee reports/tests.txt
+          sh tools/test_audio.sh | tee reports/tests-audio.txt
+          sh tools/test_tts.sh | tee reports/tests-tts.txt
+          sh tools/test_diagnostics.sh | tee reports/tests-diagnostics.txt
       - name: Charger Vosk sous Linux et vérifier le rejet du silence
         run: |
           python3 -m venv "$RUNNER_TEMP/jarvis-vosk"

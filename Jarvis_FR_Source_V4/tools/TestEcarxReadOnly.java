@@ -2,6 +2,8 @@ import android.content.Context;
 import android.os.SystemClock;
 import com.aztech.jarvisfr.EcarxReadOnly;
 import com.ecarx.xui.adaptapi.car.Car;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Tests locaux de l'adaptateur, jamais une validation physique IHU007B. */
 public final class TestEcarxReadOnly {
@@ -113,6 +115,93 @@ public final class TestEcarxReadOnly {
         try { yes(!read(ecarx).available && Car.createCount == 0, "lecture annulée avant connexion"); }
         finally { Thread.interrupted(); ecarx.close(); }
         yes(Car.writeCount == 0, "aucune écriture finale");
+
+        Car.reset();
+        List<String> logs = new ArrayList<>();
+        ecarx = new EcarxReadOnly(new Context(), logs::add);
+        String metadata = ecarx.inspectEnvironment();
+        yes(metadata.contains("uid=10123") && metadata.contains("pid=123") && metadata.contains("apiAndroid=28"),
+                "identité processus et API dans métadonnées");
+        yes(metadata.contains("android.permission.RECORD_AUDIO déclarée=true accordée=true"),
+                "permission déclarée et accordée");
+        yes(metadata.contains("CAR_VENDOR_EXTENSION déclarée=false accordée=false"),
+                "permission système absente sans supposer attribution");
+        yes(metadata.contains("test-readonly.jar") && metadata.contains("test.library"), "bibliothèques du paquet et système");
+        yes(metadata.contains("getReadOnlyMetadata()->") && metadata.contains("SENSOR_TYPE_ENDURANCE_MILEAGE")
+                && metadata.contains("valeur=non_lue"), "sous-système et constantes découverts par signatures");
+        yes(Car.createCount == 0 && Car.readCount == 0 && Car.metadataGetterCount == 0
+                && Car.metadataInitializationCount == 0, "inspection sans service ni getter ni initialisation statique");
+        Car.status = "notavailable";
+        EcarxReadOnly.Value unavailable = read(ecarx);
+        String report = String.join("\n", logs);
+        yes(!unavailable.available && "notavailable".equals(unavailable.supportStatus) && Car.readCount == 0,
+                "notavailable conservé sans getter");
+        yes(report.contains("id=0x00100800 zone=0") && report.contains("candidat_historique_autonomie_non_validé"),
+                "ID zone et niveau de preuve journalisés");
+        yes(report.contains("support.return type=java.lang.String brut=notavailable")
+                && report.contains("brut=non_lu_ou_non_valide") && !report.contains("brut=0"),
+                "journal indisponible ne prétend pas valeur zéro");
+        ecarx.close();
+
+        ecarx = fresh();
+        Car.functions = new Car.SingleGetter();
+        yes(read(ecarx).available && Car.singleReadCount == 1, "getter(id) si getter(id,zone) absent");
+        ecarx.close();
+        ecarx = fresh();
+        Car.functions = new Car.SingleGetterDualSupport();
+        yes(read(ecarx).available && Car.singleReadCount == 1 && Car.supportCount == 1,
+                "support sans zone associé au seul getter sans zone, sans essayer les deux statuts");
+        ecarx.close();
+        ecarx = fresh();
+        Car.functions = new Car.DualGetter();
+        EcarxReadOnly.Value zoned = read(ecarx);
+        yes(zoned.available && zoned.raw == 202 && Car.singleReadCount == 0, "getter zoné prioritaire sans double lecture");
+        ecarx.close();
+        ecarx = fresh();
+        Car.functions = new Car.ThrowingZonedGetter();
+        yes(!read(ecarx).available && Car.singleReadCount == 0, "aucun fallback après refus du getter zoné");
+        ecarx.close();
+
+        Car.reset();
+        logs.clear();
+        ecarx = new EcarxReadOnly(new Context(), logs::add);
+        Car.failRead = true;
+        EcarxReadOnly.Value readDenied = read(ecarx);
+        yes(!readDenied.available && "active".equals(readDenied.supportStatus)
+                && String.join("\n", logs).contains("SecurityException"), "statut actif et exception conservés séparément");
+        ecarx.close();
+
+        Car.reset();
+        logs.clear();
+        ecarx = new EcarxReadOnly(new Context(), logs::add);
+        Car.functions = new Car.NonIntegerValue();
+        yes(!read(ecarx).available && String.join("\n", logs).contains("type=java.lang.Float brut=7.8"),
+                "float journalisé sans conversion ni attribution d'unité");
+        ecarx.close();
+
+        Car.reset();
+        ecarx = new EcarxReadOnly(new Context(), message -> { throw new IllegalStateException("logger failed"); });
+        yes(read(ecarx).available, "échec journal ne change pas le résultat de lecture");
+        ecarx.close();
+
+        Car.reset();
+        ecarx = new EcarxReadOnly(new Context() {
+            @Override public android.content.pm.PackageManager getPackageManager() { throw new SecurityException("metadata denied"); }
+        });
+        yes(ecarx.inspectEnvironment().contains("métadonnéesPaquetErreur=SecurityException"),
+                "exception métadonnées explicitée");
+        yes(Car.createCount == 0, "échec métadonnées ne crée pas le service");
+        ecarx.close();
+
+        Car.reset();
+        ecarx = new EcarxReadOnly(new Context() {
+            @Override public ClassLoader getClassLoader() { return new ClassLoader(null) {}; }
+        });
+        yes(ecarx.inspectEnvironment().contains("présente=false erreur=ClassNotFoundException"),
+                "classes OEM invisibles distinguées");
+        yes(!read(ecarx).available && Car.createCount == 0, "classloader manquant ne tente pas d'autre paquet");
+        ecarx.close();
+        yes(Car.writeCount == 0, "aucune écriture V5");
         System.out.println(assertions + " assertions ECARX simulées PASSÉES (lecture seule, aucun véhicule)");
     }
 }

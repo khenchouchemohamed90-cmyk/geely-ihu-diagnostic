@@ -20,10 +20,6 @@
     <string name="diagnostic_notice">Aucune écriture automobile n\'est activée. Les fonctions Android et les lectures ECARX doivent être vérifiées sur la tablette.</string>
     <string name="model_loaded">Modèle Vosk français chargé — reconnaissance hors ligne disponible.</string>
     <string name="model_unavailable">Modèle Vosk indisponible : %1$s. Vérifiez l\'espace libre, le stockage de l\'application et la compatibilité des bibliothèques natives. La saisie reste utilisable.</string>
-    <string name="tts_unavailable">Synthèse vocale indisponible ; les réponses restent affichées.</string>
-    <string name="tts_ready">Synthèse vocale française disponible.</string>
-    <string name="tts_french_missing">Voix française absente : installez les données vocales dans les paramètres Android.</string>
-    <string name="tts_french_unavailable">Synthèse française indisponible ; les réponses restent affichées.</string>
     <string name="recognition_unavailable">Reconnaissance indisponible : consultez l\'état du modèle ci-dessus ou utilisez la saisie.</string>
     <string name="listen_start_failed">L\'écoute n\'a pas pu démarrer. Réessayez.</string>
     <string name="listening">J\'écoute en français… Une commande, pendant 15 secondes maximum.</string>
@@ -49,8 +45,17 @@
     <string name="reading_disabled">Donnée reconnue, mais lecture fiable indisponible dans cette version.</string>
     <string name="command_unknown">Commande non reconnue ou ambiguë. Essayez une seule commande explicite.</string>
     <string name="command_origin">%1$s : %2$s</string>
-    <string name="tts_rejected">Réponse affichée ; le moteur de synthèse n\'a pas accepté la lecture.</string>
-    <string name="tts_failed">Réponse affichée ; synthèse vocale indisponible.</string>
     <string name="origin_voice">Entendu</string>
     <string name="recognition_invalid">Réponse Vosk illisible. Appuyez sur Écouter pour réessayer.</string>
+    <string name="microphone_stopping">Libération de l’écoute précédente…</string>
+    <string name="microphone_initializing">Initialisation du microphone…</string>
+    <string name="voice_partial">Hypothèse en cours : %1$s\nAucune action avant un résultat finalisé.</string>
+    <string name="voice_rejected">Phrase finalisée : %1$s\nCommande inconnue ou ambiguë ; aucune action.</string>
+    <string name="voice_timeout_diagnostic">Aucune commande finalisée exploitable.\nDernière hypothèse : %1$s\nDiagnostic audio : %2$s\nTapez « Diagnostic vocal » ou « Exporter le diagnostic » dans la saisie existante.</string>
+    <string name="voice_report">Autorisation microphone : %1$s\nModèle : %2$s\nDernière hypothèse : %3$s\nAudio : %4$s\n%5$s</string>
+    <string name="export_title">Exporter le diagnostic Jarvis FR</string>
+    <string name="export_ready">Instantané du diagnostic prêt pour le partage que vous choisissez.</string>
+    <string name="export_no_app">Aucune application de partage disponible. Le journal reste privé dans les fichiers de Jarvis FR.</string>
+    <string name="export_failed">Export du diagnostic indisponible. Consultez le journal JarvisFR si un accès de diagnostic est déjà disponible.</string>
+    <string name="microphone_preset_selected">Source microphone pour la prochaine écoute : %1$s. Appuyez sur Écouter et comparez le signal ; aucun réglage système modifié.</string>
 </resources>

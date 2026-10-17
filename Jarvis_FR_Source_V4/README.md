@@ -1,9 +1,11 @@
-# Jarvis FR — Diagnostic IHU007B 0.4.1
+# Jarvis FR — Diagnostic IHU007B 0.5.0
 
 Application française reconstruite pour Android 9 : **APK compilée et contrôlée, essais réels sur la tablette encore nécessaires**. Toutes les écritures ECARX restent désactivées. Il s’agit d’une reconstruction partielle, indépendante de l’APK Jarvis russe et de son identité Android.
 
-- APK et journaux : [diagnostic-jarvis-fr-v4](../diagnostic-jarvis-fr-v4/README.md).
-- Résultats et matrice des fonctions : [rapport courant](docs/RAPPORT_DIAGNOSTIC.md).
+- Nouvelle APK : artefact `JarvisFR-diagnostic-Android9` du dernier run réussi sur cette branche.
+- [Corrections V5, bilan des essais réels et commandes de diagnostic](docs/DIAGNOSTIC_V5.md).
+- Archive de l’APK V4 : [diagnostic-jarvis-fr-v4](../diagnostic-jarvis-fr-v4/README.md).
+- Résultats V4 et matrice initiale : [rapport historique](docs/RAPPORT_DIAGNOSTIC.md).
 - Essais tablette : [procédure de diagnostic](docs/ESSAIS_TABLETTE.md).
 - Reconnaissance : [preuves Vosk](docs/VALIDATION_VOSK.md).
 - Analyse des méthodes et lecture ECARX : [diagnostic ECARX](docs/ECARX_DIAGNOSTIC.md).

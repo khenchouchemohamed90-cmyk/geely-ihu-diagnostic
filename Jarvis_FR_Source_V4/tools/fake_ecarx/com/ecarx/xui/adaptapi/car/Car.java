@@ -13,6 +13,9 @@ public final class Car implements IConnectable {
     public static int getterCount;
     public static int unregisterCount;
     public static int disposeCount;
+    public static int singleReadCount;
+    public static int metadataGetterCount;
+    public static int metadataInitializationCount;
     public static boolean returnNullCar;
     public static boolean failCreate;
     public static boolean failRegister;
@@ -27,6 +30,7 @@ public final class Car implements IConnectable {
 
     public static void reset() {
         createCount = writeCount = readCount = supportCount = getterCount = unregisterCount = disposeCount = 0;
+        singleReadCount = metadataGetterCount = metadataInitializationCount = 0;
         returnNullCar = failCreate = failRegister = failUnregister = failSupport = failRead = false;
         connectionDelay = 0;
         status = "active";
@@ -63,6 +67,31 @@ public final class Car implements IConnectable {
         return getterCount <= connectionDelay ? null : functions;
     }
 
+    public SensorMetadata getReadOnlyMetadata() { metadataGetterCount++; return null; }
+    public static final class SensorMetadata {
+        public static final int SENSOR_TYPE_ENDURANCE_MILEAGE = 12345;
+        static { Car.metadataInitializationCount++; }
+        public float getSensorLastValue(int id) { throw new AssertionError("metadata only"); }
+    }
+    public static final class SingleGetter {
+        public String isFunctionSupported(int id) { supportCount++; return "active"; }
+        public int getFunctionValue(int id) { readCount++; singleReadCount++; return 101; }
+    }
+    public static final class SingleGetterDualSupport {
+        public String isFunctionSupported(int id, int zone) { supportCount++; return "notavailable"; }
+        public String isFunctionSupported(int id) { supportCount++; return "active"; }
+        public int getFunctionValue(int id) { readCount++; singleReadCount++; return 105; }
+    }
+    public static final class DualGetter {
+        public String isFunctionSupported(int id, int zone) { supportCount++; return "active"; }
+        public int getFunctionValue(int id, int zone) { readCount++; return 202; }
+        public int getFunctionValue(int id) { readCount++; singleReadCount++; return 303; }
+    }
+    public static final class ThrowingZonedGetter {
+        public String isFunctionSupported(int id, int zone) { supportCount++; return "active"; }
+        public int getFunctionValue(int id, int zone) { readCount++; throw new SecurityException("zoned refused"); }
+        public int getFunctionValue(int id) { readCount++; singleReadCount++; return 404; }
+    }
     public static final class FakeFunctions {
         public int getFunctionValue(int id, int area) {
             readCount++;

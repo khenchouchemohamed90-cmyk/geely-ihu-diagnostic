@@ -10,7 +10,7 @@ java -cp "$WORK" TestVoiceResultGate
 javac -cp "$WORK" -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/VoiceSessionGate.java" "$BASE/tools/TestVoiceSessionGate.java"
 java -cp "$WORK" TestVoiceSessionGate
 # ECARX: simulation locale sans interaction avec un véhicule réel.
-javac -d "$WORK" "$BASE/tools/fake_ecarx/android/content/Context.java" "$BASE/tools/fake_ecarx/android/os/SystemClock.java" "$BASE/tools/fake_ecarx/com/ecarx/xui/adaptapi/binder/IConnectable.java" "$BASE/tools/fake_ecarx/com/ecarx/xui/adaptapi/car/Car.java" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/EcarxReadOnly.java" "$BASE/tools/TestEcarxReadOnly.java"
+javac -d "$WORK" $(find "$BASE/tools/fake_ecarx" -name '*.java' -type f) "$BASE/android/app/src/main/java/com/aztech/jarvisfr/EcarxReadOnly.java" "$BASE/tools/TestEcarxReadOnly.java"
 java -cp "$WORK" TestEcarxReadOnly
 
 # Actions Android standard : simulation pure sans appareil et sans ECARX.

@@ -7,7 +7,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.speech.tts.TextToSpeech;
+import android.content.Intent;
+import android.content.ClipData;
+import android.net.Uri;
+import android.os.SystemClock;
 import android.text.InputFilter;
 import android.view.Gravity;
 import android.widget.Button;
@@ -21,10 +24,10 @@ import org.json.JSONObject;
 import org.vosk.Model;
 import org.vosk.Recognizer;
 import org.vosk.android.RecognitionListener;
-import org.vosk.android.SpeechService;
 import org.vosk.android.StorageService;
 import java.io.IOException;
-import java.util.Locale;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -46,17 +49,23 @@ public class MainActivity extends Activity {
     private CheckBox guidedVocabulary;
     private Button rangeButton, acButton;
     private Model model;
-    private Recognizer recognizer;
-    private SpeechService speech;
-    private TextToSpeech tts;
+    private DiagnosticSpeechService speech;
+    private DiagnosticSpeechService.InputPreset microphonePreset = DiagnosticSpeechService.InputPreset.AUTO;
+    private FrenchTtsController voice;
+    private DiagnosticJournal journal;
+    private final Set<DiagnosticSpeechService> captures = new HashSet<>();
+    private boolean resumeSpeechAfterStop;
+    private long permissionStartDeadline;
+    private String lastPartial = "", lastAudioDiagnostic = "Aucune capture effectuée";
     private EcarxReadOnly ecarx;
     private volatile boolean destroyed;
-    private boolean foreground, ttsReady, readInProgress;
+    private boolean foreground, readInProgress;
     private long resultGeneration;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
-        ecarx = new EcarxReadOnly(getApplicationContext());
+        journal = new DiagnosticJournal(getApplicationContext());
+        ecarx = new EcarxReadOnly(getApplicationContext(), message -> journal.record("ECARX", message));
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
         content.setPadding(28, 24, 28, 24);
@@ -94,7 +103,7 @@ public class MainActivity extends Activity {
             }
             stopSpeech();
             stopTts();
-            dispatch(phrase, getString(R.string.origin_text));
+            if (!dispatchDiagnostic(phrase)) dispatch(phrase, getString(R.string.origin_text));
         });
         rangeButton = button(content, getString(R.string.range_button));
         rangeButton.setOnClickListener(view -> requestRead(EcarxReadOnly.AUTONOMIE_KM, getString(R.string.range_label)));
@@ -129,6 +138,7 @@ public class MainActivity extends Activity {
 
     private void loadModel() {
         final Context appContext = getApplicationContext();
+        journal.record("VOSK", "Chargement modèle model-fr ; uuid attendu=fr-0.22-standalone-1");
         worker.execute(() -> {
             try {
                 // sync + Model sur notre exécuteur : le helper unpack crée un exécuteur
@@ -141,7 +151,9 @@ public class MainActivity extends Activity {
                     path = StorageService.sync(appContext, "model-fr", "model-fr");
                 }
                 if (destroyed || Thread.currentThread().isInterrupted()) return;
+                journal.record("VOSK", "Modèle synchronisé : " + path);
                 Model loaded = new Model(path);
+                journal.record("VOSK", "Modèle natif chargé");
                 if (destroyed) {
                     loaded.close();
                     return;
@@ -155,6 +167,7 @@ public class MainActivity extends Activity {
                     modelStatus.setText(getString(R.string.model_loaded));
                 });
             } catch (IOException | RuntimeException | LinkageError error) {
+                journal.record("VOSK", "Échec modèle : " + error);
                 mainHandler.post(() -> {
                     if (alive()) modelStatus.setText(getString(R.string.model_unavailable, error.getClass().getSimpleName()));
                 });
@@ -163,44 +176,69 @@ public class MainActivity extends Activity {
     }
 
     private void initTts() {
-        tts = new TextToSpeech(getApplicationContext(), state -> mainHandler.post(() -> {
-            if (!alive() || tts == null) return;
-            if (state != TextToSpeech.SUCCESS) {
-                ttsStatus.setText(getString(R.string.tts_unavailable));
-                return;
-            }
-            try {
-                int language = tts.setLanguage(Locale.FRANCE);
-                if (language < TextToSpeech.LANG_AVAILABLE) language = tts.setLanguage(Locale.FRENCH);
-                ttsReady = language >= TextToSpeech.LANG_AVAILABLE;
-                ttsStatus.setText(ttsReady ? getString(R.string.tts_ready)
-                        : getString(R.string.tts_french_missing));
-            } catch (RuntimeException error) {
-                ttsStatus.setText(getString(R.string.tts_french_unavailable));
-            }
-        }));
+        voice = new FrenchTtsController(getApplicationContext(),
+                message -> journal.record("TTS", message),
+                message -> { if (alive()) ttsStatus.setText(message); });
+        voice.initialize(); // Aucun son automatique tant que la voix n'est pas approuvée.
     }
 
     private void startSpeech() {
         if (!alive() || !foreground) return;
         stopSpeech();
-        // Évite de capturer une réponse vocale encore jouée par le moteur TTS.
         stopTts();
+        journal.record("MIC", "Demande explicite ; permission=" + checkSelfPermission(Manifest.permission.RECORD_AUDIO));
+        try {
+            android.media.AudioManager audio = (android.media.AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            if (audio != null) journal.record("AUDIO", "État système en lecture : mode=" + audio.getMode()
+                    + " ; micro système muet=" + audio.isMicrophoneMute()
+                    + " ; entrées=" + audio.getDevices(android.media.AudioManager.GET_DEVICES_INPUTS).length);
+        } catch (RuntimeException error) { journal.record("AUDIO", "Métadonnées système indisponibles : " + error); }
         if (model == null) {
             status.setText(getString(R.string.recognition_unavailable));
             return;
         }
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            permissionStartDeadline = SystemClock.elapsedRealtime() + 30000;
+            journal.record("MIC", "Demande autorisation RECORD_AUDIO");
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_MIC);
             return;
         }
+        permissionStartDeadline = 0;
+        if (!captures.isEmpty()) {
+            // Attendre la libération réelle du précédent AudioRecord, sans bloquer l'écran.
+            resumeSpeechAfterStop = true;
+            status.setText(getString(R.string.microphone_stopping));
+            return;
+        }
+        lastPartial = "";
+        lastAudioDiagnostic = getString(R.string.microphone_initializing);
         long token = sessions.begin();
+        Recognizer pending = null;
         try {
-            recognizer = guidedVocabulary.isChecked()
+            journal.record("VOSK", "Nouvelle session=" + token + " ; guidé=" + guidedVocabulary.isChecked());
+            pending = guidedVocabulary.isChecked()
                     ? new Recognizer(model, 16000.0f, FrenchVoiceGrammar.json())
                     : new Recognizer(model, 16000.0f);
-            speech = new SpeechService(recognizer, 16000.0f);
-            if (!speech.startListening(listenerFor(token), LISTENING_TIMEOUT_MS)) {
+            DiagnosticSpeechService created = new DiagnosticSpeechService(pending, detail -> {
+                journal.record("AUDIO", detail);
+                if (alive() && foreground && sessions.isCurrent(token)) {
+                    lastAudioDiagnostic = detail;
+                    status.setText(detail);
+                }
+            }, microphonePreset);
+            pending = null; // La capture est désormais seule propriétaire du Recognizer.
+            captures.add(created);
+            created.whenStopped(() -> {
+                captures.remove(created);
+                journal.record("AUDIO", "Capture libérée session=" + token + " ; captures restantes=" + captures.size());
+                if (destroyed && captures.isEmpty()) closeModel();
+                else if (alive() && foreground && captures.isEmpty() && resumeSpeechAfterStop) {
+                    resumeSpeechAfterStop = false;
+                    startSpeech();
+                }
+            });
+            speech = created;
+            if (!created.startListening(listenerFor(token), LISTENING_TIMEOUT_MS)) {
                 stopSpeech();
                 status.setText(getString(R.string.listen_start_failed));
                 return;
@@ -208,6 +246,8 @@ public class MainActivity extends Activity {
             guidedVocabulary.setEnabled(false);
             status.setText(getString(R.string.listening));
         } catch (IOException | RuntimeException | LinkageError error) {
+            if (pending != null) pending.close();
+            journal.record("AUDIO", "Démarrage impossible : " + error);
             stopSpeech();
             status.setText(getString(R.string.microphone_unavailable, error.getClass().getSimpleName()));
         }
@@ -215,60 +255,47 @@ public class MainActivity extends Activity {
 
     private RecognitionListener listenerFor(final long token) {
         return new RecognitionListener() {
-            @Override public void onResult(String json) { handle(token, json); }
-            @Override public void onFinalResult(String json) { handle(token, json); }
-            @Override public void onPartialResult(String json) { }
+            @Override public void onResult(String json) { handle(token, json, VoiceTranscriptPolicy.Kind.ENDPOINT); }
+            @Override public void onFinalResult(String json) { handle(token, json, VoiceTranscriptPolicy.Kind.FINAL); }
+            @Override public void onPartialResult(String json) { handle(token, json, VoiceTranscriptPolicy.Kind.PARTIAL); }
             @Override public void onError(Exception error) {
                 mainHandler.post(() -> {
                     if (!alive() || !sessions.isCurrent(token)) return;
+                    journal.record("AUDIO", "Erreur session=" + token + " : " + error);
                     stopSpeech();
-                    status.setText(getString(R.string.recognition_error, error.getClass().getSimpleName()));
+                    status.setText(getString(R.string.recognition_error, error.getMessage() == null ? error.getClass().getSimpleName() : error.getMessage()));
                 });
             }
             @Override public void onTimeout() {
                 mainHandler.post(() -> {
                     if (!alive() || !sessions.isCurrent(token)) return;
+                    journal.record("VOSK", "Expiration sans commande ; dernier partiel=" + lastPartial + " ; " + lastAudioDiagnostic);
                     stopSpeech();
                     status.setText(getString(R.string.listen_timeout));
+                    result.setText(getString(R.string.voice_timeout_diagnostic, lastPartial.isEmpty() ? "—" : lastPartial, lastAudioDiagnostic));
                 });
             }
         };
     }
 
     private void stopSpeech() {
-        // Invalide d'abord tous les callbacks déjà en file d'attente.
         sessions.cancel();
+        resumeSpeechAfterStop = false;
         if (guidedVocabulary != null) guidedVocabulary.setEnabled(true);
-        SpeechService previousSpeech = speech;
-        Recognizer previousRecognizer = recognizer;
         speech = null;
-        recognizer = null;
-        try {
-            if (previousSpeech != null) previousSpeech.cancel();
-        } finally {
-            try {
-                if (previousSpeech != null) previousSpeech.shutdown();
-            } finally {
-                // Vosk 0.3.47 : shutdown() libère AudioRecord, PAS le Recognizer natif.
-                if (previousRecognizer != null) previousRecognizer.close();
-            }
-        }
+        for (DiagnosticSpeechService capture : captures) capture.cancel();
     }
 
-    private void stopTts() {
-        if (tts != null) {
-            try { tts.stop(); }
-            catch (RuntimeException ignored) { ttsReady = false; }
-        }
-    }
+    private void stopTts() { if (voice != null) voice.stop(); }
 
     @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grants) {
         super.onRequestPermissionsResult(requestCode, permissions, grants);
         if (requestCode != REQUEST_MIC || !alive()) return;
-        // Une autorisation ne démarre jamais le microphone pendant un changement d'activité.
-        status.setText(grants.length > 0 && grants[0] == PackageManager.PERMISSION_GRANTED
-                ? getString(R.string.microphone_granted)
-                : getString(R.string.microphone_denied));
+        boolean granted = grants.length > 0 && grants[0] == PackageManager.PERMISSION_GRANTED;
+        journal.record("MIC", "Résultat autorisation=" + granted + " ; premier plan=" + foreground);
+        status.setText(getString(granted ? R.string.microphone_granted : R.string.microphone_denied));
+        if (granted && foreground && SystemClock.elapsedRealtime() <= permissionStartDeadline) startSpeech();
+        else if (!granted) permissionStartDeadline = 0;
     }
 
     private void requestRead(int id, String label) {
@@ -315,8 +342,10 @@ public class MainActivity extends Activity {
 
     private void dispatch(String phrase, String origin) {
         if (!alive() || !foreground) return;
+        journal.record("COMMAND", "origine=" + origin + " ; phrase=" + phrase);
         FrenchIntentParser.Command command = FrenchIntentParser.parseCommand(phrase);
         FrenchIntentParser.Intent intent = command.intent;
+        journal.record("COMMAND", "intention=" + intent + " ; argument=" + command.argument);
         long token = ++resultGeneration;
         String answer;
         int readId = 0;
@@ -367,43 +396,116 @@ public class MainActivity extends Activity {
         status.setText(getString(R.string.command_origin, origin, phrase));
         result.setText(answer);
         if (readLabel != null) showRead(readId, readLabel, token);
-        if (ttsReady && tts != null) {
-            try {
-                if (tts.speak(answer, TextToSpeech.QUEUE_FLUSH, null, "fr-reply") == TextToSpeech.ERROR)
-                    ttsStatus.setText(getString(R.string.tts_rejected));
-            } catch (RuntimeException error) {
-                ttsStatus.setText(getString(R.string.tts_failed));
-            }
-        }
+        if (voice != null) voice.speakAnswer(answer);
     }
 
-    private void handle(long token, String json) {
+    private void handle(long token, String json, VoiceTranscriptPolicy.Kind kind) {
         mainHandler.post(() -> {
             if (!alive() || !foreground || !sessions.isCurrent(token)) return;
             try {
-                String phrase = new JSONObject(json).optString("text", "").trim();
-                if (phrase.isEmpty() || !sessions.consume(token)) return;
-                // Ferme le micro AVANT l'action et sa réponse TTS. Reprise toujours manuelle.
-                stopSpeech();
-                if (phrase.contains("[unk]")) {
-                    // Ne jamais laisser la normalisation effacer le marqueur Vosk
-                    // et transformer un fragment inconnu en commande exécutable.
-                    ++resultGeneration;
-                    status.setText(getString(R.string.command_origin, getString(R.string.origin_voice), phrase));
-                    result.setText(getString(R.string.command_unknown));
+                String phrase = new JSONObject(json).optString(kind == VoiceTranscriptPolicy.Kind.PARTIAL ? "partial" : "text", "").trim();
+                VoiceTranscriptPolicy.Decision decision = VoiceTranscriptPolicy.decide(kind, phrase);
+                if (kind != VoiceTranscriptPolicy.Kind.PARTIAL || !phrase.equals(lastPartial))
+                    journal.record("TRANSCRIPT", "session=" + token + " ; type=" + kind + " ; décision=" + decision + " ; texte=" + phrase);
+                if (decision == VoiceTranscriptPolicy.Decision.EMPTY) return;
+                if (decision == VoiceTranscriptPolicy.Decision.PARTIAL) {
+                    lastPartial = phrase;
+                    result.setText(getString(R.string.voice_partial, phrase));
                     return;
                 }
+                if (decision == VoiceTranscriptPolicy.Decision.UNKNOWN) {
+                    status.setText(getString(R.string.command_origin, getString(R.string.origin_voice), phrase));
+                    result.setText(getString(R.string.voice_rejected, phrase));
+                    // Un premier endpoint imprécis ne masque pas une phrase finale exploitable.
+                    if (kind == VoiceTranscriptPolicy.Kind.FINAL && sessions.consume(token)) stopSpeech();
+                    return;
+                }
+                if (!sessions.consume(token)) return;
+                stopSpeech();
                 dispatch(phrase, getString(R.string.origin_voice));
             } catch (JSONException error) {
-                stopSpeech();
-                status.setText(getString(R.string.recognition_invalid));
+                journal.record("VOSK", "Résultat JSON invalide type=" + kind + " : " + json);
+                if (kind != VoiceTranscriptPolicy.Kind.PARTIAL) {
+                    stopSpeech();
+                    status.setText(getString(R.string.recognition_invalid));
+                }
             }
         });
+    }
+
+    private boolean dispatchDiagnostic(String phrase) {
+        DiagnosticCommands.Action action = DiagnosticCommands.parse(phrase);
+        if (action == DiagnosticCommands.Action.NONE) return false;
+        final long diagnosticToken = ++resultGeneration;
+        journal.record("DIAGNOSTIC", "commande explicite=" + action);
+        switch (action) {
+            case SILENT: result.setText(voice.setSilent(true)); break;
+            case TEST_VOICE: result.setText(voice.speakTest()); break;
+            case ENABLE_VOICE: result.setText(voice.approveVoice()); break;
+            case VOICE_REPORT:
+                result.setText(getString(R.string.voice_report, checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED ? "accordée" : "refusée",
+                        model != null ? "chargé" : "indisponible", lastPartial, lastAudioDiagnostic, voice.describe()));
+                break;
+            case MIC_AUTO:
+            case MIC_STANDARD:
+            case MIC_RECOGNITION:
+            case MIC_SYSTEM:
+                microphonePreset = action == DiagnosticCommands.Action.MIC_STANDARD ? DiagnosticSpeechService.InputPreset.MIC
+                        : action == DiagnosticCommands.Action.MIC_RECOGNITION ? DiagnosticSpeechService.InputPreset.VOICE_RECOGNITION
+                        : action == DiagnosticCommands.Action.MIC_SYSTEM ? DiagnosticSpeechService.InputPreset.DEFAULT
+                        : DiagnosticSpeechService.InputPreset.AUTO;
+                journal.record("MIC", "Préréglage explicite=" + microphonePreset);
+                result.setText(getString(R.string.microphone_preset_selected, microphonePreset.name()));
+                break;
+            case ECARX_REPORT:
+                try {
+                    worker.execute(() -> {
+                        String report = ecarx.inspectEnvironment();
+                        mainHandler.post(() -> { if (alive() && foreground && diagnosticToken == resultGeneration) result.setText(report); });
+                    });
+                } catch (RejectedExecutionException error) { result.setText(R.string.diagnostic_busy); }
+                break;
+            case EXPORT:
+                try {
+                    worker.execute(() -> {
+                        try {
+                            journal.exportSnapshot();
+                            mainHandler.post(() -> {
+                                if (!alive() || !foreground || diagnosticToken != resultGeneration) return;
+                                Uri uri = Uri.parse("content://" + getPackageName() + ".diagnostic" + DiagnosticExportProvider.EXPORT_PATH);
+                                Intent send = new Intent(Intent.ACTION_SEND).setType("text/plain");
+                                send.putExtra(Intent.EXTRA_STREAM, uri);
+                                send.setClipData(ClipData.newRawUri("Diagnostic Jarvis FR", uri));
+                                send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                try {
+                                    startActivity(Intent.createChooser(send, getString(R.string.export_title)));
+                                    result.setText(R.string.export_ready);
+                                } catch (RuntimeException error) {
+                                    journal.record("EXPORT", "Application de partage indisponible : " + error);
+                                    result.setText(R.string.export_no_app);
+                                }
+                            });
+                        } catch (IOException error) {
+                            journal.record("EXPORT", "Échec : " + error);
+                            mainHandler.post(() -> { if (alive() && diagnosticToken == resultGeneration) result.setText(R.string.export_failed); });
+                        }
+                    });
+                } catch (RejectedExecutionException error) { result.setText(R.string.diagnostic_busy); }
+                break;
+            default: break;
+        }
+        return true;
+    }
+
+    private void closeModel() {
+        if (model != null) { model.close(); model = null; }
     }
 
     @Override protected void onResume() {
         super.onResume();
         foreground = true;
+        if (permissionStartDeadline > SystemClock.elapsedRealtime()
+                && checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) startSpeech();
     }
 
     @Override protected void onPause() {
@@ -411,6 +513,11 @@ public class MainActivity extends Activity {
         stopSpeech();
         stopTts();
         super.onPause();
+    }
+
+    @Override protected void onStop() {
+        permissionStartDeadline = 0;
+        super.onStop();
     }
 
     @Override protected void onDestroy() {
@@ -422,14 +529,9 @@ public class MainActivity extends Activity {
         Thread carCleanup = new Thread(ecarx::close, "jarvis-ecarx-close");
         carCleanup.setDaemon(true);
         carCleanup.start();
-        if (model != null) {
-            model.close();
-            model = null;
-        }
-        if (tts != null) {
-            tts.shutdown();
-            tts = null;
-        }
+        if (captures.isEmpty()) closeModel();
+        if (voice != null) voice.close();
+        journal.record("APP", "Activité détruite ; captures restantes=" + captures.size());
         super.onDestroy();
     }
 }

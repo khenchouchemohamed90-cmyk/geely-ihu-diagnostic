@@ -6,10 +6,11 @@ android {
         applicationId 'com.aztech.jarvisfr.reconstruction'
         minSdk 28
         targetSdk 28
-        versionCode 5
-        versionName '0.4.1-diagnostic-fr'
+        versionCode 6
+        versionName '0.5.0-diagnostic-fr'
         ndk { abiFilters 'armeabi-v7a', 'arm64-v8a' }
     }
+    buildFeatures { buildConfig true }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
