@@ -16,6 +16,10 @@ public final class Car implements IConnectable {
     public static int singleReadCount;
     public static int metadataGetterCount;
     public static int metadataInitializationCount;
+    public static int sensorReadCount;
+    public static float sensorRange;
+    public static boolean sensorAvailable;
+    public static boolean failSensor;
     public static boolean returnNullCar;
     public static boolean failCreate;
     public static boolean failRegister;
@@ -31,6 +35,10 @@ public final class Car implements IConnectable {
     public static void reset() {
         createCount = writeCount = readCount = supportCount = getterCount = unregisterCount = disposeCount = 0;
         singleReadCount = metadataGetterCount = metadataInitializationCount = 0;
+        sensorReadCount = 0;
+        sensorRange = 242f;
+        sensorAvailable = true;
+        failSensor = false;
         returnNullCar = failCreate = failRegister = failUnregister = failSupport = failRead = false;
         connectionDelay = 0;
         status = "active";
@@ -65,6 +73,18 @@ public final class Car implements IConnectable {
     public Object getICarFunction() {
         getterCount++;
         return getterCount <= connectionDelay ? null : functions;
+    }
+
+    public FakeSensor getSensorManager() {
+        return sensorAvailable ? new FakeSensor() : null;
+    }
+    public static final class FakeSensor {
+        public float getSensorLatestValue(int sensorId) {
+            sensorReadCount++;
+            if (sensorId != 0x00100800) throw new AssertionError("Unapproved sensor ID");
+            if (failSensor) throw new SecurityException("Sensor read forbidden");
+            return sensorRange;
+        }
     }
 
     public SensorMetadata getReadOnlyMetadata() { metadataGetterCount++; return null; }
