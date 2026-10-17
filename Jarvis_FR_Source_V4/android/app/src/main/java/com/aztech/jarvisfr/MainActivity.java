@@ -334,7 +334,9 @@ public class MainActivity extends Activity {
         voice = new FrenchTtsController(getApplicationContext(),
                 message -> journal.record("TTS", message),
                 message -> { if (alive()) ttsStatus.setText(message); });
-        voice.initialize(); // Aucun son automatique tant que la voix n'est pas approuvée.
+        voice.initialize(); // Moteur TTS Android optionnel.
+        journal.record("TTS", "Voix française de secours PCM WAV intégrée, hors ligne.");
+        ttsStatus.setText("Voix française intégrée prête. Moteur Android en cours d'inspection.");
     }
 
     private void startSpeech() {
@@ -649,9 +651,26 @@ public class MainActivity extends Activity {
         final long diagnosticToken = ++resultGeneration;
         journal.record("DIAGNOSTIC", "commande explicite=" + action);
         switch (action) {
-            case SILENT: result.setText(voice.setSilent(true)); break;
-            case TEST_VOICE: result.setText(voice.speakTest()); break;
-            case ENABLE_VOICE: result.setText(voice.approveVoice()); break;
+            case SILENT:
+                spokenReplies.setChecked(false);
+                result.setText(voice.setSilent(true));
+                break;
+            case TEST_VOICE:
+                if (voice.isReady()) {
+                    result.setText(voice.speakTest());
+                } else {
+                    if (spokenReplies != null) spokenReplies.setChecked(true);
+                    boolean ok = offlineVoice != null && offlineVoice.speak("test");
+                    result.setText(ok ? "Test vocal français embarqué lancé."
+                            : "Voix française intégrée indisponible ; consulter JarvisOfflineFR.");
+                }
+                break;
+            case ENABLE_VOICE:
+                spokenReplies.setChecked(true);
+                offlineVoice.setEnabled(true);
+                result.setText(voice.isReady() ? voice.approveVoice()
+                        : "Réponses françaises intégrées activées. Le TTS Android est facultatif.");
+                break;
             case VOICE_REPORT:
                 result.setText(getString(R.string.voice_report, checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED ? "accordée" : "refusée",
                         model != null ? "chargé" : "indisponible", lastPartial, lastAudioDiagnostic, voice.describe()));
