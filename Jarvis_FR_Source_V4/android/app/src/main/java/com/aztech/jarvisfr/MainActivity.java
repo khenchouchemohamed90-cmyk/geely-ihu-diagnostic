@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
     private final VoiceSessionGate sessions = new VoiceSessionGate();
     private TextView modelStatus, status, result, ttsStatus;
     private EditText commandInput;
-    private CheckBox guidedVocabulary;
+    private CheckBox guidedVocabulary, gainEnabled;
     private Button rangeButton, acButton;
     private Model model;
     private DiagnosticSpeechService speech;
@@ -66,35 +66,72 @@ public class MainActivity extends Activity {
         super.onCreate(state);
         journal = new DiagnosticJournal(getApplicationContext());
         ecarx = new EcarxReadOnly(getApplicationContext(), message -> journal.record("ECARX", message));
+
+        getWindow().setStatusBarColor(android.graphics.Color.rgb(5, 16, 31));
+        getWindow().setNavigationBarColor(android.graphics.Color.rgb(5, 16, 31));
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
-        content.setPadding(28, 24, 28, 24);
-        content.setGravity(Gravity.CENTER_HORIZONTAL);
-        TextView title = new TextView(this);
-        title.setText(getString(R.string.jarvis_title));
-        title.setTextSize(27);
-        content.addView(title);
-        modelStatus = text(content, getString(R.string.model_loading), 18);
-        status = text(content, getString(R.string.diagnostic_ready), 18);
-        guidedVocabulary = new CheckBox(this);
-        guidedVocabulary.setText(R.string.guided_vocabulary);
-        guidedVocabulary.setChecked(true);
-        content.addView(guidedVocabulary);
-        Button mic = button(content, getString(R.string.listen_button));
+        content.setPadding(dp(22), dp(18), dp(22), dp(26));
+        content.setBackgroundColor(0xff071627);
+
+        TextView signature = text(content, "AZ TECH AUTO   /   ASSISTANT EMBARQUÉ", 12);
+        signature.setTextColor(0xff34d8f0);
+        signature.setLetterSpacing(0.13f);
+        TextView title = text(content, "JARVIS  FR", 35);
+        title.setTextColor(0xfff7fcff);
+        title.setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD);
+        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.6", 12);
+        version.setTextColor(0xffa2bcd3);
+
+        LinearLayout systemPanel = panel(content);
+        section(systemPanel, "ÉTAT DE L’ASSISTANT");
+        modelStatus = text(systemPanel, getString(R.string.model_loading), 14);
+        status = text(systemPanel, getString(R.string.diagnostic_ready), 14);
+        status.setTextColor(0xff80e2ed);
+        ttsStatus = text(systemPanel, getString(R.string.tts_initializing), 12);
+        ttsStatus.setTextColor(0xff8197ae);
+
+        TextView hint = text(content, "Parlez après avoir appuyé : écoute privée, hors ligne", 13);
+        hint.setTextColor(0xffaac9d6);
+        Button mic = button(content, "🎙  PARLER À JARVIS");
+        mic.setTextSize(21);
+        mic.setMinHeight(dp(64));
+        mic.setBackground(background(0xff0b779a, 20));
         mic.setOnClickListener(view -> startSpeech());
-        Button stop = button(content, getString(R.string.stop_button));
+        Button stop = button(content, "■   Arrêter l’écoute");
         stop.setOnClickListener(view -> {
             stopSpeech();
             stopTts();
             status.setText(getString(R.string.listening_stopped));
         });
+
+        LinearLayout responsePanel = panel(content);
+        section(responsePanel, "RÉPONSE");
+        result = text(responsePanel, "Jarvis est prêt. Touchez le microphone ou choisissez une commande.", 17);
+        result.setTextColor(0xfff4fbff);
+        result.setMinHeight(dp(60));
+
+        section(content, "ACTIONS RAPIDES");
+        quickRow(content, "NAVIGATION", () -> runQuick("ouvre la navigation"),
+                "MUSIQUE", () -> runQuick("lance la musique"));
+        quickRow(content, "AUTONOMIE", () -> requestRead(EcarxReadOnly.AUTONOMIE_KM, getString(R.string.range_label)),
+                "ÉTAT CLIM", () -> requestRead(EcarxReadOnly.COMPRESSEUR_A_C, getString(R.string.ac_label)));
+        quickRow(content, "PISTE SUIV.", () -> runQuick("piste suivante"),
+                "PAUSE", () -> runQuick("pause"));
+
+        LinearLayout commandPanel = panel(content);
+        section(commandPanel, "COMMANDE PERSONNALISÉE");
         commandInput = new EditText(this);
         commandInput.setSingleLine(true);
+        commandInput.setTextColor(0xfff0f9ff);
+        commandInput.setHintTextColor(0xff789ab5);
+        commandInput.setBackground(background(0xff102940, 12));
+        commandInput.setPadding(dp(14), dp(8), dp(14), dp(8));
         commandInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(240)});
-        commandInput.setHint(getString(R.string.command_hint));
+        commandInput.setHint("Ex. : ouvre la navigation");
         commandInput.setContentDescription(getString(R.string.command_description));
-        content.addView(commandInput);
-        Button textCommand = button(content, getString(R.string.command_button));
+        commandPanel.addView(commandInput);
+        Button textCommand = button(commandPanel, "Exécuter");
         textCommand.setOnClickListener(view -> {
             String phrase = commandInput.getText().toString().trim();
             if (phrase.isEmpty()) {
@@ -105,24 +142,94 @@ public class MainActivity extends Activity {
             stopTts();
             if (!dispatchDiagnostic(phrase)) dispatch(phrase, getString(R.string.origin_text));
         });
-        rangeButton = button(content, getString(R.string.range_button));
+
+        Button showSettings = button(content, "⚙  Réglages, audio et diagnostic   ▾");
+        LinearLayout diagnosticsPanel = panel(content);
+        diagnosticsPanel.setVisibility(android.view.View.GONE);
+        showSettings.setOnClickListener(view -> {
+            diagnosticsPanel.setVisibility(diagnosticsPanel.getVisibility() == android.view.View.VISIBLE
+                    ? android.view.View.GONE : android.view.View.VISIBLE);
+        });
+        section(diagnosticsPanel, "RECONNAISSANCE VOCALE");
+        guidedVocabulary = new CheckBox(this);
+        guidedVocabulary.setText("Vocabulaire guidé (commandes françaises)");
+        guidedVocabulary.setTextColor(0xffe0efff);
+        guidedVocabulary.setChecked(true);
+        diagnosticsPanel.addView(guidedVocabulary);
+        gainEnabled = new CheckBox(this);
+        gainEnabled.setText("Amplification logicielle (signal micro faible)");
+        gainEnabled.setTextColor(0xffe0efff);
+        gainEnabled.setChecked(true);
+        diagnosticsPanel.addView(gainEnabled);
+        Button chooseMic = button(diagnosticsPanel, "Source microphone : AUTO (changer)");
+        chooseMic.setOnClickListener(v -> {
+            switch (microphonePreset) {
+                case AUTO: microphonePreset = DiagnosticSpeechService.InputPreset.VOICE_RECOGNITION; break;
+                case VOICE_RECOGNITION: microphonePreset = DiagnosticSpeechService.InputPreset.MIC; break;
+                case MIC: microphonePreset = DiagnosticSpeechService.InputPreset.DEFAULT; break;
+                default: microphonePreset = DiagnosticSpeechService.InputPreset.AUTO;
+            }
+            chooseMic.setText("Source microphone : " + microphonePreset + " (changer)");
+            journal.record("MIC", "Choix source depuis tableau de bord : " + microphonePreset);
+        });
+        section(diagnosticsPanel, "LECTURES CONSTRUCTEUR");
+        rangeButton = button(diagnosticsPanel, getString(R.string.range_button));
         rangeButton.setOnClickListener(view -> requestRead(EcarxReadOnly.AUTONOMIE_KM, getString(R.string.range_label)));
-        acButton = button(content, getString(R.string.ac_button));
+        acButton = button(diagnosticsPanel, getString(R.string.ac_button));
         acButton.setOnClickListener(view -> requestRead(EcarxReadOnly.COMPRESSEUR_A_C, getString(R.string.ac_label)));
-        ttsStatus = text(content, getString(R.string.tts_initializing), 16);
-        result = text(content, getString(R.string.diagnostic_notice), 18);
+        button(diagnosticsPanel, "Diagnostic ECARX").setOnClickListener(v -> dispatchDiagnostic("diagnostic ecarx"));
+        button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
+        button(diagnosticsPanel, "Tester voix française").setOnClickListener(v -> dispatchDiagnostic("tester la voix francaise"));
+        button(diagnosticsPanel, "Activer réponses vocales après test").setOnClickListener(v -> dispatchDiagnostic("activer les reponses vocales"));
+        button(diagnosticsPanel, "Exporter le journal").setOnClickListener(v -> dispatchDiagnostic("exporter le diagnostic"));
+
+        TextView safety = text(content, "ACTIONS AUTOMOBILES : lecture seule. Vitres, climatisation et appels non autorisés tant que leur compatibilité n'est pas validée.", 12);
+        safety.setTextColor(0xff8fa5b8);
+
         ScrollView scroll = new ScrollView(this);
         scroll.setFillViewport(true);
+        scroll.setBackgroundColor(0xff071627);
         scroll.addView(content);
         setContentView(scroll);
         initTts();
         loadModel();
     }
 
+    private int dp(int value) {
+        return (int) (value * getResources().getDisplayMetrics().density + 0.5f);
+    }
+
+    private android.graphics.drawable.GradientDrawable background(int color, int radiusDp) {
+        android.graphics.drawable.GradientDrawable shape = new android.graphics.drawable.GradientDrawable();
+        shape.setColor(color);
+        shape.setCornerRadius(dp(radiusDp));
+        return shape;
+    }
+
+    private LinearLayout panel(LinearLayout parent) {
+        LinearLayout view = new LinearLayout(this);
+        view.setOrientation(LinearLayout.VERTICAL);
+        view.setPadding(dp(17), dp(12), dp(17), dp(16));
+        view.setBackground(background(0xff10263c, 17));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -2);
+        params.topMargin = dp(13);
+        params.bottomMargin = dp(11);
+        parent.addView(view, params);
+        return view;
+    }
+
+    private void section(LinearLayout parent, String label) {
+        TextView heading = text(parent, label, 13);
+        heading.setTextColor(0xff31d6f2);
+        heading.setLetterSpacing(0.08f);
+    }
+
     private TextView text(LinearLayout parent, String value, int size) {
         TextView view = new TextView(this);
         view.setText(value);
         view.setTextSize(size);
+        view.setTextColor(0xffd9e8f5);
+        view.setPadding(dp(2), dp(5), dp(2), dp(6));
         parent.addView(view);
         return view;
     }
@@ -130,8 +237,41 @@ public class MainActivity extends Activity {
     private Button button(LinearLayout parent, String label) {
         Button view = new Button(this);
         view.setText(label);
-        parent.addView(view);
+        view.setAllCaps(false);
+        view.setTextColor(0xfff3fcff);
+        view.setTextSize(15);
+        view.setBackground(background(0xff1a3c58, 12));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, dp(48));
+        params.topMargin = dp(7);
+        parent.addView(view, params);
         return view;
+    }
+
+    private void quickRow(LinearLayout parent, String a, Runnable actionA, String b, Runnable actionB) {
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        parent.addView(row, new LinearLayout.LayoutParams(-1, -2));
+        quick(row, a, actionA);
+        quick(row, b, actionB);
+    }
+
+    private void quick(LinearLayout parent, String label, Runnable action) {
+        Button view = new Button(this);
+        view.setText(label);
+        view.setAllCaps(false);
+        view.setTextSize(15);
+        view.setTextColor(0xffecf9ff);
+        view.setBackground(background(0xff194461, 13));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dp(55), 1);
+        params.setMargins(dp(3), dp(5), dp(3), dp(5));
+        parent.addView(view, params);
+        view.setOnClickListener(v -> action.run());
+    }
+
+    private void runQuick(String command) {
+        stopSpeech();
+        stopTts();
+        dispatch(command, getString(R.string.origin_text));
     }
 
     private boolean alive() { return !destroyed && !isFinishing(); }
@@ -225,7 +365,7 @@ public class MainActivity extends Activity {
                     lastAudioDiagnostic = detail;
                     status.setText(detail);
                 }
-            }, microphonePreset);
+            }, microphonePreset, gainEnabled != null && gainEnabled.isChecked());
             pending = null; // La capture est désormais seule propriétaire du Recognizer.
             captures.add(created);
             created.whenStopped(() -> {
@@ -378,9 +518,7 @@ public class MainActivity extends Activity {
                 // Sur IHU007B le composeur OEM a emprisonné l'ancienne tâche de Jarvis.
                 // Bloquer toute ouverture par hypothèse vocale jusqu'à validation du
                 // FLAG_ACTIVITY_NEW_TASK sur un essai manuel à l'arrêt.
-                answer = getString(R.string.origin_voice).equals(origin)
-                        ? getString(R.string.phone_voice_temporarily_disabled)
-                        : AndroidActions.perform(this, intent);
+                answer = getString(R.string.phone_voice_temporarily_disabled);
                 break;
             case VENTILATION_NIVEAU:
                 answer = getString(R.string.fan_disabled, command.argument);
