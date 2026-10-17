@@ -791,11 +791,24 @@ public class MainActivity extends Activity {
                     return;
                 }
                 if (decision == VoiceTranscriptPolicy.Decision.UNKNOWN) {
+                    // Vosk a transcrit une phrase non présente dans le dictionnaire
+                    // des commandes. Une conversation générale peut lui répondre,
+                    // mais l'IA ne recevra jamais de contrôle véhicule.
+                    boolean conversation = FrenchConversation.reply(phrase) != null;
+                    boolean cloudAllowed = cloudEnabled != null && cloudEnabled.isChecked();
+                    if (!phrase.contains("[unk]") && (conversation || cloudAllowed)
+                            && phrase.length() >= 2 && sessions.consume(token)) {
+                        stopSpeech();
+                        dispatch(phrase, getString(R.string.origin_voice));
+                        return;
+                    }
                     status.setText(getString(R.string.command_origin, getString(R.string.origin_voice), phrase));
                     result.setText(getString(R.string.voice_rejected, phrase));
-                    if (kind == VoiceTranscriptPolicy.Kind.FINAL) say(getString(R.string.command_unknown), "inconnu");
                     // Un premier endpoint imprécis ne masque pas une phrase finale exploitable.
-                    if (kind == VoiceTranscriptPolicy.Kind.FINAL && sessions.consume(token)) stopSpeech();
+                    if (kind == VoiceTranscriptPolicy.Kind.FINAL) {
+                        say(getString(R.string.command_unknown), "inconnu");
+                        if (sessions.consume(token)) stopSpeech();
+                    }
                     return;
                 }
                 if (!sessions.consume(token)) return;
