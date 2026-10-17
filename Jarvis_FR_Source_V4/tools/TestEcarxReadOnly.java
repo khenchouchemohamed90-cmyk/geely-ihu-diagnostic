@@ -116,6 +116,36 @@ public final class TestEcarxReadOnly {
         finally { Thread.interrupted(); ecarx.close(); }
         yes(Car.writeCount == 0, "aucune écriture finale");
 
+        // La lecture d'autonomie véritable du Jarvis russe utilise ISensor,
+        // et NON le faux getFunctionValue() que notre prototype utilisait.
+        ecarx = fresh();
+        Car.status = "notavailable";
+        EcarxReadOnly.Value realRange = ecarx.readEnduranceSensor();
+        yes(realRange.available && realRange.raw == 242
+                && "ISensor".equals(realRange.supportStatus), "range via ISensor malgré statut ICarFunction notavailable");
+        yes(Car.sensorReadCount == 1 && Car.supportCount == 0
+                && Car.readCount == 0, "pas de lecture ICarFunction pour autonomie");
+        ecarx.close();
+
+        ecarx = fresh();
+        Car.sensorRange = 242.6f;
+        yes(ecarx.readEnduranceSensor().raw == 243, "arrondi conforme à Jarvis russe");
+        ecarx.close();
+        for (float invalid : new float[]{-1f, 5001f, Float.NaN, Float.POSITIVE_INFINITY}) {
+            ecarx = fresh();
+            Car.sensorRange = invalid;
+            yes(!ecarx.readEnduranceSensor().available, "capteur invalide interdit : " + invalid);
+            ecarx.close();
+        }
+        ecarx = fresh();
+        Car.sensorAvailable = false;
+        yes(!ecarx.readEnduranceSensor().available, "ISensor indisponible : aucun zéro inventé");
+        ecarx.close();
+        ecarx = fresh();
+        Car.failSensor = true;
+        yes(!ecarx.readEnduranceSensor().available, "refus de permission du capteur journalisé");
+        ecarx.close();
+
         Car.reset();
         List<String> logs = new ArrayList<>();
         ecarx = new EcarxReadOnly(new Context(), logs::add);
