@@ -27,6 +27,10 @@ public final class AndroidActions {
                         "Aucune navigation compatible détectée");
                 case OUVRIR_TELEPHONE: {
                     Intent i = new Intent(Intent.ACTION_DIAL);
+                    // Le dialer OEM doit vivre dans sa propre tâche Android.
+                    // Sans NEW_TASK, il peut rester au-dessus de Jarvis FR et le raccourci
+                    // de lancement restaure le dialer au lieu de notre activité.
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     if (i.resolveActivity(activity.getPackageManager()) == null) return "Aucun composeur téléphonique disponible";
                     activity.startActivity(i);
                     return "Ouverture du téléphone demandée";
