@@ -198,6 +198,56 @@ public class MainActivity extends Activity {
             chooseMic.setText("Source microphone : " + microphonePreset + " (changer)");
             journal.record("MIC", "Choix source depuis tableau de bord : " + microphonePreset);
         });
+        section(diagnosticsPanel, "CONVERSATION INTELLIGENTE (INTERNET)");
+        TextView privacy = text(diagnosticsPanel,
+                "Option facultative : seule la question transcrite est envoyée à OpenAI. "
+                + "La réponse peut ensuite être envoyée au service de voix française. "
+                + "Aucune commande ECARX n'est transmise à l'IA. Usage API facturé séparément.", 12);
+        privacy.setTextColor(0xffb3c9d9);
+        final EditText apiKeyInput = new EditText(this);
+        apiKeyInput.setSingleLine(true);
+        apiKeyInput.setTextColor(0xfff0f9ff);
+        apiKeyInput.setHintTextColor(0xff789ab5);
+        apiKeyInput.setBackground(background(0xff102940, 12));
+        apiKeyInput.setPadding(dp(14), dp(8), dp(14), dp(8));
+        apiKeyInput.setInputType(android.text.InputType.TYPE_CLASS_TEXT
+                | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        apiKeyInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(512)});
+        apiKeyInput.setHint(privateKeys.configured() ? "Clé personnelle chiffrée enregistrée" : "Clé API OpenAI personnelle (ne jamais me l'envoyer)");
+        diagnosticsPanel.addView(apiKeyInput);
+        Button saveKey = button(diagnosticsPanel, "Enregistrer la clé sur la tablette");
+        saveKey.setOnClickListener(v -> {
+            try {
+                privateKeys.save(apiKeyInput.getText().toString());
+                apiKeyInput.setText("");
+                apiKeyInput.setHint("Clé personnelle chiffrée enregistrée");
+                result.setText("Clé API enregistrée localement avec Android Keystore. L'IA reste désactivée tant que vous n'acceptez pas l'envoi des questions.");
+            } catch (Exception error) {
+                journal.record("CLOUD", "Sauvegarde échouée, type=" + error.getClass().getSimpleName());
+                result.setText("Impossible de sécuriser la clé API sur cette tablette. Service IA désactivé.");
+                if (cloudEnabled != null) cloudEnabled.setChecked(false);
+            }
+        });
+        cloudEnabled = new CheckBox(this);
+        cloudEnabled.setText("J'autorise l'envoi de mes questions et réponses à l'API OpenAI pour une conversation parlée");
+        cloudEnabled.setTextColor(0xffe0efff);
+        cloudEnabled.setChecked(false);
+        cloudEnabled.setOnCheckedChangeListener((view, checked) -> {
+            if (checked && !privateKeys.configured()) {
+                cloudEnabled.setChecked(false);
+                result.setText("Enregistrez d'abord votre propre clé API OpenAI. La fonction locale reste disponible.");
+                return;
+            }
+            journal.record("CLOUD", "Consentement pour ce lancement=" + checked);
+        });
+        diagnosticsPanel.addView(cloudEnabled);
+        button(diagnosticsPanel, "Effacer la clé API").setOnClickListener(v -> {
+            cloudEnabled.setChecked(false);
+            privateKeys.clear();
+            apiKeyInput.setText("");
+            apiKeyInput.setHint("Clé API supprimée. Configuration requise.");
+            result.setText("La clé API a été supprimée de l'application.");
+        });
         section(diagnosticsPanel, "LECTURES CONSTRUCTEUR");
         rangeButton = button(diagnosticsPanel, getString(R.string.range_button));
         rangeButton.setOnClickListener(view -> requestRead(EcarxReadOnly.AUTONOMIE_KM, getString(R.string.range_label)));
