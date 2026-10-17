@@ -1,0 +1,213 @@
+{
+  "ok": true,
+  "model": "/workspace/work/geely-ihu-diagnostic-v4/Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr",
+  "files_checked": 15,
+  "total_bytes": 68483828,
+  "uuid": "fr-0.22-standalone-1",
+  "intentional_empty_file": "ivector/online_cmvn.conf",
+  "source_of_hashes": "/workspace/work/geely-ihu-diagnostic-v4/Jarvis_FR_Source_V4/analysis/SHA256_MODELE_FR.txt",
+  "files": [
+    {
+      "path": "README",
+      "bytes": 354,
+      "sha256": "a036c27a5f30d95910f739ce9466539a5772cd13541e5fdddfbfae187993f8d8",
+      "matches": true
+    },
+    {
+      "path": "am/final.mdl",
+      "bytes": 15978979,
+      "sha256": "580d99752e3f6f31fb4a03403b0b2a3a78b9665937e2823668b46d9c9ce1a1a1",
+      "matches": true
+    },
+    {
+      "path": "conf/mfcc.conf",
+      "bytes": 153,
+      "sha256": "6c326fea5741c2d78be12f76eb1b36ea2ace040da9e355e4cfe6bb80e5f7d5ab",
+      "matches": true
+    },
+    {
+      "path": "conf/model.conf",
+      "bytes": 289,
+      "sha256": "d8d91d310a9659fed2d89f8ea4996af6163a43c3ab008cd278e4264120551712",
+      "matches": true
+    },
+    {
+      "path": "graph/Gr.fst",
+      "bytes": 24029163,
+      "sha256": "4d5aefc6af664d1c47979ae3b9eb7e972c196e843ff4eee65e4c7b0c064723cf",
+      "matches": true
+    },
+    {
+      "path": "graph/HCLr.fst",
+      "bytes": 18331442,
+      "sha256": "6562aee2cffac5ad2e569584bc8ca22b1bae0ce9e6e03f0f9898d9d7c267eaa5",
+      "matches": true
+    },
+    {
+      "path": "graph/disambig_tid.int",
+      "bytes": 380,
+      "sha256": "fd844580478d2c0dbb01e408f77fce92a343a9fe05c304fea57a0d8e3122d7b1",
+      "matches": true
+    },
+    {
+      "path": "graph/phones/word_boundary.int",
+      "bytes": 1626,
+      "sha256": "262452069835201f18fd4de64c4816a2333a54c80b4114084d75e1c4eb273836",
+      "matches": true
+    },
+    {
+      "path": "ivector/final.dubm",
+      "bytes": 168048,
+      "sha256": "15c6736f097e9a1fbc3811a75a666da39cb9aa4526acea29d25f2a3003357acc",
+      "matches": true
+    },
+    {
+      "path": "ivector/final.ie",
+      "bytes": 9927287,
+      "sha256": "bd52bc5aeef1f35349c7a6fd3fb671a4a877ba04181da30d99f2cf01d4b75dd5",
+      "matches": true
+    },
+    {
+      "path": "ivector/final.mat",
+      "bytes": 44975,
+      "sha256": "61818a44ae3519708e9a31701da4ab351f3e19d7bd3e4ddfd820fd7f121cfad0",
+      "matches": true
+    },
+    {
+      "path": "ivector/global_cmvn.stats",
+      "bytes": 1076,
+      "sha256": "9d94d076adc26cd578cc4cf702dc41e5ea6de202f4563d6f0d4b4d4fdbb46bc1",
+      "matches": true
+    },
+    {
+      "path": "ivector/online_cmvn.conf",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "ivector/splice.conf",
+      "bytes": 35,
+      "sha256": "9f0c5f7c82d18eaf25d8bce470efa9f7741f88411fe428774bc0a9bb69a24756",
+      "matches": true
+    },
+    {
+      "path": "uuid",
+      "bytes": 21,
+      "sha256": "6e882746e30c9c1fb0027542d451ed0fe4ebc19524dba78191c31337af04394f",
+      "matches": true
+    }
+  ],
+  "errors": []
+}
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+121 tests du parser FR PASSÉS (zéro écriture automobile)
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+7 tests anti-doublons PASSÉS
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+12 tests d'isolation des sessions Vosk PASSÉS
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+38 assertions ECARX simulées PASSÉES (lecture seule, aucun véhicule)
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+29 tests Android standard simulés PASSÉS
+13 tests du garde-fou statique PASSÉS
+Contrôle statique : aucune écriture ECARX connue dans 7 sources Java
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+Unable to initialize metrics, ensure /home/agent/.android is writable, details: /home/agent/.android/analytics.settings (No such file or directory)
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+
+> Task :app:verifyFrenchModel
+Modèle Vosk français : 15/15 empreintes SHA-256 conformes
+
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:mergeDebugResources
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:parseDebugLocalResources
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeDebugStartupProfile UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:preDebugUnitTestBuild
+> Task :app:processDebugResources
+> Task :app:compileDebugJavaWithJavac
+> Task :app:dexBuilderDebug
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:mergeProjectDexDebug
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug
+> Task :app:lintAnalyzeDebugUnitTest
+
+> Task :app:lintAnalyzeDebugAndroidTest
+Warning: Unable to initialize metrics, ensure /home/agent/.android is writable, details: /home/agent/.android/analytics.settings (No such file or directory)
+
+> Task :app:lintAnalyzeDebug
+> Task :app:lintReportDebug
+> Task :app:lintDebug
+
+BUILD SUCCESSFUL in 15s
+46 actionable tasks: 20 executed, 26 up-to-date
+{
+  "ok": true,
+  "apk": "/workspace/work/geely-ihu-diagnostic-v4/Jarvis_FR_Source_V4/android/app/build/outputs/apk/debug/app-debug.apk",
+  "bytes": 61135805,
+  "sha256": "8352938829dd573bde72eafecd9ae18d3b409a27efa6e6f60f1dfe9af5ae5780",
+  "min_sdk": 28,
+  "target_sdk": 28,
+  "model_files_verified": 15,
+  "native_abis": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "native_libraries": [
+    "lib/arm64-v8a/libjnidispatch.so",
+    "lib/arm64-v8a/libvosk.so",
+    "lib/armeabi-v7a/libjnidispatch.so",
+    "lib/armeabi-v7a/libvosk.so"
+  ],
+  "zipalign": "Verification succesful",
+  "signature_verification": "Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*\nVerifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): false\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: f742acccc12d80db4b6fd97e790cf09e5dd4c66423fc95d4437b65c3b95368ce\nSigner #1 certificate SHA-1 digest: a7b35fe31b077c23262dee0f64c835e13d849210\nSigner #1 certificate MD5 digest: 9e150480100f51ede2a83db700fa7370\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: d59aecb61dfd47d866679d371cc9925971c7fc14d444add4d28b0acd3076bafc\nSigner #1 public key SHA-1 digest: 7a5cf3c8431083d020ce8973b40ea0c6f616b9fa\nSigner #1 public key MD5 digest: c4245a9cb455446ecbf801099650d3c6",
+  "manifest_badging": "package: name='com.aztech.jarvisfr.reconstruction' versionCode='5' versionName='0.4.1-diagnostic-fr' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'\nsdkVersion:'28'\ntargetSdkVersion:'28'\nuses-permission: name='android.permission.RECORD_AUDIO'\napplication-label:'Jarvis FR Diagnostic'\napplication-icon-160:'res/drawable/ic_jarvis.xml'\napplication: label='Jarvis FR Diagnostic' icon='res/drawable/ic_jarvis.xml'\napplication-debuggable\nlaunchable-activity: name='com.aztech.jarvisfr.MainActivity'  label='' icon=''\nfeature-group: label=''\n  uses-feature-not-required: name='android.hardware.microphone'\n  uses-feature: name='android.hardware.faketouch'\n  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'\nmain\nsupports-screens: 'small' 'normal' 'large' 'xlarge'\nsupports-any-density: 'true'\nlocales: '--_--'\ndensities: '160'\nnative-code: 'arm64-v8a' 'armeabi-v7a'",
+  "installation_tablette_verifiee": false
+}

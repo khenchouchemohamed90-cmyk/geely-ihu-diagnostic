@@ -1,3 +1,5 @@
+> Archive historique des vérifications avant compilation réelle. Le bilan courant est dans [RAPPORT_DIAGNOSTIC.md](RAPPORT_DIAGNOSTIC.md).
+
 # Jarvis FR — Vérification technique V4 (17 octobre 2026)
 
 ## Résultats effectivement obtenus

@@ -1,0 +1,36 @@
+name: Vérification Jarvis FR Android 9
+on:
+  workflow_dispatch:
+  push:
+    paths: ['Jarvis_FR_Source_V4/**', '.github/workflows/jarvis-fr-v4.yml']
+  pull_request:
+    paths: ['Jarvis_FR_Source_V4/**']
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Jarvis_FR_Source_V4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Vérifier le modèle et les tests simulés
+        run: |
+          python3 tools/verify_model.py
+          sh tools/test_parser.sh
+      - name: Compiler et contrôler Android
+        run: cd android && ./gradlew --no-daemon :app:assembleDebug :app:lintDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: JarvisFR-diagnostic-Android9
+          path: |
+            Jarvis_FR_Source_V4/android/app/build/outputs/apk/debug/app-debug.apk
+            Jarvis_FR_Source_V4/android/app/build/reports/lint-results-debug.*

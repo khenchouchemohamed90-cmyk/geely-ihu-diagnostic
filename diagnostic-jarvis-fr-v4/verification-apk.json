@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "apk": "/workspace/work/geely-ihu-diagnostic-v4/Jarvis_FR_Source_V4/android/app/build/outputs/apk/debug/app-debug.apk",
+  "bytes": 61135805,
+  "sha256": "8352938829dd573bde72eafecd9ae18d3b409a27efa6e6f60f1dfe9af5ae5780",
+  "min_sdk": 28,
+  "target_sdk": 28,
+  "model_files_verified": 15,
+  "native_abis": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "native_libraries": [
+    "lib/arm64-v8a/libjnidispatch.so",
+    "lib/arm64-v8a/libvosk.so",
+    "lib/armeabi-v7a/libjnidispatch.so",
+    "lib/armeabi-v7a/libvosk.so"
+  ],
+  "zipalign": "Verification succesful",
+  "signature_verification": "Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/workspace/azvoice-tools/cacerts -Dhttps.proxyHost=proxy -Dhttps.proxyPort=8080 -Dhttp.proxyHost=proxy -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.*\nVerifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): true\nVerified using v3 scheme (APK Signature Scheme v3): false\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: f742acccc12d80db4b6fd97e790cf09e5dd4c66423fc95d4437b65c3b95368ce\nSigner #1 certificate SHA-1 digest: a7b35fe31b077c23262dee0f64c835e13d849210\nSigner #1 certificate MD5 digest: 9e150480100f51ede2a83db700fa7370\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 2048\nSigner #1 public key SHA-256 digest: d59aecb61dfd47d866679d371cc9925971c7fc14d444add4d28b0acd3076bafc\nSigner #1 public key SHA-1 digest: 7a5cf3c8431083d020ce8973b40ea0c6f616b9fa\nSigner #1 public key MD5 digest: c4245a9cb455446ecbf801099650d3c6",
+  "manifest_badging": "package: name='com.aztech.jarvisfr.reconstruction' versionCode='5' versionName='0.4.1-diagnostic-fr' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'\nsdkVersion:'28'\ntargetSdkVersion:'28'\nuses-permission: name='android.permission.RECORD_AUDIO'\napplication-label:'Jarvis FR Diagnostic'\napplication-icon-160:'res/drawable/ic_jarvis.xml'\napplication: label='Jarvis FR Diagnostic' icon='res/drawable/ic_jarvis.xml'\napplication-debuggable\nlaunchable-activity: name='com.aztech.jarvisfr.MainActivity'  label='' icon=''\nfeature-group: label=''\n  uses-feature-not-required: name='android.hardware.microphone'\n  uses-feature: name='android.hardware.faketouch'\n  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'\nmain\nsupports-screens: 'small' 'normal' 'large' 'xlarge'\nsupports-any-density: 'true'\nlocales: '--_--'\ndensities: '160'\nnative-code: 'arm64-v8a' 'armeabi-v7a'",
+  "installation_tablette_verifiee": false
+}

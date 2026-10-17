@@ -1,0 +1,17 @@
+[
+  {
+    "archive": "Jarvis_FR_V4_SOURCES_LEGER_POUR_CODEX.zip",
+    "bytes": 129456,
+    "sha256": "35e9181e38b161c2afef43599753cf9584caf893b422259b4d488d84d0df6d54"
+  },
+  {
+    "archive": "Jarvis_FR_V4_MODELE_VOSK_FR_1.zip",
+    "bytes": 18865611,
+    "sha256": "68043d624c591e260335734ab0317a846c973d37d63e41b7cea459a68ab9a3c0"
+  },
+  {
+    "archive": "Jarvis_FR_V4_MODELE_VOSK_FR_2.zip",
+    "bytes": 23340926,
+    "sha256": "5ef66b8e52b1d124ad143683c8ec40a34775510f0821f207616ec089cb897ab5"
+  }
+]

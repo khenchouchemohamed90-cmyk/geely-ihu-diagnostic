@@ -30,7 +30,9 @@ public final class FrenchIntentParser {
     private static final Pattern QUESTION = Pattern.compile("^(?:est ce que|est ce|quel est|quelle est|comment est|la clim est|le climatiseur est|la climatisation est)\\b");
     private static final Pattern STOP = Pattern.compile("\\b(?:eteins|eteindre|arrete|arreter|coupe|couper|desactive|desactiver|stoppe|stopper)\\b");
     private static final Pattern START = Pattern.compile("\\b(?:allume|allumer|active|activer|demarre|demarrer|enclenche|enclencher|lance|lancer|mets|mettez|mettre)\\b");
-    private static final Pattern NEGATION = Pattern.compile("\\b(?:ne|pas|jamais|aucun|sans)\\b");
+    private static final Pattern NEGATION = Pattern.compile("\\b(?:ne|n|pas|jamais|aucun|sans)\\b");
+    private static final Pattern COMPOUND = Pattern.compile("\\b(?:et|ou|puis|ensuite)\\b");
+    private static final Pattern INFORMATION_QUESTION = Pattern.compile("^(?:quel|quelle|quels|quelles|comment|pourquoi|quand|combien|est ce)\\b");
     private static final Pattern SHOW_ONLY = Pattern.compile("\\b(?:ouvre|ouvrir|affiche|afficher|montre|montrer|ecran|menu|page|parametres|reglages)\\b");
     private static final Pattern FAN = Pattern.compile("\\b(?:ventilation|ventilateur|soufflerie|soufflage)\\b");
     private static final Pattern TEMPERATURE = Pattern.compile("\\b(?:temperature|degres?|chauffage)\\b");
@@ -41,6 +43,15 @@ public final class FrenchIntentParser {
     private static final Pattern NEXT = Pattern.compile("\\b(?:suivant|suivante|prochain|prochaine)\\b");
     private static final Pattern PREVIOUS = Pattern.compile("\\b(?:precedent|precedente|retour)\\b");
     private static final Pattern OPEN = Pattern.compile("\\b(?:ouvre|ouvrir|lance|lancer|demarre|demarrer|affiche|afficher)\\b");
+    private static final Pattern NAVIGATION = Pattern.compile("\\b(?:navigation|gps|cartes)\\b");
+    private static final Pattern TELEPHONE = Pattern.compile("\\b(?:telephone|composeur)\\b");
+    private static final Pattern BROWSER = Pattern.compile("\\b(?:navigateur internet|navigateur web|browser)\\b");
+    private static final Pattern SETTING = Pattern.compile("\\b(?:regle|regler|mets|mettre|fixe|fixer|definis|definir)\\b");
+    private static final Pattern NUMBER_OR_DEGREES = Pattern.compile("\\b(?:\\d+|degres?|zero|un|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|seize|vingt|trente|quarante)\\b");
+    private static final Pattern MEDIA_REQUEST = Pattern.compile("^(?:reprends|reprendre|joue|jouer|passe|passer)\\b");
+    private static final Pattern TERSE_MEDIA = Pattern.compile("^(?:(?:(?:la|le) )?(?:musique|chanson|morceau|piste|lecture) (?:suivant|suivante|precedent|precedente)|pause|reprise(?: de la lecture)?)$");
+    private static final Pattern NUMBER_CONTINUATION = Pattern.compile("^\\s*(?:\\d+|et|zero|un|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|treize|quatorze|quinze|seize|vingt|trente|quarante|cinquante|soixante|cents?)\\b");
+    private static final Pattern NEGATIVE_NUMBER = Pattern.compile("(?:^|\\s)-\\s*\\d");
 
     private FrenchIntentParser() { }
 
@@ -54,66 +65,94 @@ public final class FrenchIntentParser {
     public static Intent parse(String raw) { return parseCommand(raw).intent; }
 
     public static Command parseCommand(String raw) {
-        String s = normalize(raw);
+        String s = normalize(raw).replaceFirst("^jarvis\\s+", "")
+                .replaceFirst("^(?:s il te plait|merci de|peux tu|pourrais tu|veuillez)\\s+", "");
         if (s.isEmpty()) return of(Intent.INCONNUE);
         // Une négation empêche une action ambiguë, y compris sur des fonctions non automobiles.
         if (NEGATION.matcher(s).find()) return of(Intent.INCONNUE);
+        // Une session traite un seul ordre. « vingt et un » reste un nombre unique.
+        if (COMPOUND.matcher(s.replaceAll("\\bvingt et un\\b", "vingt un")).find())
+            return of(Intent.INCONNUE);
         // Fonctions à mouvement physique : reconnues mais jamais routées vers une écriture.
         if (WINDOW_ROOF_TRUNK.matcher(s).find()) return of(Intent.COMMANDE_VEHICULE_NON_VALIDEE);
         // Ne pas exécuter silencieusement UNE action si l'utilisateur en demande DEUX.
         // En particulier, une phrase mixte véhicule/média doit être clarifiée.
-        boolean mentionsClimate = HVAC.matcher(s).find() || FAN.matcher(s).find();
+        boolean mentionsOutsideTemperature = TEMPERATURE.matcher(s).find()
+                && (s.contains("exterieur") || s.contains("dehors"));
+        boolean mentionsClimate = HVAC.matcher(s).find() || FAN.matcher(s).find()
+                || TEMPERATURE.matcher(s).find() && !mentionsOutsideTemperature;
         boolean mentionsMusic = MUSIC.matcher(s).find() || s.contains("piste ") || s.contains("morceau ");
-        boolean mentionsNavigation = s.contains("navigation") || s.matches(".*\\bgps\\b.*");
-        boolean mentionsTelephone = s.contains("telephone") || s.contains("composeur");
-        if ((mentionsClimate && mentionsMusic)
-                || (mentionsClimate && (mentionsNavigation || mentionsTelephone))
-                || (mentionsMusic && (mentionsNavigation || mentionsTelephone))
-                || (mentionsClimate && s.contains("pause"))) {
+        boolean mentionsNavigation = NAVIGATION.matcher(s).find();
+        boolean mentionsTelephone = TELEPHONE.matcher(s).find();
+        boolean mentionsBrowser = BROWSER.matcher(s).find();
+        boolean mentionsRange = s.contains("autonomie") || s.contains("kilometres restants")
+                || s.contains("combien de kilometres") || s.contains("rayon d action");
+        boolean mentionsFuel = s.contains("niveau de carburant") || s.contains("combien de carburant")
+                || s.contains("combien d essence");
+        int domains = (mentionsClimate ? 1 : 0) + (mentionsMusic || s.contains("pause") ? 1 : 0)
+                + (mentionsNavigation ? 1 : 0) + (mentionsTelephone ? 1 : 0)
+                + (mentionsBrowser ? 1 : 0) + (mentionsRange ? 1 : 0)
+                + (mentionsFuel ? 1 : 0) + (mentionsOutsideTemperature ? 1 : 0);
+        if (domains > 1) {
             return of(Intent.INCONNUE);
         }
-        if (s.contains("autonomie") || s.contains("kilometres restants")
-                || s.contains("combien de kilometres") || s.contains("rayon d action")) return of(Intent.AUTONOMIE);
-        if (s.contains("niveau de carburant") || s.contains("combien de carburant") || s.contains("combien d essence"))
-            return of(Intent.NIVEAU_CARBURANT);
-        if (TEMPERATURE.matcher(s).find() && (s.contains("exterieur") || s.contains("dehors")))
-            return of(Intent.TEMPERATURE_EXTERIEURE);
+        if (mentionsRange) return of(Intent.AUTONOMIE);
+        if (mentionsFuel) return of(Intent.NIVEAU_CARBURANT);
+        if (mentionsOutsideTemperature) return of(Intent.TEMPERATURE_EXTERIEURE);
 
         if (MUSIC.matcher(s).find() || s.contains("pause") || s.contains("reprends la lecture")) {
-            if (NEXT.matcher(s).find() && !PREVIOUS.matcher(s).find()) return of(Intent.MUSIQUE_SUIVANTE);
-            if (PREVIOUS.matcher(s).find() && !NEXT.matcher(s).find()) return of(Intent.MUSIQUE_PRECEDENTE);
+            if (INFORMATION_QUESTION.matcher(s).find()
+                    || !isActionRequest(s) && !TERSE_MEDIA.matcher(s).matches()) return of(Intent.INCONNUE);
+            boolean next = NEXT.matcher(s).find();
+            boolean previous = PREVIOUS.matcher(s).find();
+            if (next && previous) return of(Intent.INCONNUE);
+            boolean resume = s.contains("reprends") || s.contains("reprise") || s.contains("joue");
+            boolean pause = s.contains("pause") || STOP.matcher(s).find();
+            if (pause && (resume || START.matcher(s).find() && !s.matches(".*\\b(?:mets|mettez|mettre)\\b.*\\bpause\\b.*")))
+                return of(Intent.INCONNUE);
+            if ((next || previous) && (pause || resume))
+                return of(Intent.INCONNUE);
+            if (next) return of(Intent.MUSIQUE_SUIVANTE);
+            if (previous) return of(Intent.MUSIQUE_PRECEDENTE);
             if (s.contains("pause") || STOP.matcher(s).find()) return of(Intent.MUSIQUE_PAUSE);
-            if (s.contains("reprends") || s.contains("reprise") || s.contains("joue")
-                    || START.matcher(s).find()) return of(Intent.MUSIQUE_LECTURE);
+            if (resume || START.matcher(s).find()) return of(Intent.MUSIQUE_LECTURE);
         }
-        if (OPEN.matcher(s).find()) {
-            if (s.contains("navigation") || s.contains("navigateur gps") || s.matches(".*\\bgps\\b.*")
-                    || s.contains("cartes")) return of(Intent.OUVRIR_NAVIGATION);
-            if (s.contains("telephone") || s.contains("composeur")) return of(Intent.OUVRIR_TELEPHONE);
-            if (s.contains("navigateur internet") || s.contains("navigateur web")
-                    || s.contains("browser")) return of(Intent.OUVRIR_NAVIGATEUR);
+        if (OPEN.matcher(s).find() && isActionRequest(s) && !INFORMATION_QUESTION.matcher(s).find()) {
+            if (mentionsNavigation) return of(Intent.OUVRIR_NAVIGATION);
+            if (mentionsTelephone) return of(Intent.OUVRIR_TELEPHONE);
+            if (mentionsBrowser) return of(Intent.OUVRIR_NAVIGATEUR);
         }
-        if (FAN.matcher(s).find() && (s.contains("regle") || s.contains("mets") || s.contains("vitesse") || s.contains("niveau"))) {
+        if (FAN.matcher(s).find() && (SETTING.matcher(s).lookingAt() || s.startsWith("ventilation niveau") || s.startsWith("ventilation vitesse"))) {
             Matcher m = EXPLICIT_LEVEL.matcher(s);
             if (m.find()) {
                 int n = parseFrenchNumber(m.group(1));
                 if (n >= 1 && n <= 9) return withArg(Intent.VENTILATION_NIVEAU, n);
             }
         }
-        if (TEMPERATURE.matcher(s).find() && (s.contains("regle") || s.contains("mets") || s.contains("fixe") || s.contains("definis"))) {
+        if ((TEMPERATURE.matcher(s).find() || HVAC.matcher(s).find() && NUMBER_OR_DEGREES.matcher(s).find())
+                && SETTING.matcher(s).lookingAt()) {
+            if (s.contains("moins") || raw != null && NEGATIVE_NUMBER.matcher(raw).find())
+                return of(Intent.INCONNUE);
             Matcher m = EXPLICIT_TEMP.matcher(s);
-            if (m.find()) return withArg(Intent.TEMPERATURE_HABITACLE, parseFrenchNumber(m.group(1)));
+            if (m.find()) {
+                int value = parseFrenchNumber(m.group(1));
+                boolean invalidContinuation = NUMBER_CONTINUATION.matcher(s.substring(m.end())).find();
+                if (!invalidContinuation && !m.find()) return withArg(Intent.TEMPERATURE_HABITACLE, value);
+            }
+            // Une consigne invalide ne doit pas devenir par défaut « allumer la clim ».
+            return of(Intent.INCONNUE);
         }
         if (HVAC.matcher(s).find()) {
             if (QUESTION.matcher(s).find() || s.startsWith("donne") && s.contains("etat")
                     || s.contains("est elle activee")) return of(Intent.ETAT_CLIMATISATION);
             if (SHOW_ONLY.matcher(s).find()) return of(Intent.INCONNUE);
-            if (s.contains("automatique") && (START.matcher(s).find() || s.startsWith("climatisation automatique")))
-                return of(Intent.CLIMATISATION_AUTO);
             boolean stop = STOP.matcher(s).find();
             boolean start = START.matcher(s).find();
             if (stop && start) return of(Intent.INCONNUE);
+            boolean terseAuto = s.equals("climatisation automatique");
+            if (!isActionRequest(s) && !terseAuto) return of(Intent.INCONNUE);
             if (stop) return of(Intent.ARRETER_CLIMATISATION);
+            if (s.contains("automatique") && (start || terseAuto)) return of(Intent.CLIMATISATION_AUTO);
             if (start) return of(Intent.ACTIVER_CLIMATISATION);
         }
         return of(Intent.INCONNUE);
@@ -136,4 +175,9 @@ public final class FrenchIntentParser {
 
     private static Command of(Intent i) { return new Command(i, -1); }
     private static Command withArg(Intent i, int value) { return new Command(i, value); }
+
+    private static boolean isActionRequest(String phrase) {
+        return START.matcher(phrase).lookingAt() || STOP.matcher(phrase).lookingAt()
+                || OPEN.matcher(phrase).lookingAt() || MEDIA_REQUEST.matcher(phrase).lookingAt();
+    }
 }

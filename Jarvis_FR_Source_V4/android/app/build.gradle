@@ -6,14 +6,55 @@ android {
         applicationId 'com.aztech.jarvisfr.reconstruction'
         minSdk 28
         targetSdk 28
-        versionCode 4
-        versionName '0.4-source-readonly'
+        versionCode 5
+        versionName '0.4.1-diagnostic-fr'
+        ndk { abiFilters 'armeabi-v7a', 'arm64-v8a' }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    lint {
+        // Installation privée sur IHU007B Android 9, pas de publication Google Play.
+        // Conserver les autres contrôles de compatibilité et les erreurs Lint actifs.
+        disable 'ExpiredTargetSdkVersion'
+    }
 }
 dependencies {
     implementation 'com.alphacephei:vosk-android:0.3.47'
 }
+
+// Refuser une APK contenant un modèle tronqué, y compris après un transfert séparé.
+tasks.register('verifyFrenchModel') {
+    def manifest = rootProject.file('../analysis/SHA256_MODELE_FR.txt')
+    def modelDir = file('src/main/assets/model-fr')
+    inputs.file(manifest)
+    inputs.dir(modelDir)
+    doLast {
+        def entries = manifest.readLines('UTF-8').findAll { !it.trim().isEmpty() }
+        if (entries.size() != 15) throw new GradleException('Manifeste Vosk incomplet : 15 fichiers attendus')
+        entries.each { line ->
+            def parts = line.trim().split(/\s+/, 2)
+            def marker = '/assets/model-fr/'
+            if (parts.length != 2 || !parts[0].matches('[0-9a-f]{64}') || !parts[1].contains(marker)) {
+                throw new GradleException('Entrée invalide du manifeste Vosk')
+            }
+            def relative = parts[1].substring(parts[1].indexOf(marker) + marker.length())
+            def target = new File(modelDir, relative).canonicalFile
+            if (!target.toPath().startsWith(modelDir.canonicalFile.toPath()) || !target.isFile()) {
+                throw new GradleException('Fichier Vosk absent : ' + relative)
+            }
+            def digest = java.security.MessageDigest.getInstance('SHA-256')
+            target.withInputStream { stream ->
+                byte[] buffer = new byte[65536]
+                int count
+                while ((count = stream.read(buffer)) != -1) digest.update(buffer, 0, count)
+            }
+            if (digest.digest().encodeHex().toString() != parts[0]) {
+                throw new GradleException('Empreinte Vosk incorrecte : ' + relative)
+            }
+        }
+        logger.lifecycle('Modèle Vosk français : 15/15 empreintes SHA-256 conformes')
+    }
+}
+tasks.named('preBuild').configure { dependsOn 'verifyFrenchModel' }

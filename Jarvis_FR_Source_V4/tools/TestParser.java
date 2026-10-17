@@ -1,5 +1,6 @@
 import com.aztech.jarvisfr.FrenchIntentParser;
 public class TestParser {
+ private static int assertions;
  public static void main(String[] args) {
   expect("Allume la climatisation",FrenchIntentParser.Intent.ACTIVER_CLIMATISATION);
   expect("Active la clim",FrenchIntentParser.Intent.ACTIVER_CLIMATISATION);
@@ -51,13 +52,67 @@ public class TestParser {
   expect("Coupe la climatisation et lance la navigation",FrenchIntentParser.Intent.INCONNUE);
   expect("Lance la musique et ouvre le téléphone",FrenchIntentParser.Intent.INCONNUE);
   expect("Mets la climatisation en pause",FrenchIntentParser.Intent.INCONNUE);
-  System.out.println("50 tests du parser FR PASSÉS (zéro écriture automobile)");
+  // Une commande par phrase, y compris entre domaines Android et lectures véhicule.
+  expect("Ouvre la navigation et le téléphone",FrenchIntentParser.Intent.INCONNUE);
+  expect("Ouvre le navigateur web puis le GPS",FrenchIntentParser.Intent.INCONNUE);
+  expect("Ouvre les cartes ouvre le composeur",FrenchIntentParser.Intent.INCONNUE);
+  expect("Ouvre le navigateur web ouvre les cartes",FrenchIntentParser.Intent.INCONNUE);
+  expect("Donne mon autonomie ouvre le GPS",FrenchIntentParser.Intent.INCONNUE);
+  expect("Quel est mon niveau de carburant et mon autonomie",FrenchIntentParser.Intent.INCONNUE);
+  expect("Règle la température à 22 degrés lance la musique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Mets de la musique ou ouvre le téléphone",FrenchIntentParser.Intent.INCONNUE);
+  expect("Pause puis reprends la musique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Musique suivante précédente",FrenchIntentParser.Intent.INCONNUE);
+  expect("Mets la musique suivante en pause",FrenchIntentParser.Intent.INCONNUE);
+  expect("Arrête reprends la musique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Allume coupe la musique",FrenchIntentParser.Intent.INCONNUE);
+  expect("N'allume la musique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Quelle est la chanson suivante",FrenchIntentParser.Intent.INCONNUE);
+  expect("Pourquoi ouvre le téléphone",FrenchIntentParser.Intent.INCONNUE);
+  expect("Je parle de lancer la musique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Je pense à ouvrir le téléphone",FrenchIntentParser.Intent.INCONNUE);
+  expect("La chanson suivante est belle",FrenchIntentParser.Intent.INCONNUE);
+  expect("Pause déjeuner",FrenchIntentParser.Intent.INCONNUE);
+  expect("Je parle d'allumer la climatisation automatique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Allume coupe la climatisation automatique",FrenchIntentParser.Intent.INCONNUE);
+  expect("Climatisation automatique coupe",FrenchIntentParser.Intent.INCONNUE);
+  expect("Climatisation automatique",FrenchIntentParser.Intent.CLIMATISATION_AUTO);
+  expect("Éteins la climatisation automatique",FrenchIntentParser.Intent.ARRETER_CLIMATISATION);
+  expect("Jarvis ouvre la navigation",FrenchIntentParser.Intent.OUVRIR_NAVIGATION);
+  expect("Peux-tu ouvrir le téléphone",FrenchIntentParser.Intent.OUVRIR_TELEPHONE);
+  expect("S'il te plaît lance la musique",FrenchIntentParser.Intent.MUSIQUE_LECTURE);
+  expect("Merci de mettre la musique en pause",FrenchIntentParser.Intent.MUSIQUE_PAUSE);
+  expect("Pause",FrenchIntentParser.Intent.MUSIQUE_PAUSE);
+  expect("Mets en pause",FrenchIntentParser.Intent.MUSIQUE_PAUSE);
+  expect("Reprends la musique",FrenchIntentParser.Intent.MUSIQUE_LECTURE);
+  expect("Mets le morceau suivant",FrenchIntentParser.Intent.MUSIQUE_SUIVANTE);
+  expect("Ouvre les cartes",FrenchIntentParser.Intent.OUVRIR_NAVIGATION);
+  expect("Ouvre le navigateur GPS",FrenchIntentParser.Intent.OUVRIR_NAVIGATION);
+  expect("Ouvre le composeur",FrenchIntentParser.Intent.OUVRIR_TELEPHONE);
+  expect("Règle la climatisation à 45 degrés",FrenchIntentParser.Intent.INCONNUE);
+  expect("Mets la climatisation à zéro degré",FrenchIntentParser.Intent.INCONNUE);
+  expect("Règle la température à vingt douze degrés",FrenchIntentParser.Intent.INCONNUE);
+  expect("Règle la température à 22 24 degrés",FrenchIntentParser.Intent.INCONNUE);
+  expect("Règle la température à 22 45 degrés",FrenchIntentParser.Intent.INCONNUE);
+  expect("Règle la température à moins vingt degrés",FrenchIntentParser.Intent.INCONNUE);
+  expect("Règle la température à -20 degrés",FrenchIntentParser.Intent.INCONNUE);
+  expect(null,FrenchIntentParser.Intent.INCONNUE);
+  expect(" ",FrenchIntentParser.Intent.INCONNUE);
+  for (int temperature=16;temperature<=30;temperature++)
+   expectArg("Règle la température à "+temperature+" degrés",FrenchIntentParser.Intent.TEMPERATURE_HABITACLE,temperature);
+  for (int level=1;level<=9;level++)
+   expectArg("Mets la ventilation niveau "+level,FrenchIntentParser.Intent.VENTILATION_NIVEAU,level);
+  expectArg("Règle la température à vingt-et-un degrés",FrenchIntentParser.Intent.TEMPERATURE_HABITACLE,21);
+  expectArg("Mets la climatisation à 22 degrés",FrenchIntentParser.Intent.TEMPERATURE_HABITACLE,22);
+  System.out.println(assertions+" tests du parser FR PASSÉS (zéro écriture automobile)");
  }
  private static void expectArg(String input, FrenchIntentParser.Intent expected,int arg){
+  assertions++;
   FrenchIntentParser.Command got=FrenchIntentParser.parseCommand(input);
   if (got.intent!=expected||got.argument!=arg) throw new AssertionError(input+" : "+got.intent+"/"+got.argument);
  }
  private static void expect(String input, FrenchIntentParser.Intent expected){
+  assertions++;
   var actual=FrenchIntentParser.parse(input);
   if (actual!=expected) throw new AssertionError(input+" : "+actual+" au lieu de "+expected);
  }

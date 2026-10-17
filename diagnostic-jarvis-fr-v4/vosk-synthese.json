@@ -1,0 +1,13 @@
+{
+  "positive_commands": 11,
+  "free_parser_correct": 2,
+  "guided_parser_correct": 7,
+  "free_exact": 0,
+  "guided_exact": 5,
+  "negation_or_composite": 7,
+  "free_negative_rejected": 7,
+  "guided_negative_rejected": 7,
+  "out_of_domain": 3,
+  "free_out_of_domain_rejected": 3,
+  "guided_out_of_domain_rejected": 2
+}

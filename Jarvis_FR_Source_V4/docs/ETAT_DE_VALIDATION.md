@@ -1,3 +1,5 @@
+> Archive historique des vérifications avant compilation réelle. Le bilan courant est dans [RAPPORT_DIAGNOSTIC.md](RAPPORT_DIAGNOSTIC.md).
+
 # Niveau de preuve au 17 octobre 2026
 
 | Élément | Provenance | Statut |

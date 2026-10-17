@@ -1,10 +1,14 @@
-name: Verification du projet source Jarvis FR
+name: Vérification Jarvis FR Android 9
 on:
   workflow_dispatch:
   push:
-    paths: ['android/**']
+    paths: ['android/**', 'tools/**', 'analysis/SHA256_MODELE_FR.txt', '.github/workflows/build-source.yml']
+  pull_request:
+    paths: ['android/**', 'tools/**', 'analysis/SHA256_MODELE_FR.txt']
+permissions:
+  contents: read
 jobs:
-  android:
+  diagnostic:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,16 +17,17 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: android-actions/setup-android@v3
+      - run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0'
       - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.7'
-      - name: Tester les commandes françaises, les doublons et l’ECARX simulé
-        run: sh tools/test_parser.sh
-      - name: Vérifier la syntaxe Java (interfaces Android simulées)
-        run: python3 tools/check_android_sources.py
-      - name: Compiler Android (lecture seule)
-        run: cd android && gradle --no-daemon :app:assembleDebug
+      - name: Vérifier le modèle et les tests simulés
+        run: |
+          python3 tools/verify_model.py
+          sh tools/test_parser.sh
+      - name: Compiler et contrôler Android
+        run: cd android && ./gradlew --no-daemon :app:assembleDebug :app:lintDebug
       - uses: actions/upload-artifact@v4
         with:
-          name: JarvisFR-source-base-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: JarvisFR-diagnostic-Android9
+          path: |
+            android/app/build/outputs/apk/debug/app-debug.apk
+            android/app/build/reports/lint-results-debug.*
