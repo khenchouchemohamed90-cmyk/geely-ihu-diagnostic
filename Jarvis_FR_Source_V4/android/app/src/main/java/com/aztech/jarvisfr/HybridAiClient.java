@@ -84,10 +84,12 @@ public final class HybridAiClient {
         if (frenchText == null || frenchText.trim().isEmpty())
             throw new IllegalArgumentException("Texte vocal absent");
         JSONObject body = new JSONObject();
-        body.put("contents", new JSONArray().put(
-                new JSONObject().put("parts", new JSONArray().put(
-                        new JSONObject().put("text", "Prononce en français, lentement et clairement : "
-                                + frenchText.substring(0, Math.min(900, frenchText.length()))))));
+        String spoken = "Prononce en français, lentement et clairement : "
+                + frenchText.substring(0, Math.min(900, frenchText.length()));
+        JSONObject speechPart = new JSONObject().put("text", spoken);
+        JSONObject speechContent = new JSONObject().put("parts",
+                new JSONArray().put(speechPart));
+        body.put("contents", new JSONArray().put(speechContent));
         JSONObject speechConfig = new JSONObject().put("voiceConfig", new JSONObject()
                 .put("prebuiltVoiceConfig", new JSONObject().put("voiceName", "Kore")));
         body.put("generationConfig", new JSONObject()
