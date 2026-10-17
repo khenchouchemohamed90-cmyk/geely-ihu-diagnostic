@@ -28,6 +28,8 @@ import java.util.Set;
  */
 public final class EcarxReadOnly implements AutoCloseable {
     public static final int AUTONOMIE_KM = 0x00100800;
+    public static final int TEMPERATURE_EXTERIEURE = 0x00100B00;
+    public static final int VITESSE_BRUTE = 0x00100100;
     public static final int CLIMAT_SYSTEME = 0x10010100;
     public static final int COMPRESSEUR_A_C = 0x10010300;
     private static final String CAR_CLASS = "com.ecarx.xui.adaptapi.car.Car";
@@ -186,6 +188,58 @@ public final class EcarxReadOnly implements AutoCloseable {
                                 + String.valueOf(rawValue));
             return finish(id, 0, true, Math.round(km), "ISensor",
                     "Autonomie lue via ISensor (km présumés) ; vérifier au tableau de bord");
+        } catch (Exception | LinkageError error) {
+            return finish(id, 0, false, 0, null, causeText(error));
+        }
+    }
+
+    /**
+     * Deux capteurs supplémentaires retracés dans le DEX Jarvis russe.
+     * Valeurs BRUTES (aucune conversion ou unité supposée).
+     * La liste blanche n'autorise pas d'autres identifiants.
+     */
+    public Value readKnownSensor(int id) {
+        if (id == AUTONOMIE_KM) return readEnduranceSensor();
+        if (id != TEMPERATURE_EXTERIEURE && id != VITESSE_BRUTE)
+            return finish(id, 0, false, 0, null, "Capteur absent de la liste autorisée");
+        log("sensor.readOnly id=" + hex(id) + " source=Jarvis_2.8_DEX");
+        if (closed || Thread.currentThread().isInterrupted())
+            return finish(id, 0, false, 0, null, "Lecture annulée");
+        try {
+            Object carObject = ensureCar();
+            if (carObject == null) return finish(id, 0, false, 0, null, "Service Car indisponible");
+            Method getter = findMethod(carObject.getClass(), "getSensorManager");
+            if (getter == null) return finish(id, 0, false, 0, null, "getSensorManager absent");
+            Object sensor = null;
+            long deadline = SystemClock.elapsedRealtime() + CONNECTION_TIMEOUT_MS;
+            while (!closed && !Thread.currentThread().isInterrupted()
+                    && SystemClock.elapsedRealtime() < deadline) {
+                synchronized (guard) {
+                    if (closed) break;
+                    sensor = getter.invoke(carObject);
+                }
+                if (sensor != null) break;
+                SystemClock.sleep(POLL_INTERVAL_MS);
+            }
+            if (sensor == null) return finish(id, 0, false, 0, null, "ISensor non connecté");
+            Method method = findMethod(sensor.getClass(), "getSensorLatestValue", int.class);
+            if (method == null) return finish(id, 0, false, 0, null, "getSensorLatestValue absent");
+            Object raw;
+            synchronized (guard) {
+                if (closed) return finish(id, 0, false, 0, null, "Lecture annulée");
+                raw = method.invoke(sensor, id);
+            }
+            log("sensor.return id=" + hex(id) + " type="
+                    + (raw == null ? "null" : raw.getClass().getName())
+                    + " brut=" + String.valueOf(raw));
+            if (!(raw instanceof Number))
+                return finish(id, 0, false, 0, null, "Valeur non numérique");
+            float value = ((Number) raw).floatValue();
+            if (!Float.isFinite(value) || value < -1000f || value > 1000f)
+                return finish(id, 0, false, 0, null, "Valeur invalide : " + String.valueOf(raw));
+            return finish(id, 0, true, Math.round(value),
+                    "ISensor brut " + String.valueOf(value),
+                    "Lecture brute, unité non confirmée ; confronter au tableau de bord");
         } catch (Exception | LinkageError error) {
             return finish(id, 0, false, 0, null, causeText(error));
         }
