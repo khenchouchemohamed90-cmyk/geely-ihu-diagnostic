@@ -6,8 +6,11 @@ trap 'rm -rf "$WORK"' EXIT
 javac -encoding UTF-8 -d "$WORK" \
   "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/Pcm16Resampler.java \
   "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/PcmAudioMetrics.java \
+  "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/PcmVoiceGain.java \
+  "$BASE"/tools/TestPcmVoiceGain.java \
   "$BASE"/tools/TestPcmAudio.java
 java -cp "$WORK" TestPcmAudio
+java -cp "$WORK" TestPcmVoiceGain
 # Scénarios d'erreur et cycle de vie simulés : ce ne sont pas des tests matériels.
 javac -encoding UTF-8 -cp "$WORK" -d "$WORK" \
   "$BASE"/tools/fake_audio/android/annotation/*.java \
