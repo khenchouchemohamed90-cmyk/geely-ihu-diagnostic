@@ -57,11 +57,17 @@ public final class EcarxReadOnly implements AutoCloseable {
         public final int raw;
         public final String supportStatus;
         public final String detail;
+        /** Representation exacte de la valeur flottante ISensor, sans unite supposee. */
+        public final String rawExact;
         Value(boolean available, int raw, String supportStatus, String detail) {
+            this(available, raw, supportStatus, detail, null);
+        }
+        Value(boolean available, int raw, String supportStatus, String detail, String rawExact) {
             this.available = available;
             this.raw = raw;
             this.supportStatus = supportStatus;
             this.detail = detail;
+            this.rawExact = rawExact;
         }
     }
 
@@ -237,9 +243,10 @@ public final class EcarxReadOnly implements AutoCloseable {
             float value = ((Number) raw).floatValue();
             if (!Float.isFinite(value) || value < -1000f || value > 1000f)
                 return finish(id, 0, false, 0, null, "Valeur invalide : " + String.valueOf(raw));
-            return finish(id, 0, true, Math.round(value),
-                    "ISensor brut " + String.valueOf(value),
-                    "Lecture brute, unité non confirmée ; confronter au tableau de bord");
+            String exact = Float.toString(value);
+            log("sensor.verified id=" + hex(id) + " brutExact=" + exact + " unité=inconnue");
+            return new Value(true, Math.round(value), "ISensor", 
+                    "Lecture brute, unité non confirmée ; confronter au tableau de bord", exact);
         } catch (Exception | LinkageError error) {
             return finish(id, 0, false, 0, null, causeText(error));
         }
