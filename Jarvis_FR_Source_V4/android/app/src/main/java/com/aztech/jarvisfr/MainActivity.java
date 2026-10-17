@@ -371,9 +371,16 @@ public class MainActivity extends Activity {
             case MUSIQUE_SUIVANTE:
             case MUSIQUE_PRECEDENTE:
             case OUVRIR_NAVIGATION:
-            case OUVRIR_TELEPHONE:
             case OUVRIR_NAVIGATEUR:
                 answer = AndroidActions.perform(this, intent);
+                break;
+            case OUVRIR_TELEPHONE:
+                // Sur IHU007B le composeur OEM a emprisonné l'ancienne tâche de Jarvis.
+                // Bloquer toute ouverture par hypothèse vocale jusqu'à validation du
+                // FLAG_ACTIVITY_NEW_TASK sur un essai manuel à l'arrêt.
+                answer = getString(R.string.origin_voice).equals(origin)
+                        ? getString(R.string.phone_voice_temporarily_disabled)
+                        : AndroidActions.perform(this, intent);
                 break;
             case VENTILATION_NIVEAU:
                 answer = getString(R.string.fan_disabled, command.argument);
