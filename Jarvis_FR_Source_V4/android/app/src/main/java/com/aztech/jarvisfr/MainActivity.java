@@ -472,7 +472,7 @@ public class MainActivity extends Activity {
                     rangeButton.setEnabled(true);
                     acButton.setEnabled(true);
                     if (resultToken != resultGeneration) return;
-                    result.setText(getString(R.string.read_value, label, value.available ? Integer.toString(value.raw)
+                    result.setText(getString(R.string.read_value, label, value.available ? (value.rawExact == null ? Integer.toString(value.raw) : value.rawExact)
                             : getString(R.string.read_value_unavailable, value.detail), value.supportStatus));
                 });
             });
