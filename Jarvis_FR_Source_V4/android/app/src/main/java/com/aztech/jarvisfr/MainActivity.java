@@ -239,6 +239,10 @@ public class MainActivity extends Activity {
                 return;
             }
             journal.record("CLOUD", "Consentement pour ce lancement=" + checked);
+            if (checked) {
+                guidedVocabulary.setChecked(false);
+                result.setText("IA connectée activée. Le vocabulaire libre est sélectionné pour les questions ouvertes. Les commandes constructeur restent locales.");
+            }
         });
         diagnosticsPanel.addView(cloudEnabled);
         button(diagnosticsPanel, "Effacer la clé API").setOnClickListener(v -> {
@@ -637,6 +641,10 @@ public class MainActivity extends Activity {
                 answer = getString(R.string.reading_disabled);
                 break;
             default:
+                if (cloudEnabled != null && cloudEnabled.isChecked()) {
+                    requestCloudAnswer(phrase, origin);
+                    return;
+                }
                 answer = getString(R.string.command_unknown);
         }
         status.setText(getString(R.string.command_origin, origin, phrase));
@@ -669,6 +677,103 @@ public class MainActivity extends Activity {
             case NIVEAU_CARBURANT: return "carburant_absent";
             default: return "inconnu";
         }
+    }
+
+    /**
+     * Conversation en ligne sur un exécuteur distinct. Réponse texte UNIQUEMENT,
+     * jamais d'exécution de code ni d'appel ECARX depuis une réponse du modèle.
+     * Les questions ouvertes ne sont envoyées qu'après activation explicite.
+     */
+    private void requestCloudAnswer(String question, String origin) {
+        if (!alive() || !foreground || cloudEnabled == null || !cloudEnabled.isChecked()) return;
+        if (cloudBusy) {
+            result.setText("Jarvis répond déjà à une question. Attendez la fin avant de réessayer.");
+            return;
+        }
+        final String key = privateKeys.load();
+        if (key == null) {
+            cloudEnabled.setChecked(false);
+            result.setText("La clé API personnelle est absente. Utilisez les commandes locales ou configurez l'IA.");
+            return;
+        }
+        if (question.length() > 500) {
+            result.setText("Question trop longue pour cet essai. Limite : 500 caractères.");
+            return;
+        }
+        final long operation = ++cloudGeneration;
+        cloudBusy = true;
+        status.setText("Jarvis consulte le service IA en français…");
+        result.setText("Réponse en cours. Internet nécessaire ; aucune action véhicule n'est autorisée.");
+        journal.record("CLOUD", "Demande volontaire, longueur=" + question.length()
+                + " origine=" + origin + " ; aucune donnée capteur ajoutée");
+        try {
+            cloudWorker.execute(() -> {
+                String answer;
+                try {
+                    answer = cloudClient.answer(key, question);
+                } catch (HybridAiClient.AiError error) {
+                    finishCloudError(operation, "IA : " + error.getMessage(), "HTTP " + error.status);
+                    return;
+                } catch (Exception error) {
+                    finishCloudError(operation, "IA indisponible : vérifiez Internet et votre configuration.",
+                            error.getClass().getSimpleName());
+                    return;
+                }
+                final String spokenText = answer;
+                mainHandler.post(() -> {
+                    if (alive() && foreground && operation == cloudGeneration
+                            && cloudEnabled != null && cloudEnabled.isChecked()) {
+                        status.setText("Réponse de Jarvis en français");
+                        result.setText(spokenText);
+                    }
+                });
+                if (destroyed || !foreground || operation != cloudGeneration
+                        || cloudEnabled == null || !cloudEnabled.isChecked()
+                        || spokenReplies == null || !spokenReplies.isChecked()) {
+                    finishCloud(operation);
+                    return;
+                }
+                try {
+                    byte[] audio = cloudClient.speech(key, spokenText);
+                    java.io.File clip = cloudSpeech.writePrivateFile(audio);
+                    mainHandler.post(() -> {
+                        if (alive() && foreground && operation == cloudGeneration
+                                && cloudEnabled != null && cloudEnabled.isChecked()
+                                && spokenReplies != null && spokenReplies.isChecked()) {
+                            if (!cloudSpeech.play(clip))
+                                journal.record("CLOUD", "Audio français généré mais lecture impossible");
+                        } else clip.delete();
+                        finishCloud(operation);
+                    });
+                } catch (Exception error) {
+                    journal.record("CLOUD", "Voix réseau indisponible : "
+                            + error.getClass().getSimpleName());
+                    mainHandler.post(() -> {
+                        if (alive() && foreground && operation == cloudGeneration)
+                            status.setText("Réponse affichée ; synthèse vocale en ligne indisponible");
+                        finishCloud(operation);
+                    });
+                }
+            });
+        } catch (RejectedExecutionException error) {
+            cloudBusy = false;
+            result.setText("Service IA occupé. Réessayez.");
+        }
+    }
+
+    private void finishCloudError(long operation, String userText, String diagnostic) {
+        journal.record("CLOUD", "Échec : " + diagnostic);
+        mainHandler.post(() -> {
+            if (alive() && foreground && operation == cloudGeneration) {
+                status.setText("Service IA indisponible — les commandes locales restent accessibles");
+                result.setText(userText);
+            }
+            finishCloud(operation);
+        });
+    }
+
+    private void finishCloud(long operation) {
+        if (operation == cloudGeneration) cloudBusy = false;
     }
 
     private void handle(long token, String json, VoiceTranscriptPolicy.Kind kind) {
