@@ -23,8 +23,8 @@ import java.util.Set;
 
 /**
  * Diagnostic ECARX en lecture seule. Les IDs sont des candidats, sans unité déduite.
- * L'ID d'autonomie vient des notes historiques ; le corps du helper russe
- * getEnduranceMileage()->float n'a pas été fourni et son API reste à identifier.
+ * L'autonomie (0x00100800) a été retracée dans le DEX original Jarvis 2.8 :
+ * ISensor.getSensorLatestValue(int) renvoie un float. Aucun changement de droits.
  */
 public final class EcarxReadOnly implements AutoCloseable {
     public static final int AUTONOMIE_KM = 0x00100800;
@@ -116,7 +116,7 @@ public final class EcarxReadOnly implements AutoCloseable {
             }
         }
         for (Class<?> type : types) appendApiMetadata(lines, type);
-        lines.add("Autonomie : candidat historique 0x00100800, API exacte non validée ; helper russe getEnduranceMileage()->float.");
+        lines.add("Autonomie : source DEX vérifiée = ISensor.getSensorLatestValue(0x00100800) float ; validation réelle IHU007B requise.");
         lines.add("Aucun statut notavailable/unsupported/inconnu ne sera converti en zéro, et aucune écriture n'est disponible.");
         StringBuilder report = new StringBuilder();
         for (String line : lines) {
@@ -125,6 +125,68 @@ public final class EcarxReadOnly implements AutoCloseable {
             log("environment " + clean);
         }
         return report.toString();
+    }
+
+
+    /**
+     * Lecture d'autonomie reproduite depuis l'APK originale Jarvis 2.8 Lite
+     * (méthode getEnduranceMileage()->float, DEX 12334).
+     *
+     * Source confirmée dans le DEX original : ISensor.getSensorLatestValue(0x00100800).
+     * Ne PAS passer par ICarFunction.isFunctionSupported() : la propriété est un capteur,
+     * et l'ancien chemin retournait notavailable sur IHU007B.
+     *
+     * Lecture seule. Aucun getter arbitraire et aucune écriture automobile.
+     */
+    public Value readEnduranceSensor() {
+        final int id = AUTONOMIE_KM;
+        log("range.source=Jarvis2.8.DEX.getEnduranceMileage ISensor.getSensorLatestValue("
+                + hex(id) + ")");
+        if (closed) return finish(id, 0, false, 0, null, "Connexion ECARX fermée");
+        if (Thread.currentThread().isInterrupted())
+            return finish(id, 0, false, 0, null, "Lecture annulée");
+        try {
+            Object carObject = ensureCar();
+            if (carObject == null) return finish(id, 0, false, 0, null,
+                    "Car.create() indisponible pour le capteur");
+            Method managerGetter = findMethod(carObject.getClass(), "getSensorManager");
+            if (managerGetter == null) return finish(id, 0, false, 0, null,
+                    "getSensorManager() absent sur ICar");
+            Object sensor = null;
+            long deadline = SystemClock.elapsedRealtime() + CONNECTION_TIMEOUT_MS;
+            while (!closed && !Thread.currentThread().isInterrupted()
+                    && SystemClock.elapsedRealtime() < deadline) {
+                synchronized (guard) {
+                    if (closed) break;
+                    sensor = managerGetter.invoke(carObject);
+                    if (sensor != null) break;
+                }
+                SystemClock.sleep(POLL_INTERVAL_MS);
+            }
+            if (sensor == null) return finish(id, 0, false, 0, null,
+                    "ISensor non connecté ou lecture interrompue");
+            Method latest = findMethod(sensor.getClass(), "getSensorLatestValue", int.class);
+            if (latest == null) return finish(id, 0, false, 0, null,
+                    "ISensor.getSensorLatestValue(int) absent");
+            Object rawValue;
+            synchronized (guard) {
+                if (closed) return finish(id, 0, false, 0, null, "Lecture ECARX fermée");
+                rawValue = latest.invoke(sensor, id);
+            }
+            log("range.sensorValue type=" + (rawValue == null ? "null"
+                    : rawValue.getClass().getName()) + " valeur=" + String.valueOf(rawValue));
+            if (!(rawValue instanceof Number)) return finish(id, 0, false, 0, null,
+                    "Capteur sans valeur numérique");
+            float km = ((Number) rawValue).floatValue();
+            // Le DEX original contrôle explicitement NaN, Infinite et une borne 5000f.
+            if (Float.isNaN(km) || Float.isInfinite(km) || km < 0f || km > 5000f)
+                return finish(id, 0, false, 0, null,
+                        "Valeur capteur hors plage ou non numérique");
+            return finish(id, 0, true, Math.round(km), "ISensor",
+                    "Autonomie lue via ISensor (km présumés) ; vérifier au tableau de bord");
+        } catch (Exception | LinkageError error) {
+            return finish(id, 0, false, 0, null, causeText(error));
+        }
     }
 
     /**
