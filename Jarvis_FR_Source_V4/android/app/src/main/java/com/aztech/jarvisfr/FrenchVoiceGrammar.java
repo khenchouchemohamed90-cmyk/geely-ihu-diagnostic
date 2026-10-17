@@ -54,6 +54,14 @@ public final class FrenchVoiceGrammar {
                 "vingt cinq", "vingt six", "vingt sept", "vingt huit", "vingt neuf", "trente"}) {
             phrases.add("règle la température à " + temperature + " degrés");
         }
+        phrases.addAll(Arrays.asList(
+                "bonjour", "bonjour jarvis", "salut", "bonsoir", "comment ça va",
+                "comment tu t'appelles", "qui es tu", "quel est ton nom", "présente toi",
+                "merci", "merci jarvis", "merci beaucoup",
+                "aide", "que sais tu faire", "quelles sont tes fonctions",
+                "quelles commandes", "raconte une blague",
+                "quelle heure est il", "quelle est la date", "quel jour sommes nous"
+        ));
         phrases.add("[unk]");
         return Collections.unmodifiableList(new ArrayList<>(phrases));
     }
