@@ -81,8 +81,11 @@ public final class Car implements IConnectable {
     public static final class FakeSensor {
         public float getSensorLatestValue(int sensorId) {
             sensorReadCount++;
-            if (sensorId != 0x00100800) throw new AssertionError("Unapproved sensor ID");
+            if (sensorId != 0x00100800 && sensorId != 0x00100B00 && sensorId != 0x00100100)
+                throw new AssertionError("Unapproved sensor ID");
             if (failSensor) throw new SecurityException("Sensor read forbidden");
+            if (sensorId == 0x00100B00) return 22.7f;
+            if (sensorId == 0x00100100) return 44.1f;
             return sensorRange;
         }
     }
