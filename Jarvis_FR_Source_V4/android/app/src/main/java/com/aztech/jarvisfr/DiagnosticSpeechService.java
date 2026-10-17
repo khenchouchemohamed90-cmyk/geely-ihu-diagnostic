@@ -34,6 +34,7 @@ public final class DiagnosticSpeechService {
     private static final int VOSK_RATE = 16000;
     private static final int[] RATES = {16000, 48000, 44100};
     private final int[] sources;
+    private final boolean softwareGain;
     private static final long DIAGNOSTIC_INTERVAL_MS = 1000;
     private final Recognizer recognizer;
     private final DiagnosticsListener diagnostics;
@@ -46,10 +47,16 @@ public final class DiagnosticSpeechService {
     private Thread captureThread;
 
     public DiagnosticSpeechService(Recognizer recognizer, DiagnosticsListener diagnostics) {
-        this(recognizer, diagnostics, InputPreset.AUTO);
+        this(recognizer, diagnostics, InputPreset.AUTO, true);
     }
 
     public DiagnosticSpeechService(Recognizer recognizer, DiagnosticsListener diagnostics, InputPreset preset) {
+        this(recognizer, diagnostics, preset, true);
+    }
+
+    public DiagnosticSpeechService(Recognizer recognizer, DiagnosticsListener diagnostics,
+                                   InputPreset preset, boolean enableGain) {
+        this.softwareGain = enableGain;
         if (recognizer == null || preset == null) throw new IllegalArgumentException("Configuration audio absente");
         this.recognizer = recognizer;
         this.diagnostics = diagnostics;
@@ -123,6 +130,7 @@ public final class DiagnosticSpeechService {
             int rate = input.rate;
             short[] raw = new short[Math.max(1, rate / 10)];
             Pcm16Resampler resampler = new Pcm16Resampler(rate, VOSK_RATE);
+            PcmVoiceGain voiceGain = new PcmVoiceGain();
             short[] pcm16k = new short[resampler.outputCapacity(raw.length)];
             long nextDiagnostic = SystemClock.elapsedRealtime() + DIAGNOSTIC_INTERVAL_MS;
             long nextPartial = 0;
@@ -141,6 +149,7 @@ public final class DiagnosticSpeechService {
                     int converted = resampler.process(raw, count, pcm16k);
                     if (converted > 0) {
                         outputSamples += converted;
+                        if (softwareGain) voiceGain.apply(pcm16k, converted);
                         if (recognizer.acceptWaveForm(pcm16k, converted)) {
                             String json = recognizer.getResult();
                             post(() -> listener.onResult(json));
@@ -160,6 +169,9 @@ public final class DiagnosticSpeechService {
                 }
                 if (SystemClock.elapsedRealtime() >= nextDiagnostic) {
                     reportMetrics(metrics.snapshot(), buffers, outputSamples);
+                    if (softwareGain) report(String.format(Locale.FRANCE,
+                            "Gain logiciel vocal : %.1fx (mesure RMS precedente brute, pas d'action sur le microphone systeme)",
+                            voiceGain.currentGain()));
                     nextDiagnostic = SystemClock.elapsedRealtime() + DIAGNOSTIC_INTERVAL_MS;
                 }
             }
