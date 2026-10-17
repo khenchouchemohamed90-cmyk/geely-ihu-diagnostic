@@ -161,6 +161,16 @@ public class MainActivity extends Activity {
         guidedVocabulary.setTextColor(0xffe0efff);
         guidedVocabulary.setChecked(true);
         diagnosticsPanel.addView(guidedVocabulary);
+        spokenReplies = new CheckBox(this);
+        spokenReplies.setText("Réponses parlées en français (hors ligne)");
+        spokenReplies.setTextColor(0xffe0efff);
+        spokenReplies.setChecked(true);
+        spokenReplies.setOnCheckedChangeListener((buttonView, checked) -> {
+            offlineVoice.setEnabled(checked);
+            if (!checked && voice != null) voice.setSilent(true);
+            journal.record("TTS", "voix française embarquée autorisée=" + checked);
+        });
+        diagnosticsPanel.addView(spokenReplies);
         gainEnabled = new CheckBox(this);
         gainEnabled.setText("Amplification logicielle (signal micro faible)");
         gainEnabled.setTextColor(0xffe0efff);
