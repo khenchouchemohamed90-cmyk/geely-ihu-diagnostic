@@ -562,7 +562,33 @@ public class MainActivity extends Activity {
         status.setText(getString(R.string.command_origin, origin, phrase));
         result.setText(answer);
         if (readLabel != null) showRead(readId, readLabel, token);
-        if (voice != null) voice.speakAnswer(answer);
+        else say(answer, responseVoiceKey(intent));
+    }
+
+    private void say(String message, String key) {
+        if (spokenReplies != null && !spokenReplies.isChecked()) return;
+        if (voice != null && voice.speakAnswer(message)) return;
+        if (offlineVoice != null) offlineVoice.speak(key);
+    }
+
+    private static String responseVoiceKey(FrenchIntentParser.Intent intent) {
+        switch (intent) {
+            case OUVRIR_NAVIGATION: return "navigation";
+            case OUVRIR_NAVIGATEUR: return "navigateur";
+            case MUSIQUE_LECTURE: return "musique";
+            case MUSIQUE_PAUSE: return "pause";
+            case MUSIQUE_SUIVANTE: return "suivante";
+            case MUSIQUE_PRECEDENTE: return "precedente";
+            case OUVRIR_TELEPHONE: return "telephone";
+            case ACTIVER_CLIMATISATION:
+            case ARRETER_CLIMATISATION:
+            case CLIMATISATION_AUTO:
+            case VENTILATION_NIVEAU:
+            case TEMPERATURE_HABITACLE: return "clim_bloquee";
+            case COMMANDE_VEHICULE_NON_VALIDEE: return "vehicule_bloque";
+            case NIVEAU_CARBURANT: return "carburant_absent";
+            default: return "inconnu";
+        }
     }
 
     private void handle(long token, String json, VoiceTranscriptPolicy.Kind kind) {
