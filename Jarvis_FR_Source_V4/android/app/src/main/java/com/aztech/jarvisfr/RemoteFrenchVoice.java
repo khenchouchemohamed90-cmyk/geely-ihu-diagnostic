@@ -21,7 +21,7 @@ public final class RemoteFrenchVoice {
             throw new IOException("Réponse audio vide ou excessive");
         File dir = new File(context.getCacheDir(), "jarvis-cloud-audio");
         if (!dir.isDirectory() && !dir.mkdirs()) throw new IOException("Stockage temporaire absent");
-        File result = File.createTempFile("response-", ".mp3", dir);
+        File result = File.createTempFile("response-", ".wav", dir);
         try (FileOutputStream output = new FileOutputStream(result)) { output.write(bytes); }
         return result;
     }
