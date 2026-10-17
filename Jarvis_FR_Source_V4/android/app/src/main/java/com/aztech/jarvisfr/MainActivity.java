@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
         hint.setTextColor(0xffaac9d6);
         Button mic = button(content, "🎙  PARLER À JARVIS");
         mic.setTextSize(21);
-        mic.setMinHeight(dp(64));
+        mic.getLayoutParams().height = dp(64);
         mic.setBackground(background(0xff0b779a, 20));
         mic.setOnClickListener(view -> startSpeech());
         Button stop = button(content, "■   Arrêter l’écoute");
