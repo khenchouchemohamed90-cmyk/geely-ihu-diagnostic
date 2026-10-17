@@ -749,8 +749,11 @@ public class MainActivity extends Activity {
                     journal.record("CLOUD", "Voix réseau indisponible : "
                             + error.getClass().getSimpleName());
                     mainHandler.post(() -> {
-                        if (alive() && foreground && operation == cloudGeneration)
-                            status.setText("Réponse affichée ; synthèse vocale en ligne indisponible");
+                        if (alive() && foreground && operation == cloudGeneration) {
+                            status.setText("Réponse affichée ; synthèse vocale Gemini indisponible");
+                            if (spokenReplies != null && spokenReplies.isChecked())
+                                offlineVoice.speak("reponse_affichee");
+                        }
                         finishCloud(operation);
                     });
                 }
