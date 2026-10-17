@@ -181,7 +181,9 @@ public final class EcarxReadOnly implements AutoCloseable {
             // Le DEX original contrôle explicitement NaN, Infinite et une borne 5000f.
             if (Float.isNaN(km) || Float.isInfinite(km) || km < 0f || km > 5000f)
                 return finish(id, 0, false, 0, null,
-                        "Valeur capteur hors plage ou non numérique");
+                        "Valeur capteur hors plage ou non numérique : type="
+                                + rawValue.getClass().getSimpleName() + " brut="
+                                + String.valueOf(rawValue));
             return finish(id, 0, true, Math.round(km), "ISensor",
                     "Autonomie lue via ISensor (km présumés) ; vérifier au tableau de bord");
         } catch (Exception | LinkageError error) {
