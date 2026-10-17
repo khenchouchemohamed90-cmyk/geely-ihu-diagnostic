@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
         TextView title = text(content, "JARVIS  FR", 35);
         title.setTextColor(0xfff7fcff);
         title.setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD);
-        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.7", 12);
+        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.8", 12);
         version.setTextColor(0xffa2bcd3);
 
         LinearLayout systemPanel = panel(content);
@@ -200,9 +200,9 @@ public class MainActivity extends Activity {
         });
         section(diagnosticsPanel, "CONVERSATION INTELLIGENTE (INTERNET)");
         TextView privacy = text(diagnosticsPanel,
-                "Option facultative : seule la question transcrite est envoyée à OpenAI. "
-                + "La réponse peut ensuite être envoyée au service de voix française. "
-                + "Aucune commande ECARX n'est transmise à l'IA. Usage API facturé séparément.", 12);
+                "Option facultative : seule la question transcrite est envoyée à Google Gemini. "
+                + "La réponse peut ensuite être envoyée au service Gemini de voix française. "
+                + "Offre gratuite limitée : si le quota est atteint, Jarvis reste hors ligne. Les textes envoyés peuvent servir à améliorer les produits Google. N'activez pas la facturation du projet.", 12);
         privacy.setTextColor(0xffb3c9d9);
         final EditText apiKeyInput = new EditText(this);
         apiKeyInput.setSingleLine(true);
@@ -213,7 +213,7 @@ public class MainActivity extends Activity {
         apiKeyInput.setInputType(android.text.InputType.TYPE_CLASS_TEXT
                 | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
         apiKeyInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(512)});
-        apiKeyInput.setHint(privateKeys.configured() ? "Clé personnelle chiffrée enregistrée" : "Clé API OpenAI personnelle (ne jamais me l'envoyer)");
+        apiKeyInput.setHint(privateKeys.configured() ? "Clé personnelle chiffrée enregistrée" : "Clé gratuite Google AI Studio (à garder privée)");
         diagnosticsPanel.addView(apiKeyInput);
         Button saveKey = button(diagnosticsPanel, "Enregistrer la clé sur la tablette");
         saveKey.setOnClickListener(v -> {
@@ -229,19 +229,19 @@ public class MainActivity extends Activity {
             }
         });
         cloudEnabled = new CheckBox(this);
-        cloudEnabled.setText("J'autorise l'envoi de mes questions et réponses à l'API OpenAI pour une conversation parlée");
+        cloudEnabled.setText("J'autorise l'envoi des questions et réponses à Gemini (offre gratuite, quota limité)");
         cloudEnabled.setTextColor(0xffe0efff);
         cloudEnabled.setChecked(false);
         cloudEnabled.setOnCheckedChangeListener((view, checked) -> {
             if (checked && !privateKeys.configured()) {
                 cloudEnabled.setChecked(false);
-                result.setText("Enregistrez d'abord votre propre clé API OpenAI. La fonction locale reste disponible.");
+                result.setText("Enregistrez d'abord votre clé gratuite Gemini Google AI Studio. La fonction locale reste disponible.");
                 return;
             }
             journal.record("CLOUD", "Consentement pour ce lancement=" + checked);
             if (checked) {
                 guidedVocabulary.setChecked(false);
-                result.setText("IA connectée activée. Le vocabulaire libre est sélectionné pour les questions ouvertes. Les commandes constructeur restent locales.");
+                result.setText("Gemini gratuit activé. Le vocabulaire libre est sélectionné. Les commandes constructeur restent locales.");
             }
         });
         diagnosticsPanel.addView(cloudEnabled);
@@ -702,8 +702,8 @@ public class MainActivity extends Activity {
         }
         final long operation = ++cloudGeneration;
         cloudBusy = true;
-        status.setText("Jarvis consulte le service IA en français…");
-        result.setText("Réponse en cours. Internet nécessaire ; aucune action véhicule n'est autorisée.");
+        status.setText("Jarvis consulte Gemini en français…");
+        result.setText("Réponse en cours sur l'offre Gemini gratuite. Internet nécessaire ; aucune commande automobile.");
         journal.record("CLOUD", "Demande volontaire, longueur=" + question.length()
                 + " origine=" + origin + " ; aucune donnée capteur ajoutée");
         try {
@@ -765,7 +765,7 @@ public class MainActivity extends Activity {
         journal.record("CLOUD", "Échec : " + diagnostic);
         mainHandler.post(() -> {
             if (alive() && foreground && operation == cloudGeneration) {
-                status.setText("Service IA indisponible — les commandes locales restent accessibles");
+                status.setText("Gemini indisponible — les commandes locales restent accessibles");
                 result.setText(userText);
             }
             finishCloud(operation);
