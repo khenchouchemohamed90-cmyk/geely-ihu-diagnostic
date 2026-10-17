@@ -5,6 +5,10 @@ WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 javac -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/FrenchIntentParser.java" "$BASE/tools/TestParser.java"
 java -cp "$WORK" TestParser
+javac -encoding UTF-8 -cp "$WORK" -d "$WORK" \
+  "$BASE/android/app/src/main/java/com/aztech/jarvisfr/FrenchConversation.java" \
+  "$BASE/tools/TestFrenchConversation.java"
+java -cp "$WORK" TestFrenchConversation
 javac -cp "$WORK" -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/VoiceResultGate.java" "$BASE/tools/TestVoiceResultGate.java"
 java -cp "$WORK" TestVoiceResultGate
 javac -cp "$WORK" -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/VoiceSessionGate.java" "$BASE/tools/TestVoiceSessionGate.java"
