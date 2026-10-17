@@ -43,6 +43,9 @@ public class MainActivity extends Activity {
     private final ThreadPoolExecutor worker = new ThreadPoolExecutor(1, 1, 0L,
             TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(1),
             task -> new Thread(task, "jarvis-diagnostic"));
+    private final ThreadPoolExecutor cloudWorker = new ThreadPoolExecutor(1, 1, 0L,
+            TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(1),
+            task -> new Thread(task, "jarvis-hybrid-network"));
     private final VoiceSessionGate sessions = new VoiceSessionGate();
     private TextView modelStatus, status, result, ttsStatus;
     private EditText commandInput;
@@ -53,7 +56,12 @@ public class MainActivity extends Activity {
     private DiagnosticSpeechService.InputPreset microphonePreset = DiagnosticSpeechService.InputPreset.MIC;
     private FrenchTtsController voice;
     private OfflineFrenchVoice offlineVoice;
-    private CheckBox spokenReplies;
+    private CheckBox spokenReplies, cloudEnabled;
+    private PrivateAiKeyStore privateKeys;
+    private HybridAiClient cloudClient;
+    private RemoteFrenchVoice cloudSpeech;
+    private boolean cloudBusy;
+    private long cloudGeneration;
     private DiagnosticJournal journal;
     private final Set<DiagnosticSpeechService> captures = new HashSet<>();
     private boolean resumeSpeechAfterStop;
@@ -69,6 +77,9 @@ public class MainActivity extends Activity {
         journal = new DiagnosticJournal(getApplicationContext());
         ecarx = new EcarxReadOnly(getApplicationContext(), message -> journal.record("ECARX", message));
         offlineVoice = new OfflineFrenchVoice(getApplicationContext());
+        privateKeys = new PrivateAiKeyStore(getApplicationContext());
+        cloudClient = new HybridAiClient();
+        cloudSpeech = new RemoteFrenchVoice(getApplicationContext());
 
         getWindow().setStatusBarColor(android.graphics.Color.rgb(5, 16, 31));
         getWindow().setNavigationBarColor(android.graphics.Color.rgb(5, 16, 31));
@@ -443,7 +454,7 @@ public class MainActivity extends Activity {
         for (DiagnosticSpeechService capture : captures) capture.cancel();
     }
 
-    private void stopTts() { if (voice != null) voice.stop(); if (offlineVoice != null) offlineVoice.stop(); }
+    private void stopTts() { if (voice != null) voice.stop(); if (offlineVoice != null) offlineVoice.stop(); if (cloudSpeech != null) cloudSpeech.stop(); }
 
     @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grants) {
         super.onRequestPermissionsResult(requestCode, permissions, grants);
@@ -753,6 +764,9 @@ public class MainActivity extends Activity {
         destroyed = true;
         stopSpeech();
         worker.shutdownNow();
+        cloudWorker.shutdownNow();
+        cloudGeneration++;
+        cloudBusy = false;
         // Un Binder propriétaire bloqué ne peut pas être annulé de force. Son
         // attente et sa libération ne doivent jamais retenir le thread d'interface.
         Thread carCleanup = new Thread(ecarx::close, "jarvis-ecarx-close");
@@ -761,6 +775,7 @@ public class MainActivity extends Activity {
         if (captures.isEmpty()) closeModel();
         if (voice != null) voice.close();
         if (offlineVoice != null) offlineVoice.close();
+        if (cloudSpeech != null) cloudSpeech.stop();
         journal.record("APP", "Activité détruite ; captures restantes=" + captures.size());
         super.onDestroy();
     }
