@@ -38,6 +38,13 @@ jobs:
           sh tools/test_audio.sh | tee reports/tests-audio.txt
           sh tools/test_tts.sh | tee reports/tests-tts.txt
           sh tools/test_diagnostics.sh | tee reports/tests-diagnostics.txt
+      - name: Produire les réponses françaises embarquées (obligatoires)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq espeak
+          python3 tools/generate_french_replies.py | tee reports/reponses-francaises.txt
+          test -s android/app/src/main/assets/jarvis_replies/bonjour.wav
+          test -s android/app/src/main/assets/jarvis_replies/inconnu.wav
       - name: Charger Vosk sous Linux et vérifier le rejet du silence
         run: |
           python3 -m venv "$RUNNER_TEMP/jarvis-vosk"
