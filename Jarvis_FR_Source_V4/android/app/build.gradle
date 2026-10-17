@@ -6,8 +6,8 @@ android {
         applicationId 'com.aztech.jarvisfr.reconstruction'
         minSdk 28
         targetSdk 28
-        versionCode 9
-        versionName '0.6.1-essai-IHU007B'
+        versionCode 10
+        versionName '0.7.0-assistant-vocal-fr'
         ndk { abiFilters 'armeabi-v7a', 'arm64-v8a' }
     }
     buildFeatures { buildConfig true }
