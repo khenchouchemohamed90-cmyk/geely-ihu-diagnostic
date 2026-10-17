@@ -321,7 +321,8 @@ public class MainActivity extends Activity {
         acButton.setEnabled(false);
         try {
             worker.execute(() -> {
-                EcarxReadOnly.Value value = ecarx.read(id, 0);
+                EcarxReadOnly.Value value = id == EcarxReadOnly.AUTONOMIE_KM
+                        ? ecarx.readEnduranceSensor() : ecarx.read(id, 0);
                 mainHandler.post(() -> {
                     if (!alive()) return;
                     readInProgress = false;
