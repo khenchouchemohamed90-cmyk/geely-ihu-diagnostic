@@ -50,8 +50,10 @@ public class MainActivity extends Activity {
     private Button rangeButton, acButton;
     private Model model;
     private DiagnosticSpeechService speech;
-    private DiagnosticSpeechService.InputPreset microphonePreset = DiagnosticSpeechService.InputPreset.AUTO;
+    private DiagnosticSpeechService.InputPreset microphonePreset = DiagnosticSpeechService.InputPreset.MIC;
     private FrenchTtsController voice;
+    private OfflineFrenchVoice offlineVoice;
+    private CheckBox spokenReplies;
     private DiagnosticJournal journal;
     private final Set<DiagnosticSpeechService> captures = new HashSet<>();
     private boolean resumeSpeechAfterStop;
@@ -66,6 +68,7 @@ public class MainActivity extends Activity {
         super.onCreate(state);
         journal = new DiagnosticJournal(getApplicationContext());
         ecarx = new EcarxReadOnly(getApplicationContext(), message -> journal.record("ECARX", message));
+        offlineVoice = new OfflineFrenchVoice(getApplicationContext());
 
         getWindow().setStatusBarColor(android.graphics.Color.rgb(5, 16, 31));
         getWindow().setNavigationBarColor(android.graphics.Color.rgb(5, 16, 31));
@@ -80,7 +83,7 @@ public class MainActivity extends Activity {
         TextView title = text(content, "JARVIS  FR", 35);
         title.setTextColor(0xfff7fcff);
         title.setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD);
-        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.6", 12);
+        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.7", 12);
         version.setTextColor(0xffa2bcd3);
 
         LinearLayout systemPanel = panel(content);
@@ -163,7 +166,7 @@ public class MainActivity extends Activity {
         gainEnabled.setTextColor(0xffe0efff);
         gainEnabled.setChecked(true);
         diagnosticsPanel.addView(gainEnabled);
-        Button chooseMic = button(diagnosticsPanel, "Source microphone : AUTO (changer)");
+        Button chooseMic = button(diagnosticsPanel, "Source microphone : MIC (changer)");
         chooseMic.setOnClickListener(v -> {
             switch (microphonePreset) {
                 case AUTO: microphonePreset = DiagnosticSpeechService.InputPreset.VOICE_RECOGNITION; break;
@@ -428,7 +431,7 @@ public class MainActivity extends Activity {
         for (DiagnosticSpeechService capture : captures) capture.cancel();
     }
 
-    private void stopTts() { if (voice != null) voice.stop(); }
+    private void stopTts() { if (voice != null) voice.stop(); if (offlineVoice != null) offlineVoice.stop(); }
 
     @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grants) {
         super.onRequestPermissionsResult(requestCode, permissions, grants);
@@ -684,6 +687,7 @@ public class MainActivity extends Activity {
         carCleanup.start();
         if (captures.isEmpty()) closeModel();
         if (voice != null) voice.close();
+        if (offlineVoice != null) offlineVoice.close();
         journal.record("APP", "Activité détruite ; captures restantes=" + captures.size());
         super.onDestroy();
     }
