@@ -151,10 +151,10 @@ public final class TestEcarxReadOnly {
         ecarx = fresh();
         EcarxReadOnly.Value outside = ecarx.readKnownSensor(EcarxReadOnly.TEMPERATURE_EXTERIEURE);
         yes(outside.available && outside.raw == 23
-                && outside.supportStatus.contains("22.7"), "temperature brute via ISensor");
+                && "22.7".equals(outside.rawExact), "temperature brute via ISensor");
         EcarxReadOnly.Value speed = ecarx.readKnownSensor(EcarxReadOnly.VITESSE_BRUTE);
         yes(speed.available && speed.raw == 44
-                && speed.supportStatus.contains("44.1"), "vitesse brute via ISensor");
+                && "44.1".equals(speed.rawExact), "vitesse brute via ISensor");
         yes(!ecarx.readKnownSensor(0x12345678).available, "identifiant capteur arbitraire refuse");
         yes(Car.sensorReadCount == 2 && Car.writeCount == 0,
                 "deux lectures, aucune action constructeur");
