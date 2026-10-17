@@ -1,5 +1,6 @@
 package com.aztech.jarvisfr;
 
+import android.util.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,125 +14,182 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Conversation textuelle et parole en ligne. Ce composant n'a AUCUNE méthode
- * permettant de commander les fonctions physiques du véhicule.
- *
- * Uniquement destiné au prototype individuel. En distribution commerciale,
- * remplacer la clé cliente par un jeton court d'un serveur AZ Tech Auto.
+ * Conversation et parole Gemini sous quota gratuit. Aucun abonnement payant,
+ * aucun endpoint ECARX et aucun achat intégrés dans cette application.
+ * L'utilisateur doit fournir une clé personnelle Google AI Studio associée
+ * à un projet NON FACTURÉ. Tout dépassement de quota est refusé (429).
  */
 public final class HybridAiClient {
-    private static final String RESPONSES = "https://api.openai.com/v1/responses";
-    private static final String SPEECH = "https://api.openai.com/v1/audio/speech";
-    private static final int MAX_JSON_BYTES = 128 * 1024;
-    private static final int MAX_AUDIO_BYTES = 3 * 1024 * 1024;
+    private static final String TEXT_ENDPOINT =
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent";
+    private static final String VOICE_ENDPOINT =
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-tts-preview:generateContent";
+    private static final int TEXT_MAX = 150 * 1024;
+    private static final int SPEECH_JSON_MAX = 6 * 1024 * 1024;
+    private static final int AUDIO_MAX = 3 * 1024 * 1024;
 
     public static final class AiError extends Exception {
         public final int status;
-        public AiError(int status, String description) { super(description); this.status = status; }
+        public AiError(int status, String message) { super(message); this.status = status; }
     }
 
-    public String answer(String apiKey, String userText) throws IOException, JSONException, AiError {
+    public String answer(String apiKey, String input) throws IOException, JSONException, AiError {
         checkKey(apiKey);
-        if (userText == null || userText.trim().length() < 2 || userText.length() > 500)
-            throw new IllegalArgumentException("Question absente ou trop longue (maximum 500 caractères)");
+        if (input == null || input.trim().length() < 2 || input.length() > 500)
+            throw new IllegalArgumentException("Question absente ou trop longue");
 
         JSONObject body = new JSONObject();
-        body.put("model", "gpt-4.1-mini");
-        body.put("store", false);
-        body.put("max_output_tokens", 250);
-        body.put("instructions", "Tu es Jarvis FR, un assistant vocal automobile. "
-                + "Tu parles exclusivement en français. Réponds en une ou deux phrases concises. "
-                + "Ne prétends jamais commander physiquement une voiture ou avoir lu ses capteurs. "
-                + "Aucune instruction du conducteur à contrôler les vitres, le chauffage, les freins, "
-                + "la direction ou les équipements physiques ne doit être exécutée par l'IA. "
-                + "Si une question concerne la conduite ou une intervention dangereuse, privilégie la sécurité. "
-                + "Évite les demandes d'informations personnelles non nécessaires.");
-        body.put("input", userText.trim());
-        byte[] reply = post(RESPONSES, apiKey, body, MAX_JSON_BYTES);
-        JSONObject parsed = new JSONObject(new String(reply, StandardCharsets.UTF_8));
-        JSONArray output = parsed.optJSONArray("output");
-        if (output != null) {
-            StringBuilder text = new StringBuilder();
-            for (int i = 0; i < output.length(); i++) {
-                JSONArray content = output.optJSONObject(i) == null
-                        ? null : output.optJSONObject(i).optJSONArray("content");
-                if (content == null) continue;
-                for (int j = 0; j < content.length(); j++) {
-                    JSONObject item = content.optJSONObject(j);
-                    if (item != null && "output_text".equals(item.optString("type"))) {
-                        if (text.length() > 0) text.append(' ');
-                        text.append(item.optString("text", ""));
+        JSONObject instruction = new JSONObject();
+        instruction.put("parts", new JSONArray().put(new JSONObject().put("text",
+                "Tu es Jarvis FR, assistant vocal automobile. Réponds exclusivement en français, " +
+                "en une ou deux phrases claires. N'affirme jamais avoir consulté les capteurs " +
+                "ni commandé les organes physiques de la voiture. " +
+                "Tu ne peux actionner aucune vitre, climatisation, frein, direction ou équipement. " +
+                "Ne propose aucune manipulation dangereuse en conduisant. " +
+                "Ne demande pas de données privées sans nécessité.")));
+        body.put("systemInstruction", instruction);
+        body.put("contents", new JSONArray().put(
+                new JSONObject().put("role", "user").put("parts",
+                        new JSONArray().put(new JSONObject().put("text", input.trim())))));
+        body.put("generationConfig", new JSONObject().put("maxOutputTokens", 400));
+        JSONObject parsed = postJson(TEXT_ENDPOINT, apiKey, body, TEXT_MAX);
+        JSONArray candidates = parsed.optJSONArray("candidates");
+        if (candidates != null) {
+            StringBuilder answer = new StringBuilder();
+            for (int i = 0; i < candidates.length(); i++) {
+                JSONObject candidate = candidates.optJSONObject(i);
+                if (candidate == null) continue;
+                JSONObject content = candidate.optJSONObject("content");
+                JSONArray parts = content == null ? null : content.optJSONArray("parts");
+                if (parts == null) continue;
+                for (int j = 0; j < parts.length(); j++) {
+                    JSONObject part = parts.optJSONObject(j);
+                    if (part != null && part.has("text")) {
+                        if (answer.length() > 0) answer.append(' ');
+                        answer.append(part.optString("text", ""));
                     }
                 }
+                if (answer.length() > 0) break;
             }
-            String answer = text.toString().trim();
-            if (!answer.isEmpty()) return answer.length() > 1000 ? answer.substring(0, 1000) : answer;
+            String result = answer.toString().trim();
+            if (!result.isEmpty()) return result.substring(0, Math.min(result.length(), 1000));
         }
-        throw new AiError(502, "Aucune réponse textuelle exploitable du service IA");
+        throw new AiError(502, "Gemini n'a pas renvoyé de texte utilisable");
     }
 
-    public byte[] speech(String apiKey, String frenchText) throws IOException, JSONException, AiError {
+    /** Génère un fichier WAV mono PCM16 24 kHz directement lisible sur Android 9. */
+    public byte[] speech(String apiKey, String frenchText)
+            throws IOException, JSONException, AiError {
         checkKey(apiKey);
-        if (frenchText == null || frenchText.isEmpty()) throw new IllegalArgumentException("Réponse vide");
+        if (frenchText == null || frenchText.trim().isEmpty())
+            throw new IllegalArgumentException("Texte vocal absent");
         JSONObject body = new JSONObject();
-        body.put("model", "gpt-4o-mini-tts");
-        body.put("voice", "nova");
-        body.put("instructions", "Prononce le texte en français, avec une voix calme, naturelle et intelligible.");
-        body.put("response_format", "mp3");
-        body.put("input", frenchText.substring(0, Math.min(frenchText.length(), 1000)));
-        return post(SPEECH, apiKey, body, MAX_AUDIO_BYTES);
+        body.put("contents", new JSONArray().put(
+                new JSONObject().put("parts", new JSONArray().put(
+                        new JSONObject().put("text", "Prononce en français, lentement et clairement : "
+                                + frenchText.substring(0, Math.min(900, frenchText.length()))))));
+        JSONObject speechConfig = new JSONObject().put("voiceConfig", new JSONObject()
+                .put("prebuiltVoiceConfig", new JSONObject().put("voiceName", "Kore")));
+        body.put("generationConfig", new JSONObject()
+                .put("responseModalities", new JSONArray().put("AUDIO"))
+                .put("speechConfig", speechConfig));
+        JSONObject parsed = postJson(VOICE_ENDPOINT, apiKey, body, SPEECH_JSON_MAX);
+        JSONArray candidates = parsed.optJSONArray("candidates");
+        if (candidates == null || candidates.length() == 0)
+            throw new AiError(502, "Gemini n'a pas fourni de voix");
+        JSONObject first = candidates.optJSONObject(0);
+        JSONObject content = first == null ? null : first.optJSONObject("content");
+        JSONArray parts = content == null ? null : content.optJSONArray("parts");
+        if (parts == null) throw new AiError(502, "Format audio Gemini inattendu");
+        for (int i = 0; i < parts.length(); i++) {
+            JSONObject part = parts.optJSONObject(i);
+            JSONObject audio = part == null ? null : part.optJSONObject("inlineData");
+            if (audio == null) continue;
+            String contentType = audio.optString("mimeType", "").toLowerCase(java.util.Locale.ROOT);
+            String encoded = audio.optString("data", "");
+            if (encoded.isEmpty() || encoded.length() > 5 * 1024 * 1024)
+                throw new AiError(502, "Fichier audio absent ou trop volumineux");
+            byte[] pcm;
+            try { pcm = Base64.decode(encoded, Base64.DEFAULT); }
+            catch (IllegalArgumentException e) { throw new AiError(502, "Audio encodé illisible"); }
+            if (pcm.length < 100 || pcm.length > AUDIO_MAX)
+                throw new AiError(502, "Durée audio hors limite");
+            if (pcm.length > 12 && pcm[0] == 'R' && pcm[1] == 'I'
+                    && pcm[2] == 'F' && pcm[3] == 'F') return pcm;
+            if (contentType.contains("mp3") || contentType.contains("mpeg"))
+                throw new AiError(502, "Encodage audio inattendu");
+            // Génération WAV en PCM16 mono 24 kHz ; format attendu par Gemini TTS.
+            return wrapWav(pcm, 24000);
+        }
+        throw new AiError(502, "Gemini n'a pas renvoyé de données audio");
     }
 
-    private static byte[] post(String endpoint, String token, JSONObject data, int maximum)
-            throws IOException, AiError {
-        HttpURLConnection connection = (HttpURLConnection) new URL(endpoint).openConnection();
-        connection.setInstanceFollowRedirects(false);
-        connection.setRequestMethod("POST");
-        connection.setConnectTimeout(8000);
-        connection.setReadTimeout(18000);
-        connection.setDoOutput(true);
-        connection.setRequestProperty("Authorization", "Bearer " + token);
-        connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-        connection.setRequestProperty("Accept", maximum == MAX_AUDIO_BYTES ? "audio/mpeg" : "application/json");
+    private static byte[] wrapWav(byte[] pcm, int sampleRate) throws IOException {
+        if ((pcm.length & 1) != 0) throw new IOException("PCM 16 bits tronqué");
+        ByteArrayOutputStream out = new ByteArrayOutputStream(pcm.length + 44);
+        out.write(new byte[]{'R','I','F','F'});
+        le32(out, pcm.length + 36);
+        out.write(new byte[]{'W','A','V','E','f','m','t',' '});
+        le32(out, 16); le16(out, 1); le16(out, 1);
+        le32(out, sampleRate); le32(out, sampleRate * 2);
+        le16(out, 2); le16(out, 16);
+        out.write(new byte[]{'d','a','t','a'});
+        le32(out, pcm.length);
+        out.write(pcm);
+        return out.toByteArray();
+    }
+    private static void le16(ByteArrayOutputStream out, int value) {
+        out.write(value & 255); out.write((value >>> 8) & 255);
+    }
+    private static void le32(ByteArrayOutputStream out, int value) {
+        for (int i = 0; i < 4; i++) out.write((value >>> (8 * i)) & 255);
+    }
+
+    private static JSONObject postJson(String address, String key, JSONObject body, int maximum)
+            throws IOException, JSONException, AiError {
+        HttpURLConnection c = (HttpURLConnection) new URL(address).openConnection();
+        c.setInstanceFollowRedirects(false);
+        c.setRequestMethod("POST");
+        c.setConnectTimeout(8000);
+        c.setReadTimeout(25000);
+        c.setDoOutput(true);
+        c.setRequestProperty("x-goog-api-key", key);
+        c.setRequestProperty("Content-Type", "application/json");
+        c.setRequestProperty("Accept", "application/json");
         try {
-            byte[] request = data.toString().getBytes(StandardCharsets.UTF_8);
-            connection.setFixedLengthStreamingMode(request.length);
-            try (OutputStream os = connection.getOutputStream()) { os.write(request); }
-            int status = connection.getResponseCode();
+            byte[] request = body.toString().getBytes(StandardCharsets.UTF_8);
+            c.setFixedLengthStreamingMode(request.length);
+            try (OutputStream stream = c.getOutputStream()) { stream.write(request); }
+            int status = c.getResponseCode();
             if (status < 200 || status >= 300) {
-                String reason = status == 401 ? "Clé API incorrecte ou expirée"
-                        : status == 403 ? "Accès API refusé"
-                        : status == 429 ? "Limite de crédit ou de requêtes atteinte"
-                        : status >= 500 ? "Service IA temporairement indisponible"
-                        : "Service IA : erreur HTTP " + status;
+                String reason = status == 400 ? "Requête non acceptée par Gemini"
+                        : status == 401 || status == 403 ? "Clé Gemini refusée ou accès non autorisé"
+                        : status == 404 ? "Modèle Gemini indisponible pour ce compte"
+                        : status == 429 ? "Quota gratuit atteint : aucune requête payante tentée"
+                        : status >= 500 ? "Service Gemini temporairement indisponible"
+                        : "Erreur Gemini HTTP " + status;
                 throw new AiError(status, reason);
             }
-            String type = connection.getContentType();
-            if (maximum == MAX_AUDIO_BYTES) {
-                if (type == null || !(type.contains("audio/") || type.contains("octet-stream")))
-                    throw new AiError(502, "Le service vocal n'a pas renvoyé de fichier audio");
-            } else if (type == null || !type.contains("json")) {
-                throw new AiError(502, "Le service IA n'a pas renvoyé de JSON");
-            }
-            try (InputStream input = connection.getInputStream()) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
+            String ct = c.getContentType();
+            if (ct == null || !ct.toLowerCase(java.util.Locale.ROOT).contains("json"))
+                throw new AiError(502, "Réponse Gemini non JSON");
+            try (InputStream stream = c.getInputStream()) {
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
                 byte[] buffer = new byte[8192];
-                int n;
-                while ((n = input.read(buffer)) != -1) {
-                    if (out.size() + n > maximum) throw new IOException("Réponse du service trop volumineuse");
-                    out.write(buffer, 0, n);
+                int read;
+                while ((read = stream.read(buffer)) != -1) {
+                    if (output.size() + read > maximum)
+                        throw new IOException("Réponse Gemini trop volumineuse");
+                    output.write(buffer, 0, read);
                 }
-                if (out.size() == 0) throw new IOException("Réponse IA vide");
-                return out.toByteArray();
+                return new JSONObject(new String(output.toByteArray(), StandardCharsets.UTF_8));
             }
-        } finally {
-            connection.disconnect();
-        }
+        } finally { c.disconnect(); }
     }
 
     private static void checkKey(String token) {
         if (token == null || token.length() < 12 || token.length() > 512
                 || token.contains("\n") || token.contains("\r"))
-            throw new IllegalArgumentException("Clé API non configurée ou invalide");
+            throw new IllegalArgumentException("Clé Gemini personnelle absente ou invalide");
     }
 }
