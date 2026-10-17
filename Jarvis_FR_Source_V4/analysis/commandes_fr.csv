@@ -1,0 +1,44 @@
+﻿Phrase russe,Commande française suggérée,Intention,Validation IHU007B
+Кондиционер,Climatisation,AC_ON,physiquement confirmé: A/C allumé
+Включи кондиционер,Allume la climatisation,AC_ON,"même intention, phrase française non testée"
+Выключи кондиционер,Éteins la climatisation,AC_OFF,non testé
+Климат,Climatisation,HVAC_ON,non testé
+Включи климат,Allume le système de climatisation,HVAC_ON,non testé
+Выключи климат,Éteins le système de climatisation,HVAC_OFF,non testé
+Климат авто,Climatisation automatique,AUTO_HVAC,non testé
+Вентилятор один,Ventilation niveau un,FAN_1,non testé
+Вентилятор пять,Ventilation niveau cinq,FAN_5,non testé
+Вентилятор девять,Ventilation niveau neuf,FAN_9,non testé
+Температура двадцать два,Règle la température à vingt-deux degrés,TEMP_22,non testé
+Температура двадцать четыре,Règle la température à vingt-quatre degrés,TEMP_24,non testé
+Запас хода,Autonomie restante,RANGE_QUERY,lecture confirmée sur la tablette
+Какой запас хода,Quelle est mon autonomie restante,RANGE_QUERY,lecture confirmée sur la tablette
+Сколько топлива,Quel est le niveau de carburant,FUEL_QUERY,Jarvis ne peut pas déterminer le niveau
+Открой окно водителя,Ouvre la vitre conducteur,WINDOW_DRIVER_OPEN,NON FONCTIONNEL sur Emgrand; désactivé recommandé
+Закрой окно водителя,Ferme la vitre conducteur,WINDOW_DRIVER_CLOSE,non testé; désactivé recommandé
+Открой окно пассажира,Ouvre la vitre passager,WINDOW_PASSENGER_OPEN,non testé; désactivé recommandé
+Открой заднее левое окно,Ouvre la vitre arrière gauche,WINDOW_RL_OPEN,non testé; désactivé recommandé
+Открой заднее правое окно,Ouvre la vitre arrière droite,WINDOW_RR_OPEN,non testé; désactivé recommandé
+Открой люк,Ouvre le toit ouvrant,SUNROOF_OPEN,non testé; désactivé recommandé
+Закрой люк,Ferme le toit ouvrant,SUNROOF_CLOSE,non testé; désactivé recommandé
+Открой шторку люка,Ouvre le rideau de toit ouvrant,SUNSHADE_OPEN,non testé; désactivé recommandé
+Закрой шторку люка,Ferme le rideau de toit ouvrant,SUNSHADE_CLOSE,non testé; désactivé recommandé
+Навигатор,Navigation,NAVIGATION,non testé
+Открой навигатор,Ouvre la navigation,NAVIGATION,non testé
+Запусти музыку,Lance la musique,MUSIC,non testé
+Открой браузер,Ouvre le navigateur,BROWSER,non testé
+Позже,Plus tard,UI_LATER,traduction UI
+Включить,Activer,UI_ENABLE,traduction UI
+Настройки,Paramètres,UI_SETTINGS,traduction UI
+Окна,Vitres,UI_WINDOWS,traduction UI
+Управление автомобилем,Commandes du véhicule,UI_CAR,traduction UI
+Голосовая активация,Activation vocale,UI_WAKE,traduction UI
+Голосовое управление,Commandes vocales,UI_VOICE,traduction UI
+Выбрать модель автомобиля,Choisir le modèle du véhicule,UI_MODEL,traduction UI
+Другие модели,Autres modèles,UI_OTHERS,traduction UI
+Климат-контроль,Climatisation,UI_AC,traduction UI
+Кондиционер уже включен,Climatisation déjà activée,SPEECH_AC_ON,réponse vocale
+Кондиционер уже выключен,Climatisation déjà désactivée,SPEECH_AC_OFF,réponse vocale
+Включаю кондиционер,J’active la climatisation,SPEECH_AC_START,réponse vocale
+Выключаю кондиционер,Je désactive la climatisation,SPEECH_AC_STOP,réponse vocale
+Не понял,Je n’ai pas compris,SPEECH_NO_MATCH,réponse vocale

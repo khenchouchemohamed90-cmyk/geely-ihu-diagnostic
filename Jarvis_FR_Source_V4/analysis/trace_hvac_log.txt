@@ -1,0 +1,132 @@
+APK /mnt/data/jarvis_perm_review/jarvis-v2.8-Lite-build260605.apk methods 14893 defined 10556 ref_strings 6162 hvac_strings 277
+Targets:
+12365 Lorg/jarvis/car/EcarxApiHelper;->isAcOn()->Z direct callers 2
+  CALLED BY Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String;
+12386 Lorg/jarvis/car/EcarxApiHelper;->setAcAuto(Z)->V direct callers 7
+  CALLED BY Lh4/j;->execute()->V
+  CALLED BY Lh4/m;->s(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lorg/jarvis/car/EcarxApiHelper;->setFanAuto(Z)->V
+  CALLED BY Lorg/jarvis/car/EcarxApiHelper;->setFanSpeed(I)->V
+12389 Lorg/jarvis/car/EcarxApiHelper;->setAcOn(Z)->V direct callers 4
+  CALLED BY Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String;
+12397 Lorg/jarvis/car/EcarxApiHelper;->setClimateSystemOn(Z)->V direct callers 5
+  CALLED BY Lh4/m;->Q(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->Q(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->Q(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->u(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->u(Ljava/lang/String;)->Ljava/lang/String;
+12412 Lorg/jarvis/car/EcarxApiHelper;->setFanSpeed(I)->V direct callers 7
+  CALLED BY Lh4/l;->execute()->V
+  CALLED BY Lh4/l;->execute()->V
+  CALLED BY Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->E(Ljava/lang/String;)->Ljava/lang/String;
+  CALLED BY Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String;
+Relevant phrases:
+STR 42 '  • Включает кондиционер' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V'), (8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 43 '  • Включает кондиционер на максимум' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 52 '  • Возвращает предыдущие настройки климата (если были сохранены)' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 60 '  • Направляет обдув на лицо и ноги' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 70 '  • Увеличивает скорость вентилятора' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 71 '  • Увеличивает температуру до комфортной (24°C или +2°C от текущей)' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 72 '  • Устанавливает вентилятор на уровень 9' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 73 '  • Устанавливает температуру 19°C' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 74 '  • Устанавливает температуру 20°C' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 75 '  • Устанавливает температуру 22°C' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 76 '  • Устанавливает температуру 24°C' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 77 '  • Устанавливает температуру 28°C' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 386 '## ВКЛЮЧЕНИЕ КЛИМАТА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 387 '## ВКЛЮЧЕНИЕ КОНДИЦИОНЕРА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 395 '## ВКЛЮЧЕНИЕ ЭКО-КОНДИЦИОНЕРА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 404 '## ВЫКЛЮЧЕНИЕ КЛИМАТА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 405 '## ВЫКЛЮЧЕНИЕ КОНДИЦИОНЕРА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 413 '## ВЫКЛЮЧЕНИЕ ЭКО-КОНДИЦИОНЕРА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 416 '## ДОПОЛНИТЕЛЬНЫЕ РЕЖИМЫ (НЕ ОТОБРАЖАЮТСЯ В МЕНЮ КЛИМАТА)' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 437 '## МАКСИМАЛЬНЫЙ ОБДУВ ЛОБОВОГО СТЕКЛА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 439 '## МЯГКИЙ ОБДУВ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 441 '## ОБДУВ НА ЛИЦО' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 442 '## ОБДУВ НА ЛИЦО И НОГИ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 443 '## ОБДУВ НА ЛИЦО И СТЕКЛО' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 444 '## ОБДУВ НА НОГИ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 445 '## ОБДУВ НА НОГИ И СТЕКЛО' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 446 '## ОБДУВ НА СТЕКЛО' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 462 '## РЕГУЛИРОВКА ВЕНТИЛЯТОРА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 464 '## РЕГУЛИРОВКА ТЕМПЕРАТУРЫ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 477 '## СИЛЬНЫЙ ОБДУВ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 482 '## СРЕДНИЙ ОБДУВ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 484 '## ТЕМПЕРАТУРА' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 485 '## ТЕМПЕРАТУРА В САЛОНЕ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 486 '## ТЕМПЕРАТУРА ЗА БОРТОМ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 489 '## УСТАНОВКА ТЕМПЕРАТУРЫ' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 490 '## УСТАНОВКА УРОВНЯ ВЕНТИЛЯТОРА (1-9)' used by [(8288, 'Lh4/n;->onClick(Landroid/view/View;)->V')]
+STR 1300 'CLIMATE_AUTO' used by [(8257, 'Lh4/m;->T()->V')]
+STR 1301 'CLIMATE_SYSTEM' used by [(8257, 'Lh4/m;->T()->V'), (8257, 'Lh4/m;->T()->V'), (8257, 'Lh4/m;->T()->V')]
+STR 4958 'NATURAL_CLIMATE' used by [(8261, 'Lh4/m;->X()->V')]
+STR 6780 'climate_auto_off' used by [(8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;'), (8287, 'Lh4/n;->a(Landroid/view/View;)->V')]
+STR 6781 'climate_auto_on' used by [(8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;'), (8287, 'Lh4/n;->a(Landroid/view/View;)->V')]
+STR 6782 'climate_off' used by [(8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;'), (8287, 'Lh4/n;->a(Landroid/view/View;)->V')]
+STR 6783 'climate_on' used by [(8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;'), (8287, 'Lh4/n;->a(Landroid/view/View;)->V')]
+STR 8584 'handleClimateAuto' used by [(8257, 'Lh4/m;->T()->V'), (8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;')]
+STR 8585 'handleClimateSystem' used by [(8257, 'Lh4/m;->T()->V'), (8257, 'Lh4/m;->T()->V'), (8257, 'Lh4/m;->T()->V'), (8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;'), (8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;')]
+STR 8600 'handleNaturalClimate' used by [(8261, 'Lh4/m;->X()->V'), (8267, 'Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11765 'Вентилятор уже установлен на уровень ' used by [(8240, 'Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String;')]
+STR 11779 'Включаю автоматический режим климата' used by [(8279, 'Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11795 'Включаю интенсивный обогрев: температура 28 ' used by [(8242, 'Lh4/m;->E(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11796 'Включаю климат-систему' used by [(8280, 'Lh4/m;->u(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11797 'Включаю кондиционер' used by [(8271, 'Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11798 'Включаю кондиционер и вентиляцию сидений на максимальный режим' used by [(8242, 'Lh4/m;->E(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11800 'Включаю летний режим: кондиционер и вентиляция сидений' used by [(8281, 'Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11801 'Включаю максимальный обдув лобового стекла' used by [(8278, 'Lh4/m;->s(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11805 'Включаю обдув везде' used by [(8278, 'Lh4/m;->s(Ljava/lang/String;)->Ljava/lang/String;')]
+STR 11806 'Включаю обдув лобового стекла' used by [(8278, 'Lh4/m;->s(Ljava/lang/String;)->Ljava/lang/String;')]
+Call-chain
+LEVEL 1 n= 25
+  Lh4/j;->execute()->V <- V str []
+  Lh4/m;->s(Ljava/lang/String;)->Ljava/lang/String; <- V str ['стекл', 'отключ', 'выключ', 'max', 'макс', 'турбо', 'максимальн', 'Готово', 'обдув', 'обогрев', 'Выключаю максимальный обдув лобового стекла', 'Выкл
+  Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String; <- V str ['ручн', 'Готово', 'вручн', 'выключ', 'отключ', 'Включаю автоматический режим климата', 'Выключаю автоматический режим, переключаю на ручное управлени
+  Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String; <- V str ['ручн', 'Готово', 'вручн', 'выключ', 'отключ', 'Включаю автоматический режим климата', 'Выключаю автоматический режим, переключаю на ручное управлени
+  Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String; <- V str ['ручн', 'Готово', 'вручн', 'выключ', 'отключ', 'Включаю автоматический режим климата', 'Выключаю автоматический режим, переключаю на ручное управлени
+  Lorg/jarvis/car/EcarxApiHelper;->setFanAuto(Z)->V <- V str ['❌ [ECARX] Error setting fan auto: ', 'EcarxApiHelper']
+  Lorg/jarvis/car/EcarxApiHelper;->setFanSpeed(I)->V <- V str ['monjaro', '❌ [ECARX] Error setting fan speed: ', 'EcarxApiHelper']
+  Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String; <- V str ['выключ', 'Готово', 'отключ', 'Кондиционер уже включен', 'Уже включено', 'Включаю кондиционер', 'Кондиционер уже выключен', 'Уже выключено', 'Выключа
+  Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String; <- V str ['выключ', 'Готово', 'отключ', 'Кондиционер уже включен', 'Уже включено', 'Включаю кондиционер', 'Кондиционер уже выключен', 'Уже выключено', 'Выключа
+  Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String; <- V str ['atlas', 'monjaro', 'подготовь', 'Готово', 'приготовь', 'режим', 'проветриван', 'Включаю режим проветривания', 'Не могу открыть люк для проветривания
+  Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String; <- V str ['atlas', 'monjaro', 'подготовь', 'Готово', 'приготовь', 'режим', 'проветриван', 'Включаю режим проветривания', 'Не могу открыть люк для проветривания
+  Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String; <- Z str ['выключ', 'Готово', 'отключ', 'Кондиционер уже включен', 'Уже включено', 'Включаю кондиционер', 'Кондиционер уже выключен', 'Уже выключено', 'Выключа
+  Lh4/m;->l(Ljava/lang/String;)->Ljava/lang/String; <- Z str ['выключ', 'Готово', 'отключ', 'Кондиционер уже включен', 'Уже включено', 'Включаю кондиционер', 'Кондиционер уже выключен', 'Уже выключено', 'Выключа
+  Lh4/m;->Q(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String; <- V str ['Устанавливаю температуру ', 'Температура уже установлена на ', 'Максимальная температура 28 градусов. Текущая температура ', 'Минимальная температур
+  Lh4/m;->Q(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String; <- V str ['Устанавливаю температуру ', 'Температура уже установлена на ', 'Максимальная температура 28 градусов. Текущая температура ', 'Минимальная температур
+  Lh4/m;->Q(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String; <- V str ['Устанавливаю температуру ', 'Температура уже установлена на ', 'Максимальная температура 28 градусов. Текущая температура ', 'Минимальная температур
+  Lh4/m;->u(Ljava/lang/String;)->Ljava/lang/String; <- V str ['выключ', 'Готово', 'отключ', 'Климат-система уже включена', 'Уже включено', 'Включаю климат-систему', 'Климат-система уже выключена', 'Уже выключено
+  Lh4/m;->u(Ljava/lang/String;)->Ljava/lang/String; <- V str ['выключ', 'Готово', 'отключ', 'Климат-система уже включена', 'Уже включено', 'Включаю климат-систему', 'Климат-система уже выключена', 'Уже выключено
+  Lh4/l;->execute()->V <- V str []
+  Lh4/l;->execute()->V <- V str []
+  Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String; <- V str ['Устанавливаю вентилятор на уровень ', 'Вентилятор уже установлен на уровень ', 'fanLevel', 'Уже установлено', 'Сделано', 'прибав', 'Ставлю средний р
+  Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String; <- V str ['Устанавливаю вентилятор на уровень ', 'Вентилятор уже установлен на уровень ', 'fanLevel', 'Уже установлено', 'Сделано', 'прибав', 'Ставлю средний р
+  Lh4/m;->C(Ljava/lang/String;,Ljava/util/Map;)->Ljava/lang/String; <- V str ['Устанавливаю вентилятор на уровень ', 'Вентилятор уже установлен на уровень ', 'fanLevel', 'Уже установлено', 'Сделано', 'прибав', 'Ставлю средний р
+  Lh4/m;->E(Ljava/lang/String;)->Ljava/lang/String; <- V str ['очень', 'замёрзла', 'замёрз', 'холодно', 'сильно', 'Готово', 'замерза', 'жарко', 'Включаю кондиционер и вентиляцию сидений на максимальный режим', '
+  Lh4/m;->v(Ljava/lang/String;)->Ljava/lang/String; <- V str ['atlas', 'monjaro', 'подготовь', 'Готово', 'приготовь', 'режим', 'проветриван', 'Включаю режим проветривания', 'Не могу открыть люк для проветривания
+LEVEL 2 n= 10
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+  Lh4/g;->execute()->V <- V str []
+  Lh4/m;->t(Ljava/lang/String;)->Ljava/lang/String; <- V str ['ручн', 'Готово', 'вручн', 'выключ', 'отключ', 'Включаю автоматический режим климата', 'Выключаю автоматический режим, переключаю на ручное управлени
+  Lh4/m;->h(Li4/a;,Ljava/util/Map;,Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str ['handleExteriorLight', 'handleDrivingModeWithConfirmation', 'handleCombinedCommands', 'handleAmbienceMusicLink', 'handleAtmosphereAmbient', 'handleSp
+LEVEL 3 n= 2
+  Lh4/m;->b(Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str []
+  Lh4/m;->b(Ljava/lang/String;)->Ljava/lang/String; <- Ljava/lang/String; str []
+LEVEL 4 n= 0
+OUTPUT /mnt/data/Jarvis_FR_Source_Reconstruction/analysis/trace_commandes_hvac.json

@@ -1,0 +1,5019 @@
+[
+  {
+    "class": "Lorg/jarvis/AppSelectionActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12090
+  },
+  {
+    "class": "Lorg/jarvis/AppSelectionActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12091
+  },
+  {
+    "class": "Lorg/jarvis/AppSelectionActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12092
+  },
+  {
+    "class": "Lorg/jarvis/AppSelectionActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/AppSelectionActivity;",
+        "Lorg/jarvis/model/AppInfo;"
+      ]
+    },
+    "method_index": 12093
+  },
+  {
+    "class": "Lorg/jarvis/AppSelectionActivity;",
+    "name": "y",
+    "signature": {
+      "return": "Ljava/util/ArrayList;",
+      "params": []
+    },
+    "method_index": 12094
+  },
+  {
+    "class": "Lorg/jarvis/AppSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12095
+  },
+  {
+    "class": "Lorg/jarvis/AppSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12096
+  },
+  {
+    "class": "Lorg/jarvis/AppSettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12097
+  },
+  {
+    "class": "Lorg/jarvis/AppSettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12098
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12101
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "onActivityResult",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I",
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12102
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12103
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12104
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12105
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12106
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12107
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12108
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "A",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12109
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "B",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12110
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12111
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12112
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12113
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "Ld4/g;",
+      "params": [
+        "Ljava/lang/String;",
+        "Ljava/util/ArrayList;"
+      ]
+    },
+    "method_index": 12114
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "Ljava/util/ArrayList;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12115
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "name": "z",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12116
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12117
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "A",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12118
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "B",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12119
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "C",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12120
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "D",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12121
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "E",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12122
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "F",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12123
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "G",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/model/ModuleState;"
+      ]
+    },
+    "method_index": 12124
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "H",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12125
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onActivityResult",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I",
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12126
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onConfigurationChanged",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/content/res/Configuration;"
+      ]
+    },
+    "method_index": 12127
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12128
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12129
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onPause",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12130
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onRequestPermissionsResult",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "[Ljava/lang/String;",
+        "[I"
+      ]
+    },
+    "method_index": 12131
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12132
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12133
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "y",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12134
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "name": "z",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12135
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12136
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "a",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12137
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "b",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/utils/j;"
+      ]
+    },
+    "method_index": 12138
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12139
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12140
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "onNotificationPosted",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/service/notification/StatusBarNotification;"
+      ]
+    },
+    "method_index": 12141
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "name": "onNotificationRemoved",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/service/notification/StatusBarNotification;"
+      ]
+    },
+    "method_index": 12142
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12143
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "A",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12144
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "B",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12145
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "onActivityResult",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I",
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12146
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12147
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12148
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12149
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "Landroid/view/View;",
+      "params": [
+        "Lorg/jarvis/model/SavedAddress;"
+      ]
+    },
+    "method_index": 12150
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "D",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12151
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "name": "z",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12152
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12153
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "name": "onActivityResult",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I",
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12154
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12155
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12156
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12157
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12158
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12159
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "c",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/model/Script;"
+      ]
+    },
+    "method_index": 12160
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "onBackPressed",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12161
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12162
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "w",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12163
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12164
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "name": "y",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/model/Script;"
+      ]
+    },
+    "method_index": 12165
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12166
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity;",
+    "name": "d",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12167
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity;",
+    "name": "onActivityResult",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I",
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12168
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12169
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12170
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12171
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "A",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Landroid/net/Uri;"
+      ]
+    },
+    "method_index": 12172
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "B",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12173
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "C",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12174
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "D",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12175
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "E",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12176
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "F",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z",
+        "Lorg/jarvis/model/BackupData;"
+      ]
+    },
+    "method_index": 12177
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "G",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12178
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "H",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12179
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "I",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12180
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "J",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12181
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12182
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12183
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12184
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/SettingsActivity;",
+        "Landroidx/appcompat/widget/SwitchCompat;",
+        "Landroidx/appcompat/widget/SwitchCompat;",
+        "Landroidx/appcompat/widget/SwitchCompat;",
+        "Landroidx/appcompat/widget/SwitchCompat;",
+        "Le/g;",
+        "Z",
+        "Lorg/jarvis/model/BackupData;"
+      ]
+    },
+    "method_index": 12185
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/view/View;",
+        "Ljava/lang/String;",
+        "I"
+      ]
+    },
+    "method_index": 12186
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "name": "z",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12187
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12188
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "name": "A",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12189
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12190
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12191
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "name": "y",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Landroid/net/Uri;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12192
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "name": "z",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z",
+        "Z"
+      ]
+    },
+    "method_index": 12193
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutPickerActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12194
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutPickerActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12195
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutPickerActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12196
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12197
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12198
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12199
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12200
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12201
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "name": "z",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12202
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12203
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "a",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lcom/airbnb/lottie/LottieAnimationView;",
+        "Landroid/content/SharedPreferences;"
+      ]
+    },
+    "method_index": 12204
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "b",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12205
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onBackPressed",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12206
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onConfigurationChanged",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/content/res/Configuration;"
+      ]
+    },
+    "method_index": 12207
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12208
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12209
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onNewIntent",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12210
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onPause",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12211
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12212
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onSaveInstanceState",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12213
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "name": "onUserLeaveHint",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12214
+  },
+  {
+    "class": "Lorg/jarvis/VoiceReceiver;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12215
+  },
+  {
+    "class": "Lorg/jarvis/VoiceReceiver;",
+    "name": "onReceive",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/content/Context;",
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12216
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "<clinit>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12217
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12218
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "a",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/VoiceService;"
+      ]
+    },
+    "method_index": 12219
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "b",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12220
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "c",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12221
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "d",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12222
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "e",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12223
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "f",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12224
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "g",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12225
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "h",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12226
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "i",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12227
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "j",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12228
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "k",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12229
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "l",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12230
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "m",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12231
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "n",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12232
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "o",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12233
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "onBind",
+    "signature": {
+      "return": "Landroid/os/IBinder;",
+      "params": [
+        "Landroid/content/Intent;"
+      ]
+    },
+    "method_index": 12234
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12235
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "onDestroy",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12236
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "onStartCommand",
+    "signature": {
+      "return": "I",
+      "params": [
+        "Landroid/content/Intent;",
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12237
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "p",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12238
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "q",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12239
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "r",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12240
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "s",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12241
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "t",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12242
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "name": "u",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12243
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12244
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12245
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "name": "onResume",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12246
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12247
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12248
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "name": "z",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12249
+  },
+  {
+    "class": "Lorg/jarvis/a0;",
+    "name": "accept",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12251
+  },
+  {
+    "class": "Lorg/jarvis/accessibility/JarvisAccessibilityService;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12266
+  },
+  {
+    "class": "Lorg/jarvis/accessibility/JarvisAccessibilityService;",
+    "name": "onAccessibilityEvent",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/view/accessibility/AccessibilityEvent;"
+      ]
+    },
+    "method_index": 12267
+  },
+  {
+    "class": "Lorg/jarvis/accessibility/JarvisAccessibilityService;",
+    "name": "onInterrupt",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12268
+  },
+  {
+    "class": "Lorg/jarvis/accessibility/JarvisAccessibilityService;",
+    "name": "onServiceConnected",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12269
+  },
+  {
+    "class": "Lorg/jarvis/c2;",
+    "name": "accept",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12284
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$1$1;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper$1;"
+      ]
+    },
+    "method_index": 12288
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$1$1;",
+    "name": "run",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12289
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$1;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;"
+      ]
+    },
+    "method_index": 12290
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$1;",
+    "name": "run",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12291
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$2;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;"
+      ]
+    },
+    "method_index": 12292
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$2;",
+    "name": "invoke",
+    "signature": {
+      "return": "Ljava/lang/Object;",
+      "params": [
+        "Ljava/lang/Object;",
+        "Ljava/lang/reflect/Method;",
+        "[Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12293
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+    "name": "$values",
+    "signature": {
+      "return": "[Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+      "params": []
+    },
+    "method_index": 12294
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+    "name": "<clinit>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12295
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;",
+        "I"
+      ]
+    },
+    "method_index": 12296
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+    "name": "valueOf",
+    "signature": {
+      "return": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12297
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+    "name": "values",
+    "signature": {
+      "return": "[Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+      "params": []
+    },
+    "method_index": 12298
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$HvacCommand;",
+    "name": "execute",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12299
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$PassengerSeatOccupancyCallback;",
+    "name": "onPassengerSeatOccupiedChanged",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12300
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12301
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "a",
+    "signature": {
+      "return": "Ljava/lang/Object;",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;",
+        "Ljava/lang/Object;",
+        "Ljava/lang/reflect/Method;",
+        "[Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12302
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "applyAmbienceMonochromeColor",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12303
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "applyAmbienceThemePreset",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12304
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "applyDriverSeatMemoryPreset",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12305
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "applyHvacCommandsSequentially",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "[Lorg/jarvis/car/EcarxApiHelper$HvacCommand;"
+      ]
+    },
+    "method_index": 12306
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "applyHvacCommandsSequentially",
+    "signature": {
+      "return": "V",
+      "params": [
+        "[Lorg/jarvis/car/EcarxApiHelper$HvacCommand;"
+      ]
+    },
+    "method_index": 12307
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "areAllWindowsAtPercent",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12308
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "areTemperatureSensorsReady",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12309
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "b",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;"
+      ]
+    },
+    "method_index": 12310
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "bindCarApi",
+    "signature": {
+      "return": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+      "params": [
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12311
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "c",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;"
+      ]
+    },
+    "method_index": 12312
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "closeSunroof",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12313
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "closeSunshade",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12314
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "closeTrunk",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12315
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "convertDrivingModeFromValue",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12316
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "convertDrivingModeToValue",
+    "signature": {
+      "return": "I",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12317
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "createCarInstance",
+    "signature": {
+      "return": "Ljava/lang/Object;",
+      "params": []
+    },
+    "method_index": 12318
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "d",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;",
+        "F"
+      ]
+    },
+    "method_index": 12319
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "e",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;"
+      ]
+    },
+    "method_index": 12320
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "ensureMonjaroAmbienceSolidEffectForColor",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12321
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "f",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;",
+        "J"
+      ]
+    },
+    "method_index": 12322
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "finishCarBinding",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12323
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "g",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;",
+        "F"
+      ]
+    },
+    "method_index": 12324
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getAllWindowsStatus",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12325
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getAmbientTemperature",
+    "signature": {
+      "return": "F",
+      "params": []
+    },
+    "method_index": 12326
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getAutoFanSetting",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12327
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getBlowingMode",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12328
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getCarSpeed",
+    "signature": {
+      "return": "F",
+      "params": []
+    },
+    "method_index": 12329
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getCustomizeFunctionValue",
+    "signature": {
+      "return": "F",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12330
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getDriverWindowPosition",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12331
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getDrivingMode",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12332
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getEffectiveVehicleModel",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12333
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getEnduranceMileage",
+    "signature": {
+      "return": "F",
+      "params": []
+    },
+    "method_index": 12334
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getExteriorLightMode",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12335
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getFanSpeed",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12336
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getFuelLevel",
+    "signature": {
+      "return": "F",
+      "params": []
+    },
+    "method_index": 12337
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getFunctionValue",
+    "signature": {
+      "return": "I",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12338
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getFunctionValue",
+    "signature": {
+      "return": "I",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12339
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getFunctionValueById",
+    "signature": {
+      "return": "I",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12340
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getIndoorTemperature",
+    "signature": {
+      "return": "F",
+      "params": []
+    },
+    "method_index": 12341
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getInstance",
+    "signature": {
+      "return": "Lorg/jarvis/car/EcarxApiHelper;",
+      "params": []
+    },
+    "method_index": 12342
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getInteriorLightState",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12343
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getPassengerWindowPosition",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12344
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getProjectorState",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12345
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getRearFogLampsState",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12346
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getRearLeftWindowPosition",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12347
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getRearRightWindowPosition",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12348
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getSeatHeatingLevel",
+    "signature": {
+      "return": "I",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12349
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getSeatVentilationLevel",
+    "signature": {
+      "return": "I",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12350
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getSteeringHeatingLevel",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12351
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getSunroofPosition",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12352
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getSunshadePosition",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12353
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getTemperature",
+    "signature": {
+      "return": "F",
+      "params": []
+    },
+    "method_index": 12354
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getVehicleModel",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12355
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getWindowPosition",
+    "signature": {
+      "return": "I",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12356
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "getZoneName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12357
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "h",
+    "signature": {
+      "return": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;",
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12358
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "hasValidIndoorTemperature",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12359
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "i",
+    "signature": {
+      "return": "Ljava/lang/Object;",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;"
+      ]
+    },
+    "method_index": 12360
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "initializeApi",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/content/Context;"
+      ]
+    },
+    "method_index": 12361
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isAcAutoOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12362
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isAcEcoOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12363
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isAcMaxOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12364
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isAcOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12365
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isAirRecirculationInternal",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12366
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isApiAvailable",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12367
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isClimateSystemOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12368
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isFunctionAvailable",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12369
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isFunctionAvailable",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12370
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isSeatVentilationAvailable",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12371
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "isWindscreenHeatOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12372
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "j",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper;",
+        "I"
+      ]
+    },
+    "method_index": 12373
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "lambda$bindCarApi$1",
+    "signature": {
+      "return": "Ljava/lang/Object;",
+      "params": [
+        "Ljava/lang/Object;",
+        "Ljava/lang/reflect/Method;",
+        "[Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12374
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "lambda$onPassengerSeatSensorEvent$0",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12375
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "mapPassengerSeatEventToOccupied",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12376
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "normalizeVehicleModel",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12377
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "onCarServiceConnected",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12378
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "onCarServiceDisconnected",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12379
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "onPassengerSeatSensorEvent",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12380
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "openSunroof",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12381
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "openSunshade",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12382
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "openTrunk",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12383
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "queryPassengerSeatOccupied",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12384
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "registerFuelLevelListener",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12385
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAcAuto",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12386
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAcEcoOn",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12387
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAcMax",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12388
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAcOn",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12389
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAirRecirculation",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12390
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAllWindows",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12391
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAllWindowsOneCommand",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12392
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAmbienceLightMusicLink",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12393
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAtmosphereLamps",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12394
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setAutoFanSetting",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12395
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setBlowingMode",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12396
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setClimateSystemOn",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12397
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setCustomizeFunctionValue",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I",
+        "I",
+        "F"
+      ]
+    },
+    "method_index": 12398
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setDefrostFront",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12399
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setDefrostFrontMax",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12400
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setDefrostRear",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12401
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setDisplayAndInstrumentBrightnessAtlasPreface",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "F"
+      ]
+    },
+    "method_index": 12402
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setDisplayBrightnessAutoAtlasPreface",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12403
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setDrivingMode",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12404
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setElectricDefrostFront",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12405
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setExteriorLightAutomatic",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12406
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setExteriorLightLowBeam",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12407
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setExteriorLightMode",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12408
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setExteriorLightOff",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12409
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setExteriorLightPositionLights",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12410
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setFanAuto",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12411
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setFanSpeed",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12412
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setFunctionValue",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12413
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setFunctionValue",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I",
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12414
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setFunctionValueById",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12415
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setFunctionValueWithRetry",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12416
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLight",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "Z"
+      ]
+    },
+    "method_index": 12417
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightAll",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12418
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightDriver",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12419
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightFront",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12420
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightPassenger",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12421
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightRear",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12422
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightRearLeft",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12423
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setInteriorLightRearRight",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12424
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setMirrorAutoFolding",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12425
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setMonjaroAmbienceColor",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12426
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setMonjaroAmbienceEffect",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12427
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setMonjaroAmbienceEnabled",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12428
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setMonjaroAmbienceFunctionValue",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12429
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setParkingSensors",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12430
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setPassengerSeatOccupancyCallback",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/car/EcarxApiHelper$PassengerSeatOccupancyCallback;"
+      ]
+    },
+    "method_index": 12431
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setProjector",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12432
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setRearFogLamps",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12433
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setRearMirrorsFolded",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12434
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setSeatHeating",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12435
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setSeatVentilation",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12436
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setSteeringHeating",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12437
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setSunroof",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12438
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setSunshade",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12439
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setTemperature",
+    "signature": {
+      "return": "V",
+      "params": [
+        "F"
+      ]
+    },
+    "method_index": 12440
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setTemperature",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "F"
+      ]
+    },
+    "method_index": 12441
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setVehicleModel",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12442
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setWindow",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "method_index": 12443
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setWindscreenHeat",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12444
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setWiperServiceModeAll",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12445
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setWiperServiceModeFront",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12446
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "setWiperServiceModeRear",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12447
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "startRearMirrorAdjust",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12448
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "switchToPreviousLightMode",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12449
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "tiltSunroof",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12450
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "name": "toEffectiveVehicleModel",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12451
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12590
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12591
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "getActivityName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12592
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "getAppName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12593
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "getNormalizedSynonym",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12594
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "getPackageName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12595
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "getSynonym",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12596
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "setActivityName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12597
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "setAppName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12598
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "setNormalizedSynonym",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12599
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "setPackageName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12600
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "name": "setSynonym",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12601
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12602
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getAnimationChoice",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12603
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getAnimationSizePercent",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12604
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getAppShortcuts",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12605
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getAppTheme",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12606
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getAudioChannel",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12607
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getAudioFocusEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12608
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getBookmarks",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12609
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getBufferSizeMultiplier",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12610
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCallsActiveProfile",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12611
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCallsAutoProfileSwitch",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12612
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCallsProfile1Marker",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12613
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCallsProfile2Marker",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12614
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCarControlDisabledFunctions",
+    "signature": {
+      "return": "Ljava/util/Map;",
+      "params": []
+    },
+    "method_index": 12615
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getChunkSize",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12616
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCommandVolume",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12617
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getContactSynonyms",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12618
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getCustomAnimationPath",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12619
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getDefaultAppSettings",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12620
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getEarconAudioRoute",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12621
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getEchoCancellationEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12622
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getEnhancedServiceEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12623
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getExecutionDebugEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12624
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getFinalResultDelay",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12625
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getModuleStates",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12626
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getMusicControlMode",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12627
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getNavigationAddresses",
+    "signature": {
+      "return": "Ljava/util/Map;",
+      "params": []
+    },
+    "method_index": 12628
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getNoiseSuppressionEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12629
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getPauseWakeWordWhenPassengerSeated",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12630
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getRecognitionTimeout",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12631
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getSavedAddresses",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12632
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getScripts",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12633
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getSectionFlags",
+    "signature": {
+      "return": "Lorg/jarvis/model/BackupSectionFlags;",
+      "params": []
+    },
+    "method_index": 12634
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getShortResponsesEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12635
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getTimeoutVolume",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12636
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getTimestamp",
+    "signature": {
+      "return": "J",
+      "params": []
+    },
+    "method_index": 12637
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getTtsAudioRoute",
+    "signature": {
+      "return": "Ljava/lang/Integer;",
+      "params": []
+    },
+    "method_index": 12638
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getTtsEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12639
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getTtsPauseMusic",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12640
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getUseSystemCarVolume",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12641
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getVehicleModel",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12642
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getVersion",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12643
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getWakeWordEnabled",
+    "signature": {
+      "return": "Ljava/lang/Boolean;",
+      "params": []
+    },
+    "method_index": 12644
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "getWakeWordPhrase",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12645
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "isVoiceDebugEnabled",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12646
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setAnimationChoice",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12647
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setAnimationSizePercent",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12648
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setAppShortcuts",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12649
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setAppTheme",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12650
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setAudioChannel",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12651
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setAudioFocusEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12652
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setBookmarks",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12653
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setBufferSizeMultiplier",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12654
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCallsActiveProfile",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12655
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCallsAutoProfileSwitch",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12656
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCallsProfile1Marker",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12657
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCallsProfile2Marker",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12658
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCarControlDisabledFunctions",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/Map;"
+      ]
+    },
+    "method_index": 12659
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setChunkSize",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12660
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCommandVolume",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12661
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setContactSynonyms",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12662
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setCustomAnimationPath",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12663
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setDefaultAppSettings",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12664
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setEarconAudioRoute",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12665
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setEchoCancellationEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12666
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setEnhancedServiceEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12667
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setExecutionDebugEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12668
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setFinalResultDelay",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12669
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setModuleStates",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12670
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setMusicControlMode",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12671
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setNavigationAddresses",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/Map;"
+      ]
+    },
+    "method_index": 12672
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setNoiseSuppressionEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12673
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setPauseWakeWordWhenPassengerSeated",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12674
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setRecognitionTimeout",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12675
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setSavedAddresses",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12676
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setScripts",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12677
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setSectionFlags",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Lorg/jarvis/model/BackupSectionFlags;"
+      ]
+    },
+    "method_index": 12678
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setShortResponsesEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12679
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setTimeoutVolume",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12680
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setTimestamp",
+    "signature": {
+      "return": "V",
+      "params": [
+        "J"
+      ]
+    },
+    "method_index": 12681
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setTtsAudioRoute",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Integer;"
+      ]
+    },
+    "method_index": 12682
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setTtsEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12683
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setTtsPauseMusic",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12684
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setUseSystemCarVolume",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12685
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setVehicleModel",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12686
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setVersion",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12687
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setVoiceDebugEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12688
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setWakeWordEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Boolean;"
+      ]
+    },
+    "method_index": 12689
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "name": "setWakeWordPhrase",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12690
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupSectionFlags;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12691
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupSectionFlags;",
+    "name": "a",
+    "signature": {
+      "return": "Lorg/jarvis/model/BackupSectionFlags;",
+      "params": [
+        "Lcom/google/gson/i;"
+      ]
+    },
+    "method_index": 12692
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupSectionFlags;",
+    "name": "b",
+    "signature": {
+      "return": "Z",
+      "params": [
+        "Lcom/google/gson/i;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12693
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "a",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12707
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "b",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12708
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "c",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12709
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "d",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12710
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "e",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12711
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "f",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12712
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "g",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12713
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "h",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12714
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "i",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12715
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "j",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12716
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "k",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12717
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "name": "l",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12718
+  },
+  {
+    "class": "Lorg/jarvis/model/DefaultAppSetting;",
+    "name": "getPackageName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12732
+  },
+  {
+    "class": "Lorg/jarvis/model/DefaultAppSetting;",
+    "name": "setPackageName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12736
+  },
+  {
+    "class": "Lorg/jarvis/model/Script;",
+    "name": "getActionCount",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12770
+  },
+  {
+    "class": "Lorg/jarvis/model/Script;",
+    "name": "getActions",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12771
+  },
+  {
+    "class": "Lorg/jarvis/model/Script;",
+    "name": "setActions",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12779
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12786
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12787
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "name": "getName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12788
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "name": "getValue",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12789
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "name": "setName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12790
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "name": "setValue",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12791
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12792
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "I"
+      ]
+    },
+    "method_index": 12793
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getAction",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12794
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getCondition",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12795
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getExtraParameters",
+    "signature": {
+      "return": "Ljava/util/List;",
+      "params": []
+    },
+    "method_index": 12796
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getId",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12797
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12798
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getOrder",
+    "signature": {
+      "return": "I",
+      "params": []
+    },
+    "method_index": 12799
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getPackageName",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12800
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getScriptId",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12801
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "getTarget",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12802
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "isEnabled",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12803
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setAction",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12804
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setCondition",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12805
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setEnabled",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "method_index": 12806
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setExtraParameters",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12807
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setId",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12808
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12809
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setOrder",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "method_index": 12810
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setPackageName",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12811
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setScriptId",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12812
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "name": "setTarget",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12813
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptCommand;",
+    "name": "getAction",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": []
+    },
+    "method_index": 12816
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptCommand;",
+    "name": "setAction",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12823
+  },
+  {
+    "class": "Lorg/jarvis/model/TemplateVariables;",
+    "name": "replaceVariables",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12841
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "<init>",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12847
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "A",
+    "signature": {
+      "return": "V",
+      "params": [
+        "[Ljava/lang/String;",
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12848
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "B",
+    "signature": {
+      "return": "V",
+      "params": []
+    },
+    "method_index": 12849
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "onCreate",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/os/Bundle;"
+      ]
+    },
+    "method_index": 12850
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "w",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12851
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "x",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12852
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "y",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "method_index": 12853
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "name": "z",
+    "signature": {
+      "return": "Ljava/lang/String;",
+      "params": [
+        "Ljava/lang/String;"
+      ]
+    },
+    "method_index": 12854
+  },
+  {
+    "class": "Lorg/jarvis/s1;",
+    "name": "accept",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Object;",
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12894
+  },
+  {
+    "class": "Lorg/jarvis/u;",
+    "name": "accept",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/lang/Object;"
+      ]
+    },
+    "method_index": 12908
+  },
+  {
+    "class": "Lorg/jarvis/utils/j;",
+    "name": "onActiveSessionsChanged",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Ljava/util/List;"
+      ]
+    },
+    "method_index": 12972
+  },
+  {
+    "class": "Lorg/jarvis/v0;",
+    "name": "onStartTrackingTouch",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/widget/SeekBar;"
+      ]
+    },
+    "method_index": 13062
+  },
+  {
+    "class": "Lorg/jarvis/v0;",
+    "name": "onStopTrackingTouch",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Landroid/widget/SeekBar;"
+      ]
+    },
+    "method_index": 13063
+  }
+]

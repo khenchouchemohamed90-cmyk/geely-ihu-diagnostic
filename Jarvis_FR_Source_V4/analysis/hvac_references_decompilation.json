@@ -1,0 +1,81 @@
+[
+  {
+    "name": "isAcOn",
+    "signature": {
+      "return": "Z",
+      "params": []
+    },
+    "dex_method_index": 12365,
+    "code_bytes": 72,
+    "literal_proprietes_dans_code": [
+      "0x10010300"
+    ]
+  },
+  {
+    "name": "setAcAuto",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "dex_method_index": 12386,
+    "code_bytes": 100,
+    "literal_proprietes_dans_code": []
+  },
+  {
+    "name": "setAcOn",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "dex_method_index": 12389,
+    "code_bytes": 60,
+    "literal_proprietes_dans_code": [
+      "0x10010300"
+    ]
+  },
+  {
+    "name": "setClimateSystemOn",
+    "signature": {
+      "return": "V",
+      "params": [
+        "Z"
+      ]
+    },
+    "dex_method_index": 12397,
+    "code_bytes": 60,
+    "literal_proprietes_dans_code": [
+      "0x10010100"
+    ]
+  },
+  {
+    "name": "setFanSpeed",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I"
+      ]
+    },
+    "dex_method_index": 12412,
+    "code_bytes": 308,
+    "literal_proprietes_dans_code": []
+  },
+  {
+    "name": "setWindow",
+    "signature": {
+      "return": "V",
+      "params": [
+        "I",
+        "I"
+      ]
+    },
+    "dex_method_index": 12443,
+    "code_bytes": 174,
+    "literal_proprietes_dans_code": [
+      "0x21030300"
+    ]
+  }
+]

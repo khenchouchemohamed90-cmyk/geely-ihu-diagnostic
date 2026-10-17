@@ -1,0 +1,1004 @@
+[
+  {
+    "class": "Lorg/jarvis/utils/h;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2062707
+  },
+  {
+    "class": "Lorg/jarvis/utils/f;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2082390
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$PassengerSeatOccupancyCallback;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2137656,
+    "class_data_offset": 2087166
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$HvacCommand;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2137672,
+    "class_data_offset": 2087447
+  },
+  {
+    "class": "Lorg/jarvis/utils/i;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2106614
+  },
+  {
+    "class": "Lorg/jarvis/AppSelectionActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107339
+  },
+  {
+    "class": "Lorg/jarvis/AppSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107391
+  },
+  {
+    "class": "Lorg/jarvis/BootReceiver;",
+    "super": "Landroid/content/BroadcastReceiver;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107432
+  },
+  {
+    "class": "Lorg/jarvis/BrowserSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107450
+  },
+  {
+    "class": "Lorg/jarvis/CallsSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107514
+  },
+  {
+    "class": "Lorg/jarvis/MainActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107606
+  },
+  {
+    "class": "Lorg/jarvis/MediaNotificationListener;",
+    "super": "Landroid/service/notification/NotificationListenerService;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107790
+  },
+  {
+    "class": "Lorg/jarvis/NavigationSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107839
+  },
+  {
+    "class": "Lorg/jarvis/PlayerSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107934
+  },
+  {
+    "class": "Lorg/jarvis/ScriptEditActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2107987
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity$1;",
+    "super": "Lcom/google/gson/reflect/TypeToken;",
+    "annotations_offset": 2138096,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/ScriptsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108043
+  },
+  {
+    "class": "Lorg/jarvis/SettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108091
+  },
+  {
+    "class": "Lorg/jarvis/ShareLocationReceiverActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108295
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutPickerActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108348
+  },
+  {
+    "class": "Lorg/jarvis/ShortcutsSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108386
+  },
+  {
+    "class": "Lorg/jarvis/VoiceActivity;",
+    "super": "Landroid/app/Activity;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108447
+  },
+  {
+    "class": "Lorg/jarvis/VoiceReceiver;",
+    "super": "Landroid/content/BroadcastReceiver;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108534
+  },
+  {
+    "class": "Lorg/jarvis/VoiceService;",
+    "super": "Landroid/app/Service;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108552
+  },
+  {
+    "class": "Lorg/jarvis/YandexNavigationSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108752
+  },
+  {
+    "class": "Lorg/jarvis/a0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108813
+  },
+  {
+    "class": "Lorg/jarvis/a1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108838
+  },
+  {
+    "class": "Lorg/jarvis/a2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108849
+  },
+  {
+    "class": "Lorg/jarvis/a;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108948
+  },
+  {
+    "class": "Lorg/jarvis/accessibility/JarvisAccessibilityService;",
+    "super": "Landroid/accessibilityservice/AccessibilityService;",
+    "annotations_offset": 0,
+    "class_data_offset": 2108973
+  },
+  {
+    "class": "Lorg/jarvis/b0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109004
+  },
+  {
+    "class": "Lorg/jarvis/b1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109026
+  },
+  {
+    "class": "Lorg/jarvis/b2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109051
+  },
+  {
+    "class": "Lorg/jarvis/b;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109076
+  },
+  {
+    "class": "Lorg/jarvis/c0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109101
+  },
+  {
+    "class": "Lorg/jarvis/c1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109129
+  },
+  {
+    "class": "Lorg/jarvis/c2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109159
+  },
+  {
+    "class": "Lorg/jarvis/c;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2109184
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$1$1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138112,
+    "class_data_offset": 2109217
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138128,
+    "class_data_offset": 2109239
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138144,
+    "class_data_offset": 2109261
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper$CarBindResult;",
+    "super": "Ljava/lang/Enum;",
+    "annotations_offset": 2138160,
+    "class_data_offset": 2109283
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxApiHelper;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138184,
+    "class_data_offset": 2109334
+  },
+  {
+    "class": "Lorg/jarvis/car/EcarxInitProvider;",
+    "super": "Landroid/content/ContentProvider;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110369
+  },
+  {
+    "class": "Lorg/jarvis/car/a;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110480
+  },
+  {
+    "class": "Lorg/jarvis/car/b;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110502
+  },
+  {
+    "class": "Lorg/jarvis/d0;",
+    "super": "Lx0/e1;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110537
+  },
+  {
+    "class": "Lorg/jarvis/d1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110550
+  },
+  {
+    "class": "Lorg/jarvis/d2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110587
+  },
+  {
+    "class": "Lorg/jarvis/d;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110609
+  },
+  {
+    "class": "Lorg/jarvis/database/AppDatabase;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110634
+  },
+  {
+    "class": "Lorg/jarvis/database/AppDatabase_Impl;",
+    "super": "Lorg/jarvis/database/AppDatabase;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110767
+  },
+  {
+    "class": "Lorg/jarvis/e0;",
+    "super": "Lx0/g0;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110832
+  },
+  {
+    "class": "Lorg/jarvis/e1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110861
+  },
+  {
+    "class": "Lorg/jarvis/e2;",
+    "super": "Landroid/content/BroadcastReceiver;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110889
+  },
+  {
+    "class": "Lorg/jarvis/e;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110914
+  },
+  {
+    "class": "Lorg/jarvis/f0;",
+    "super": "Lx0/r;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110948
+  },
+  {
+    "class": "Lorg/jarvis/f1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2110973
+  },
+  {
+    "class": "Lorg/jarvis/f2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111001
+  },
+  {
+    "class": "Lorg/jarvis/f;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111035
+  },
+  {
+    "class": "Lorg/jarvis/g0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111060
+  },
+  {
+    "class": "Lorg/jarvis/g1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111088
+  },
+  {
+    "class": "Lorg/jarvis/g2;",
+    "super": "Landroid/os/Binder;",
+    "annotations_offset": 0,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/g;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111119
+  },
+  {
+    "class": "Lorg/jarvis/h0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111166
+  },
+  {
+    "class": "Lorg/jarvis/h1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111191
+  },
+  {
+    "class": "Lorg/jarvis/h2;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111216
+  },
+  {
+    "class": "Lorg/jarvis/h;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111241
+  },
+  {
+    "class": "Lorg/jarvis/i0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111266
+  },
+  {
+    "class": "Lorg/jarvis/i1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111291
+  },
+  {
+    "class": "Lorg/jarvis/i;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111316
+  },
+  {
+    "class": "Lorg/jarvis/j0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111353
+  },
+  {
+    "class": "Lorg/jarvis/j1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111393
+  },
+  {
+    "class": "Lorg/jarvis/j;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111421
+  },
+  {
+    "class": "Lorg/jarvis/k0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111449
+  },
+  {
+    "class": "Lorg/jarvis/k1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111474
+  },
+  {
+    "class": "Lorg/jarvis/k;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111499
+  },
+  {
+    "class": "Lorg/jarvis/l0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111538
+  },
+  {
+    "class": "Lorg/jarvis/l1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111563
+  },
+  {
+    "class": "Lorg/jarvis/l;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111597
+  },
+  {
+    "class": "Lorg/jarvis/m0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111640
+  },
+  {
+    "class": "Lorg/jarvis/m1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111665
+  },
+  {
+    "class": "Lorg/jarvis/m;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111717
+  },
+  {
+    "class": "Lorg/jarvis/manager/BackupManager$1;",
+    "super": "Lcom/google/gson/reflect/TypeToken;",
+    "annotations_offset": 2138096,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/manager/a;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111742
+  },
+  {
+    "class": "Lorg/jarvis/manager/b;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111767
+  },
+  {
+    "class": "Lorg/jarvis/manager/c;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111795
+  },
+  {
+    "class": "Lorg/jarvis/model/AppInfo;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111878
+  },
+  {
+    "class": "Lorg/jarvis/model/AppShortcutBackup;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2111908
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupData;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138200,
+    "class_data_offset": 2111989
+  },
+  {
+    "class": "Lorg/jarvis/model/BackupSectionFlags;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112531
+  },
+  {
+    "class": "Lorg/jarvis/model/Bookmark;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112562
+  },
+  {
+    "class": "Lorg/jarvis/model/ContactSynonymBackup;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112648
+  },
+  {
+    "class": "Lorg/jarvis/model/DefaultAppCategory;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112726
+  },
+  {
+    "class": "Lorg/jarvis/model/DefaultAppSetting;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112785
+  },
+  {
+    "class": "Lorg/jarvis/model/ModuleState;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112854
+  },
+  {
+    "class": "Lorg/jarvis/model/SavedAddress;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2112947
+  },
+  {
+    "class": "Lorg/jarvis/model/Script;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138432,
+    "class_data_offset": 2113057
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction$ExtraParameter;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138496,
+    "class_data_offset": 2113172
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptAction;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138512,
+    "class_data_offset": 2113217
+  },
+  {
+    "class": "Lorg/jarvis/model/ScriptCommand;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113358
+  },
+  {
+    "class": "Lorg/jarvis/model/TemplateVariables;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 2138552,
+    "class_data_offset": 2113463
+  },
+  {
+    "class": "Lorg/jarvis/modules/CarControlSettingsActivity;",
+    "super": "Le/h;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113561
+  },
+  {
+    "class": "Lorg/jarvis/n0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113616
+  },
+  {
+    "class": "Lorg/jarvis/n1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113651
+  },
+  {
+    "class": "Lorg/jarvis/n;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113679
+  },
+  {
+    "class": "Lorg/jarvis/o0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113713
+  },
+  {
+    "class": "Lorg/jarvis/o1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113738
+  },
+  {
+    "class": "Lorg/jarvis/o;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113787
+  },
+  {
+    "class": "Lorg/jarvis/p0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113804
+  },
+  {
+    "class": "Lorg/jarvis/p1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113829
+  },
+  {
+    "class": "Lorg/jarvis/p;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113881
+  },
+  {
+    "class": "Lorg/jarvis/q0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113906
+  },
+  {
+    "class": "Lorg/jarvis/q1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113931
+  },
+  {
+    "class": "Lorg/jarvis/q;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113962
+  },
+  {
+    "class": "Lorg/jarvis/r0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2113987
+  },
+  {
+    "class": "Lorg/jarvis/r1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114030
+  },
+  {
+    "class": "Lorg/jarvis/r;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114045
+  },
+  {
+    "class": "Lorg/jarvis/s0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114070
+  },
+  {
+    "class": "Lorg/jarvis/s1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114098
+  },
+  {
+    "class": "Lorg/jarvis/s;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114120
+  },
+  {
+    "class": "Lorg/jarvis/t0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114130
+  },
+  {
+    "class": "Lorg/jarvis/t1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114158
+  },
+  {
+    "class": "Lorg/jarvis/t;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114183
+  },
+  {
+    "class": "Lorg/jarvis/u0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114208
+  },
+  {
+    "class": "Lorg/jarvis/u1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114246
+  },
+  {
+    "class": "Lorg/jarvis/u;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114280
+  },
+  {
+    "class": "Lorg/jarvis/utils/BookmarkManager$1;",
+    "super": "Lcom/google/gson/reflect/TypeToken;",
+    "annotations_offset": 2138592,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/utils/SavedAddressManager$1;",
+    "super": "Lcom/google/gson/reflect/TypeToken;",
+    "annotations_offset": 2138608,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/utils/ScriptCacheManager$1;",
+    "super": "Lcom/google/gson/reflect/TypeToken;",
+    "annotations_offset": 2138096,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/utils/ScriptCacheManager$2;",
+    "super": "Lcom/google/gson/reflect/TypeToken;",
+    "annotations_offset": 2138096,
+    "class_data_offset": 0
+  },
+  {
+    "class": "Lorg/jarvis/utils/a;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114302
+  },
+  {
+    "class": "Lorg/jarvis/utils/b;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114327
+  },
+  {
+    "class": "Lorg/jarvis/utils/c;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114379
+  },
+  {
+    "class": "Lorg/jarvis/utils/d;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114404
+  },
+  {
+    "class": "Lorg/jarvis/utils/e;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114436
+  },
+  {
+    "class": "Lorg/jarvis/utils/g;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114473
+  },
+  {
+    "class": "Lorg/jarvis/utils/j;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114508
+  },
+  {
+    "class": "Lorg/jarvis/utils/k;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114533
+  },
+  {
+    "class": "Lorg/jarvis/utils/l;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114561
+  },
+  {
+    "class": "Lorg/jarvis/utils/m;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114741
+  },
+  {
+    "class": "Lorg/jarvis/utils/n;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114788
+  },
+  {
+    "class": "Lorg/jarvis/utils/o;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114825
+  },
+  {
+    "class": "Lorg/jarvis/utils/p;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114835
+  },
+  {
+    "class": "Lorg/jarvis/utils/q;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114857
+  },
+  {
+    "class": "Lorg/jarvis/utils/r;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114882
+  },
+  {
+    "class": "Lorg/jarvis/utils/s;",
+    "super": "Landroid/speech/tts/UtteranceProgressListener;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114907
+  },
+  {
+    "class": "Lorg/jarvis/utils/t;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2114939
+  },
+  {
+    "class": "Lorg/jarvis/utils/u;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115024
+  },
+  {
+    "class": "Lorg/jarvis/utils/v;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115054
+  },
+  {
+    "class": "Lorg/jarvis/utils/w;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115082
+  },
+  {
+    "class": "Lorg/jarvis/v0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115183
+  },
+  {
+    "class": "Lorg/jarvis/v1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115268
+  },
+  {
+    "class": "Lorg/jarvis/v;",
+    "super": "Landroid/content/BroadcastReceiver;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115293
+  },
+  {
+    "class": "Lorg/jarvis/w0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115318
+  },
+  {
+    "class": "Lorg/jarvis/w1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115358
+  },
+  {
+    "class": "Lorg/jarvis/w;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115383
+  },
+  {
+    "class": "Lorg/jarvis/widget/DebugSparklineView;",
+    "super": "Landroid/view/View;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115418
+  },
+  {
+    "class": "Lorg/jarvis/x0;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115466
+  },
+  {
+    "class": "Lorg/jarvis/x1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115494
+  },
+  {
+    "class": "Lorg/jarvis/x;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115531
+  },
+  {
+    "class": "Lorg/jarvis/y0;",
+    "super": "Lx0/e1;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115550
+  },
+  {
+    "class": "Lorg/jarvis/y1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115559
+  },
+  {
+    "class": "Lorg/jarvis/y;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115584
+  },
+  {
+    "class": "Lorg/jarvis/z0;",
+    "super": "Lx0/g0;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115601
+  },
+  {
+    "class": "Lorg/jarvis/z1;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115633
+  },
+  {
+    "class": "Lorg/jarvis/z;",
+    "super": "Ljava/lang/Object;",
+    "annotations_offset": 0,
+    "class_data_offset": 2115664
+  }
+]

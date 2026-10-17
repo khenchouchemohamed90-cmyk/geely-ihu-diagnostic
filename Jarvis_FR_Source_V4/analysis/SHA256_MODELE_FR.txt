@@ -1,0 +1,15 @@
+a036c27a5f30d95910f739ce9466539a5772cd13541e5fdddfbfae187993f8d8  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/README
+580d99752e3f6f31fb4a03403b0b2a3a78b9665937e2823668b46d9c9ce1a1a1  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/am/final.mdl
+6c326fea5741c2d78be12f76eb1b36ea2ace040da9e355e4cfe6bb80e5f7d5ab  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/conf/mfcc.conf
+d8d91d310a9659fed2d89f8ea4996af6163a43c3ab008cd278e4264120551712  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/conf/model.conf
+4d5aefc6af664d1c47979ae3b9eb7e972c196e843ff4eee65e4c7b0c064723cf  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/graph/Gr.fst
+6562aee2cffac5ad2e569584bc8ca22b1bae0ce9e6e03f0f9898d9d7c267eaa5  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/graph/HCLr.fst
+fd844580478d2c0dbb01e408f77fce92a343a9fe05c304fea57a0d8e3122d7b1  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/graph/disambig_tid.int
+262452069835201f18fd4de64c4816a2333a54c80b4114084d75e1c4eb273836  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/graph/phones/word_boundary.int
+15c6736f097e9a1fbc3811a75a666da39cb9aa4526acea29d25f2a3003357acc  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/ivector/final.dubm
+bd52bc5aeef1f35349c7a6fd3fb671a4a877ba04181da30d99f2cf01d4b75dd5  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/ivector/final.ie
+61818a44ae3519708e9a31701da4ab351f3e19d7bd3e4ddfd820fd7f121cfad0  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/ivector/final.mat
+9d94d076adc26cd578cc4cf702dc41e5ea6de202f4563d6f0d4b4d4fdbb46bc1  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/ivector/global_cmvn.stats
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/ivector/online_cmvn.conf
+9f0c5f7c82d18eaf25d8bce470efa9f7741f88411fe428774bc0a9bb69a24756  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/ivector/splice.conf
+6e882746e30c9c1fb0027542d451ed0fe4ebc19524dba78191c31337af04394f  Jarvis_FR_Source_V4/android/app/src/main/assets/model-fr/uuid

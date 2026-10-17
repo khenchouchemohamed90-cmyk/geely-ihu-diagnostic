@@ -1,0 +1,1 @@
+Jarvis_FR_V4_MODELE_VOSK_FR_1.zip contient 13 fichiers du modele Vosk fr. Extraire avec les deux autres ZIP dans un meme dossier.

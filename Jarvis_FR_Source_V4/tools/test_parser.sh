@@ -1,0 +1,29 @@
+#!/bin/sh
+set -eu
+BASE="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+javac -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/FrenchIntentParser.java" "$BASE/tools/TestParser.java"
+java -cp "$WORK" TestParser
+javac -cp "$WORK" -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/VoiceResultGate.java" "$BASE/tools/TestVoiceResultGate.java"
+java -cp "$WORK" TestVoiceResultGate
+# ECARX: simulation locale sans interaction avec un véhicule réel.
+javac -d "$WORK" "$BASE/tools/fake_ecarx/android/content/Context.java" "$BASE/tools/fake_ecarx/android/os/SystemClock.java" "$BASE/tools/fake_ecarx/com/ecarx/xui/adaptapi/binder/IConnectable.java" "$BASE/tools/fake_ecarx/com/ecarx/xui/adaptapi/car/Car.java" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/EcarxReadOnly.java" "$BASE/tools/TestEcarxReadOnly.java"
+java -cp "$WORK" TestEcarxReadOnly
+
+# Actions Android standard : simulation pure sans appareil et sans ECARX.
+javac -d "$WORK" \
+  "$BASE"/tools/fake_android_actions/android/content/Context.java \
+  "$BASE"/tools/fake_android_actions/android/content/Intent.java \
+  "$BASE"/tools/fake_android_actions/android/content/pm/PackageManager.java \
+  "$BASE"/tools/fake_android_actions/android/app/Activity.java \
+  "$BASE"/tools/fake_android_actions/android/media/AudioManager.java \
+  "$BASE"/tools/fake_android_actions/android/net/Uri.java \
+  "$BASE"/tools/fake_android_actions/android/view/KeyEvent.java \
+  "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/FrenchIntentParser.java \
+  "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/AndroidActions.java \
+  "$BASE"/tools/TestAndroidActions.java
+java -cp "$WORK" TestAndroidActions
+
+# Aucun appel direct de commande physique n'est autorisé dans cette V4.
+python3 "$BASE/tools/verify_readonly.py"

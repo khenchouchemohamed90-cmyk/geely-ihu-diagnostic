@@ -1,0 +1,19 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.aztech.jarvisfr'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.aztech.jarvisfr.reconstruction'
+        minSdk 28
+        targetSdk 28
+        versionCode 4
+        versionName '0.4-source-readonly'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+dependencies {
+    implementation 'com.alphacephei:vosk-android:0.3.47'
+}
