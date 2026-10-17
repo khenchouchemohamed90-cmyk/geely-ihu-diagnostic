@@ -58,5 +58,5 @@
     <string name="export_no_app">Aucune application de partage disponible. Le journal reste privé dans les fichiers de Jarvis FR.</string>
     <string name="export_failed">Export du diagnostic indisponible. Consultez le journal JarvisFR si un accès de diagnostic est déjà disponible.</string>
     <string name="microphone_preset_selected">Source microphone pour la prochaine écoute : %1$s. Appuyez sur Écouter et comparez le signal ; aucun réglage système modifié.</string>
-    <string name="phone_voice_temporarily_disabled">Commande téléphone reconnue. Ouverture vocale suspendue pendant la vérification du composeur ECARX ; aucun appel lancé.</string>
+    <string name="phone_voice_temporarily_disabled">Téléphone momentanément désactivé : le composeur ECARX bloque parfois le retour à Jarvis. Aucun appel lancé.</string>
 </resources>
