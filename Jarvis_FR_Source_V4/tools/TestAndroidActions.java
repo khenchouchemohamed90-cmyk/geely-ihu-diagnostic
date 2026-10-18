@@ -15,6 +15,24 @@ public class TestAndroidActions {
         AndroidActions.perform(app,Intent.OUVRIR_NAVIGATION);
         check(app.lastIntent!=null && "map".equals(app.lastIntent.action), "navigation app launched");
         app.lastIntent=null;
+        AndroidActions.perform(app,Intent.OUVRIR_XIAOKA);
+        check(app.lastIntent!=null && "com.ecarx.xiaokagui".equals(app.lastIntent.packageName)
+                && "com.ecarx.xiaoka.XKMainActivity".equals(app.lastIntent.className), "Xiaoka UI explicit activity only");
+        check((app.lastIntent.getFlags() & android.content.Intent.FLAG_ACTIVITY_NEW_TASK)!=0,
+                "Xiaoka opened in separate task");
+        app.lastIntent=null;
+        AndroidActions.perform(app,Intent.AFFICHER_CLIMATISATION);
+        check(app.lastIntent!=null && "ecarx.hvac.app".equals(app.lastIntent.packageName)
+                && "ecarx.hvac.app.MainActivity".equals(app.lastIntent.className), "OEM HVAC UI only");
+        app.packages.hasXiaoka=false;
+        app.lastIntent=null;
+        check(AndroidActions.perform(app,Intent.OUVRIR_XIAOKA).contains("introuvable"), "missing Xiaoka handled");
+        check(app.lastIntent==null,"missing Xiaoka never launched");
+        app.packages.hasXiaoka=true;
+        app.packages.hasHvac=false;
+        check(AndroidActions.perform(app,Intent.AFFICHER_CLIMATISATION).contains("introuvable"), "missing HVAC handled");
+        app.packages.hasHvac=true;
+        app.lastIntent=null;
         AndroidActions.perform(app,Intent.OUVRIR_TELEPHONE);
         check(app.lastIntent!=null && "android.intent.action.DIAL".equals(app.lastIntent.action), "dialer only, never call");
         check((app.lastIntent.getFlags() & android.content.Intent.FLAG_ACTIVITY_NEW_TASK) != 0,
