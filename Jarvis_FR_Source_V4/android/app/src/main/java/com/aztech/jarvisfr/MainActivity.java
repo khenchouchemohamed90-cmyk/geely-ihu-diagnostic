@@ -134,6 +134,8 @@ public class MainActivity extends Activity {
                 "VITESSE (BRUT)", () -> requestRead(EcarxReadOnly.VITESSE_BRUTE, "Vitesse véhicule brute"));
         quickRow(content, "PISTE SUIV.", () -> runQuick("piste suivante"),
                 "PAUSE", () -> runQuick("pause"));
+        quickRow(content, "XIAOKA", () -> runQuick("ouvre xiaoka"),
+                "CLIM OEM", () -> runQuick("affiche la climatisation"));
 
         LinearLayout commandPanel = panel(content);
         section(commandPanel, "COMMANDE PERSONNALISÉE");
@@ -616,6 +618,8 @@ public class MainActivity extends Activity {
             case MUSIQUE_PRECEDENTE:
             case OUVRIR_NAVIGATION:
             case OUVRIR_NAVIGATEUR:
+            case OUVRIR_XIAOKA:
+            case AFFICHER_CLIMATISATION:
                 answer = AndroidActions.perform(this, intent);
                 break;
             case OUVRIR_TELEPHONE:
@@ -667,6 +671,10 @@ public class MainActivity extends Activity {
         switch (intent) {
             case OUVRIR_NAVIGATION: return "navigation";
             case OUVRIR_NAVIGATEUR: return "navigateur";
+            // Ne pas jouer à tort un audio « commande inconnue » si la voix
+            // française hors ligne ne contient pas encore ces phrases.
+            case OUVRIR_XIAOKA:
+            case AFFICHER_CLIMATISATION: return null;
             case MUSIQUE_LECTURE: return "musique";
             case MUSIQUE_PAUSE: return "pause";
             case MUSIQUE_SUIVANTE: return "suivante";
