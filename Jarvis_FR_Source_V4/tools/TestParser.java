@@ -30,6 +30,13 @@ public class TestParser {
   expect("Passe au morceau suivant", FrenchIntentParser.Intent.MUSIQUE_SUIVANTE);
   expect("Piste précédente", FrenchIntentParser.Intent.MUSIQUE_PRECEDENTE);
   expect("Ouvre Xiaoka", FrenchIntentParser.Intent.OUVRIR_XIAOKA);
+  expect("Ouvre l'assistant", FrenchIntentParser.Intent.OUVRIR_XIAOKA);
+  expect("Ouvre l'assistant vocal", FrenchIntentParser.Intent.OUVRIR_XIAOKA);
+  expect("Lance l'assistant Geely", FrenchIntentParser.Intent.OUVRIR_XIAOKA);
+  expect("Jarvis ouvre l'assistant", FrenchIntentParser.Intent.OUVRIR_XIAOKA);
+  expect("N'ouvre pas l'assistant", FrenchIntentParser.Intent.INCONNUE);
+  expect("Ouvre l'assistant puis allume la clim", FrenchIntentParser.Intent.INCONNUE);
+  expect("Active la climatisation", FrenchIntentParser.Intent.ACTIVER_CLIMATISATION);
   expect("Affiche la climatisation", FrenchIntentParser.Intent.AFFICHER_CLIMATISATION);
   expect("Ouvre la climatisation", FrenchIntentParser.Intent.AFFICHER_CLIMATISATION);
   expect("Ouvre le panneau de climatisation", FrenchIntentParser.Intent.AFFICHER_CLIMATISATION);

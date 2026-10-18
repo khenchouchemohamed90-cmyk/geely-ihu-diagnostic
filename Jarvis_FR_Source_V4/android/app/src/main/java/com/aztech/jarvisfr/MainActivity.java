@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
     private long permissionStartDeadline;
     private String lastPartial = "", lastAudioDiagnostic = "Aucune capture effectuée";
     private EcarxReadOnly ecarx;
+    private OemServiceProbe serviceProbe;
     private volatile boolean destroyed;
     private boolean foreground, readInProgress;
     private long resultGeneration;
@@ -262,6 +263,8 @@ public class MainActivity extends Activity {
         button(diagnosticsPanel, "Diagnostic ECARX").setOnClickListener(v -> dispatchDiagnostic("diagnostic ecarx"));
         button(diagnosticsPanel, "Prévalidation climatisation (lecture seule)")
                 .setOnClickListener(v -> dispatchDiagnostic("prevalidation climatisation"));
+        button(diagnosticsPanel, "Tester liaison SDK ECARX (sans commande)")
+                .setOnClickListener(v -> dispatchDiagnostic("tester liaison ecarx"));
         button(diagnosticsPanel, "Scanner les 32 fonctions Xiaoka / SS11 (lecture seule)")
                 .setOnClickListener(v -> dispatchDiagnostic("diagnostic xiaoka"));
         button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
@@ -880,6 +883,22 @@ public class MainActivity extends Activity {
                 journal.record("MIC", "Préréglage explicite=" + microphonePreset);
                 result.setText(getString(R.string.microphone_preset_selected, microphonePreset.name()));
                 break;
+            case OEM_BIND_PROBE:
+                // Bouton ou saisie explicite uniquement : jamais déclenché par une
+                // hypothèse vocale ni par le lancement de l'application.
+                result.setText("Test de liaison au SDK ECARX existant, sans démarrage de service ni appel de méthode…");
+                status.setText("Liaison SDK ECARX — test sans commande véhicule");
+                if (serviceProbe == null) serviceProbe = new OemServiceProbe(getApplicationContext());
+                serviceProbe.start(message -> {
+                    journal.record("OEM_BIND_PROBE", message);
+                    if (alive() && foreground && diagnosticToken == resultGeneration) {
+                        result.setText("TEST SDK ECARX (sans écriture)\n" + message
+                                + "\nLa liaison seule ne donne aucun droit de commande. "
+                                + "Utilisez « Exporter le journal ».");
+                        status.setText("Test de liaison terminé — aucun contrôle envoyé");
+                    }
+                });
+                break;
             case HVAC_PREFLIGHT:
                 result.setText("Vérification des permissions et des états A/C/HVAC en cours. Aucune commande automobile.");
                 status.setText("Prévalidation climatisation — lecture seule");
@@ -983,6 +1002,7 @@ public class MainActivity extends Activity {
         stopSpeech();
         worker.shutdownNow();
         cloudWorker.shutdownNow();
+        if (serviceProbe != null) serviceProbe.close();
         cloudGeneration++;
         cloudBusy = false;
         // Un Binder propriétaire bloqué ne peut pas être annulé de force. Son

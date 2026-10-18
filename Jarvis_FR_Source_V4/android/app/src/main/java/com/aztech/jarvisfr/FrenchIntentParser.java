@@ -100,7 +100,7 @@ public final class FrenchIntentParser {
         // Contrôle d'interfaces seulement : aucune commande physique ECARX.
         // Les formulations sont strictement limitées pour ne pas confondre
         // « ouvre la climatisation » et « allume la climatisation ».
-        if (s.matches("^(?:ouvre|affiche|montre) (?:xiaoka|l assistant xiaoka|l assistant geely)$"))
+        if (s.matches("^(?:ouvre|affiche|montre|lance) (?:xiaoka|l assistant|l assistant vocal|l assistant geely|l assistant xiaoka|l assistant vocal geely)$"))
             return of(Intent.OUVRIR_XIAOKA);
         if (s.equals("affiche la climatisation")
                 || s.equals("ouvre la climatisation")
