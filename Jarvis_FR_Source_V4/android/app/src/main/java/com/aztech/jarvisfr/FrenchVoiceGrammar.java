@@ -31,7 +31,8 @@ public final class FrenchVoiceGrammar {
 
     private static List<String> build() {
         LinkedHashSet<String> phrases = new LinkedHashSet<>(Arrays.asList(
-                "ouvre la navigation", "lance la musique", "reprends la lecture",
+                "ouvre la navigation", "ouvre xiaoka", "affiche la climatisation",
+                "ouvre la climatisation", "lance la musique", "reprends la lecture",
                 "mets la musique en pause", "pause", "piste suivante", "piste précédente",
                 "musique suivante", "musique précédente", "ouvre le téléphone",
                 "ouvre le navigateur internet", "ouvre le navigateur web",
