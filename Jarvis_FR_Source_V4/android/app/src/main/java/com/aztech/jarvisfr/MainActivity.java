@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
         TextView title = text(content, "JARVIS  FR", 35);
         title.setTextColor(0xfff7fcff);
         title.setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD);
-        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.8", 12);
+        TextView version = text(content, "GEELY EMGRAND SS11  •  IHU007B  •  V0.9", 12);
         version.setTextColor(0xffa2bcd3);
 
         LinearLayout systemPanel = panel(content);
@@ -258,6 +258,8 @@ public class MainActivity extends Activity {
         acButton = button(diagnosticsPanel, getString(R.string.ac_button));
         acButton.setOnClickListener(view -> requestRead(EcarxReadOnly.COMPRESSEUR_A_C, getString(R.string.ac_label)));
         button(diagnosticsPanel, "Diagnostic ECARX").setOnClickListener(v -> dispatchDiagnostic("diagnostic ecarx"));
+        button(diagnosticsPanel, "Scanner les 32 fonctions Xiaoka / SS11 (lecture seule)")
+                .setOnClickListener(v -> dispatchDiagnostic("diagnostic xiaoka"));
         button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
         button(diagnosticsPanel, "Tester voix française").setOnClickListener(v -> dispatchDiagnostic("tester la voix francaise"));
         button(diagnosticsPanel, "Activer réponses vocales après test").setOnClickListener(v -> dispatchDiagnostic("activer les reponses vocales"));
@@ -867,6 +869,25 @@ public class MainActivity extends Activity {
                         : DiagnosticSpeechService.InputPreset.AUTO;
                 journal.record("MIC", "Préréglage explicite=" + microphonePreset);
                 result.setText(getString(R.string.microphone_preset_selected, microphonePreset.name()));
+                break;
+            case XIAOKA_REPORT:
+                result.setText("Audit Xiaoka en cours : 32 fonctions SS11, droits OEM et lectures ECARX documentées. Aucune commande physique.");
+                status.setText("Diagnostic constructeur — lecture seule");
+                try {
+                    worker.execute(() -> {
+                        String report = XiaokaCapabilityAudit.inspect(
+                                getApplicationContext(), ecarx,
+                                (category, message) -> journal.record(category, message));
+                        mainHandler.post(() -> {
+                            if (alive() && foreground && diagnosticToken == resultGeneration) {
+                                result.setText(report + "\\nPour partager le rapport, utilisez « Exporter le journal ».");
+                                status.setText("Audit Xiaoka terminé — rapport journalisé");
+                            }
+                        });
+                    });
+                } catch (RejectedExecutionException error) {
+                    result.setText(R.string.diagnostic_busy);
+                }
                 break;
             case ECARX_REPORT:
                 try {
