@@ -9,6 +9,8 @@ javac -encoding UTF-8 -d "$JARVIS_TEST_DIR" \
   "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/VoiceTranscriptPolicy.java \
   "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/DiagnosticCommands.java \
   "$BASE"/android/app/src/main/java/com/aztech/jarvisfr/BoundedDiagnosticLog.java \
-  "$BASE"/tools/TestVoiceTranscriptPolicy.java "$BASE"/tools/TestDiagnosticLog.java
+  "$BASE"/tools/TestVoiceTranscriptPolicy.java "$BASE"/tools/TestDiagnosticLog.java \
+  "$BASE"/tools/TestHvacPreflightCommand.java
 java -cp "$JARVIS_TEST_DIR" TestVoiceTranscriptPolicy
 java -cp "$JARVIS_TEST_DIR" TestDiagnosticLog
+java -cp "$JARVIS_TEST_DIR" TestHvacPreflightCommand
