@@ -29,6 +29,14 @@ public class TestParser {
   expect("Mets la musique en pause", FrenchIntentParser.Intent.MUSIQUE_PAUSE);
   expect("Passe au morceau suivant", FrenchIntentParser.Intent.MUSIQUE_SUIVANTE);
   expect("Piste précédente", FrenchIntentParser.Intent.MUSIQUE_PRECEDENTE);
+  expect("Ouvre Xiaoka", FrenchIntentParser.Intent.OUVRIR_XIAOKA);
+  expect("Affiche la climatisation", FrenchIntentParser.Intent.AFFICHER_CLIMATISATION);
+  expect("Ouvre la climatisation", FrenchIntentParser.Intent.AFFICHER_CLIMATISATION);
+  expect("Ouvre le panneau de climatisation", FrenchIntentParser.Intent.AFFICHER_CLIMATISATION);
+  expect("Allume la climatisation", FrenchIntentParser.Intent.ACTIVER_CLIMATISATION);
+  expect("Désactive la climatisation", FrenchIntentParser.Intent.ARRETER_CLIMATISATION);
+  expect("N'ouvre pas Xiaoka", FrenchIntentParser.Intent.INCONNUE);
+  expect("Ouvre Xiaoka puis active la climatisation", FrenchIntentParser.Intent.INCONNUE);
   expect("Ouvre la navigation", FrenchIntentParser.Intent.OUVRIR_NAVIGATION);
   expect("Lance le GPS", FrenchIntentParser.Intent.OUVRIR_NAVIGATION);
   expect("Ouvre le téléphone", FrenchIntentParser.Intent.OUVRIR_TELEPHONE);
