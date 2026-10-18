@@ -31,5 +31,11 @@ javac -d "$WORK" \
   "$BASE"/tools/TestAndroidActions.java
 java -cp "$WORK" TestAndroidActions
 
+# Catalogue issu du firmware Xiaoka547 (aucune action physique).
+javac -encoding UTF-8 -cp "$WORK" -d "$WORK" \
+  "$BASE/android/app/src/main/java/com/aztech/jarvisfr/XiaokaFeatureCatalog.java" \
+  "$BASE/tools/TestXiaokaFeatureCatalog.java"
+java -cp "$WORK" TestXiaokaFeatureCatalog
+
 # Aucun appel direct de commande physique n'est autorisé dans cette V4.
 python3 "$BASE/tools/verify_readonly.py" --self-test
