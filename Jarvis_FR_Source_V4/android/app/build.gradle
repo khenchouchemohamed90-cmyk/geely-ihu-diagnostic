@@ -6,8 +6,8 @@ android {
         applicationId 'com.aztech.jarvisfr.reconstruction'
         minSdk 28
         targetSdk 28
-        versionCode 12
-        versionName '0.8.1-gratuit-gemini'
+        versionCode 13
+        versionName '0.9.0-xiaoka-audit'
         ndk { abiFilters 'armeabi-v7a', 'arm64-v8a' }
     }
     buildFeatures { buildConfig true }
