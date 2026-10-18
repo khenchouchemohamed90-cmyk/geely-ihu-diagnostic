@@ -258,6 +258,8 @@ public class MainActivity extends Activity {
         acButton = button(diagnosticsPanel, getString(R.string.ac_button));
         acButton.setOnClickListener(view -> requestRead(EcarxReadOnly.COMPRESSEUR_A_C, getString(R.string.ac_label)));
         button(diagnosticsPanel, "Diagnostic ECARX").setOnClickListener(v -> dispatchDiagnostic("diagnostic ecarx"));
+        button(diagnosticsPanel, "Prévalidation climatisation (lecture seule)")
+                .setOnClickListener(v -> dispatchDiagnostic("prevalidation climatisation"));
         button(diagnosticsPanel, "Scanner les 32 fonctions Xiaoka / SS11 (lecture seule)")
                 .setOnClickListener(v -> dispatchDiagnostic("diagnostic xiaoka"));
         button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
@@ -869,6 +871,22 @@ public class MainActivity extends Activity {
                         : DiagnosticSpeechService.InputPreset.AUTO;
                 journal.record("MIC", "Préréglage explicite=" + microphonePreset);
                 result.setText(getString(R.string.microphone_preset_selected, microphonePreset.name()));
+                break;
+            case HVAC_PREFLIGHT:
+                result.setText("Vérification des permissions et des états A/C/HVAC en cours. Aucune commande automobile.");
+                status.setText("Prévalidation climatisation — lecture seule");
+                try {
+                    worker.execute(() -> {
+                        String report = HvacPreflight.inspect(getApplicationContext(), ecarx,
+                                (category, message) -> journal.record(category, message));
+                        mainHandler.post(() -> {
+                            if (alive() && foreground && diagnosticToken == resultGeneration) {
+                                result.setText(report + "\\nUtilisez « Exporter le journal » pour partager le diagnostic.");
+                                status.setText("Prévalidation A/C terminée — aucune écriture");
+                            }
+                        });
+                    });
+                } catch (RejectedExecutionException error) { result.setText(R.string.diagnostic_busy); }
                 break;
             case XIAOKA_REPORT:
                 result.setText("Audit Xiaoka en cours : 32 fonctions SS11, droits OEM et lectures ECARX documentées. Aucune commande physique.");
