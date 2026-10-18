@@ -892,8 +892,8 @@ public class MainActivity extends Activity {
                 serviceProbe.start(message -> {
                     journal.record("OEM_BIND_PROBE", message);
                     if (alive() && foreground && diagnosticToken == resultGeneration) {
-                        result.setText("TEST SDK ECARX (sans écriture)\\n" + message
-                                + "\\nLa liaison seule ne donne aucun droit de commande. "
+                        result.setText("TEST SDK ECARX (sans écriture)\n" + message
+                                + "\nLa liaison seule ne donne aucun droit de commande. "
                                 + "Utilisez « Exporter le journal ».");
                         status.setText("Test de liaison terminé — aucun contrôle envoyé");
                     }
