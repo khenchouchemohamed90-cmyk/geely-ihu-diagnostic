@@ -35,6 +35,12 @@ public final class AndroidActions {
                     activity.startActivity(i);
                     return "Ouverture du téléphone demandée";
                 }
+                case OUVRIR_XIAOKA: return launchOemScreen(activity,
+                        "com.ecarx.xiaokagui", "com.ecarx.xiaoka.XKMainActivity",
+                        "Xiaoka");
+                case AFFICHER_CLIMATISATION: return launchOemScreen(activity,
+                        "ecarx.hvac.app", "ecarx.hvac.app.MainActivity",
+                        "le panneau de climatisation");
                 case OUVRIR_NAVIGATEUR: {
                     Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
                     if (i.resolveActivity(activity.getPackageManager()) == null) return "Aucun navigateur disponible";
@@ -48,6 +54,22 @@ public final class AndroidActions {
         } catch (RuntimeException e) {
             return "Impossible de lancer cette fonction : " + e.getClass().getSimpleName();
         }
+    }
+
+    /**
+     * Ouvre une Activity OEM publique déjà présente sur la tablette.
+     * N'accède pas aux services automobile, ne demande aucun privilège
+     * et ne transmet aucune intention de contrôle physique.
+     */
+    private static String launchOemScreen(Activity activity, String packageName,
+                                          String activityName, String label) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClassName(packageName, activityName);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (intent.resolveActivity(activity.getPackageManager()) == null)
+            return "Interface constructeur introuvable : " + label;
+        activity.startActivity(intent);
+        return "Ouverture demandée : " + label + " (résultat à vérifier)";
     }
 
     private static String sendMedia(Activity activity, int keyCode) {

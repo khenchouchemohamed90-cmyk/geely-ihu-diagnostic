@@ -16,6 +16,7 @@ public final class FrenchIntentParser {
         CLIMATISATION_AUTO, NIVEAU_CARBURANT, TEMPERATURE_EXTERIEURE,
         MUSIQUE_LECTURE, MUSIQUE_PAUSE, MUSIQUE_SUIVANTE, MUSIQUE_PRECEDENTE,
         OUVRIR_NAVIGATION, OUVRIR_TELEPHONE, OUVRIR_NAVIGATEUR,
+        OUVRIR_XIAOKA, AFFICHER_CLIMATISATION,
         COMMANDE_VEHICULE_NON_VALIDEE, INCONNUE
     }
 
@@ -96,6 +97,17 @@ public final class FrenchIntentParser {
         if (domains > 1) {
             return of(Intent.INCONNUE);
         }
+        // Contrôle d'interfaces seulement : aucune commande physique ECARX.
+        // Les formulations sont strictement limitées pour ne pas confondre
+        // « ouvre la climatisation » et « allume la climatisation ».
+        if (s.matches("^(?:ouvre|affiche|montre) (?:xiaoka|l assistant xiaoka|l assistant geely)$"))
+            return of(Intent.OUVRIR_XIAOKA);
+        if (s.equals("affiche la climatisation")
+                || s.equals("ouvre la climatisation")
+                || s.equals("ouvre le panneau de climatisation")
+                || s.equals("affiche la clim")
+                || s.equals("ouvre le menu de climatisation"))
+            return of(Intent.AFFICHER_CLIMATISATION);
         if (mentionsRange) return of(Intent.AUTONOMIE);
         if (mentionsFuel) return of(Intent.NIVEAU_CARBURANT);
         if (mentionsOutsideTemperature) return of(Intent.TEMPERATURE_EXTERIEURE);

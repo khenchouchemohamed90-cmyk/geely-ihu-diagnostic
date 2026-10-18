@@ -3,11 +3,11 @@ android {
     namespace 'com.aztech.jarvisfr'
     compileSdk 34
     defaultConfig {
-        applicationId 'com.aztech.jarvisfr.xiaoka.audit'
+        applicationId 'com.aztech.jarvisfr.xiaoka.bridge547'
         minSdk 28
         targetSdk 28
-        versionCode 15
-        versionName '0.9.2-ac-preflight-547'
+        versionCode 17
+        versionName '0.9.3.1-xiaoka-parallele-547'
         ndk { abiFilters 'armeabi-v7a', 'arm64-v8a' }
     }
     buildFeatures { buildConfig true }
