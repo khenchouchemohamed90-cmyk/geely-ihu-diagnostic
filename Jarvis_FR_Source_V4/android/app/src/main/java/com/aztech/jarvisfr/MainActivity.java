@@ -417,7 +417,7 @@ public class MainActivity extends Activity {
                     acTrialBusy = false;
                     journal.record("AC_PHYSICAL_TRIAL", "résultat=" + report);
                     if (alive() && foreground && token == resultGeneration) {
-                        result.setText(report + "\\nPour comparer, ouvrir CLIM OEM et vérifier le témoin A/C.");
+                        result.setText(report + "\nPour comparer, ouvrir CLIM OEM et vérifier le témoin A/C.");
                         status.setText("Essai A/C terminé — résultat API, confirmation physique requise");
                     }
                 });
