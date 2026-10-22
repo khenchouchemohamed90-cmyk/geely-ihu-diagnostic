@@ -111,8 +111,10 @@ def validate_manual_ac_trial(source):
         'vérification des refus': 'InvocationTargetException',
     }
     for label, marker in exact.items():
-        if source.count(marker) != 1 and label != 'garde de présence en premier plan':
+        if label not in ('garde de présence en premier plan', 'vérification des refus') and source.count(marker) != 1:
             errors.append(label + ' absent ou répété dans ManualAcTrial')
+        if label == 'vérification des refus' and marker not in source:
+            errors.append('gestion des refus manquante dans ManualAcTrial')
         if label == 'garde de présence en premier plan' and source.count(marker) < 2:
             errors.append('garde de présence insuffisante dans ManualAcTrial')
     forbidden = [(line, name) for line, name in violations(source)
