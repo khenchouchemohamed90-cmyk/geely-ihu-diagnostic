@@ -72,6 +72,8 @@ public class MainActivity extends Activity {
     private volatile boolean destroyed;
     private boolean foreground, readInProgress;
     private long resultGeneration;
+    // Invalide toute ouverture OEM en attente si l'utilisateur reprend la main.
+    private long micHandoffGeneration;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -115,6 +117,7 @@ public class MainActivity extends Activity {
         mic.setOnClickListener(view -> startSpeech());
         Button stop = button(content, "■   Arrêter l’écoute");
         stop.setOnClickListener(view -> {
+            ++micHandoffGeneration;
             stopSpeech();
             stopTts();
             status.setText(getString(R.string.listening_stopped));
@@ -415,6 +418,7 @@ public class MainActivity extends Activity {
 
     private void startSpeech() {
         if (!alive() || !foreground) return;
+        ++micHandoffGeneration;
         stopSpeech();
         stopTts();
         journal.record("MIC", "Demande explicite ; permission=" + checkSelfPermission(Manifest.permission.RECORD_AUDIO));
@@ -581,8 +585,40 @@ public class MainActivity extends Activity {
         }
     }
 
+    /**
+     * Handoff vers Xiaoka : aucune ouverture avant libération effective du micro.
+     * Les callbacks whenStopped sont publiés après AudioRecord.release().
+     */
+    private void deferXiaokaUntilMicrophoneReleased(String phrase, String origin) {
+        final long generation = ++micHandoffGeneration;
+        final Set<DiagnosticSpeechService> ending = new HashSet<>(captures);
+        journal.record("MIC_HANDOFF", "Ouverture Xiaoka différée ; captures en cours=" + ending.size());
+        status.setText("Libération du microphone avant ouverture de Xiaoka…");
+        result.setText("Xiaoka sera ouvert après libération du microphone.");
+        for (DiagnosticSpeechService capture : ending) {
+            capture.whenStopped(() -> {
+                if (generation != micHandoffGeneration || !alive() || !foreground) return;
+                if (!captures.isEmpty()) return;
+                // Empêche une seconde ouverture si plusieurs callbacks arrivent.
+                ++micHandoffGeneration;
+                journal.record("MIC_HANDOFF", "AudioRecord libéré : lancement Xiaoka autorisé");
+                dispatch(phrase, origin);
+            });
+        }
+    }
+
     private void dispatch(String phrase, String origin) {
         if (!alive() || !foreground) return;
+        // stopSpeech() annule une capture de manière ASYNCHRONE.
+        // Sur IHU007B, Xiaoka refuse le micro si son Activity est lancée
+        // avant la fin de AudioRecord.release(). L'attente repose sur le
+        // callback whenStopped(), jamais sur un sommeil du thread UI.
+        if (FrenchIntentParser.parse(phrase) == FrenchIntentParser.Intent.OUVRIR_XIAOKA
+                && !captures.isEmpty()) {
+            deferXiaokaUntilMicrophoneReleased(phrase, origin);
+            return;
+        }
+        ++micHandoffGeneration; // toute autre commande annule l'ancienne intention.
         journal.record("COMMAND", "origine=" + origin + " ; phrase=" + phrase);
         FrenchConversation.Response conversation = FrenchConversation.reply(phrase);
         if (conversation != null) {
@@ -986,6 +1022,7 @@ public class MainActivity extends Activity {
     }
 
     @Override protected void onPause() {
+        ++micHandoffGeneration;
         foreground = false;
         stopSpeech();
         stopTts();
@@ -998,6 +1035,7 @@ public class MainActivity extends Activity {
     }
 
     @Override protected void onDestroy() {
+        ++micHandoffGeneration;
         destroyed = true;
         stopSpeech();
         worker.shutdownNow();
