@@ -18,18 +18,21 @@ import java.lang.reflect.Method;
  */
 public final class ManualAcTrial {
     public interface Recorder { void record(String message); }
+    public interface Guard { boolean canProceed(); }
     static final int AC_ID = 0x10010300;
     static final int ZONE = 0;
     private static final long CONNECT_MS = 5500L;
     private static final long POLL_MS = 180L;
     private ManualAcTrial() { }
 
-    public static String execute(Context context, boolean enable, Recorder recorder) {
+    public static String execute(Context context, boolean enable, Guard guard, Recorder recorder) {
         final String desired = enable ? "ACTIVER" : "DESACTIVER";
         final int value = enable ? 1 : 0;
         if (recorder != null) recorder.record("MANUAL_AC_TRIAL début fonction=0x10010300 zone=0 valeur=" + value);
         Object car = null;
         try {
+            if (guard == null || !guard.canProceed())
+                return "ESSAI A/C annulé : application en arrière-plan, aucune écriture.";
             // Pas de service ni de permission OEM forcés : classe constructeur
             // telle que fournie normalement dans l'environnement Android.
             Class<?> carClass = Class.forName("com.ecarx.xui.adaptapi.car.Car", true,
@@ -50,6 +53,9 @@ public final class ManualAcTrial {
             if (function == null) return "ESSAI A/C " + desired
                     + " : ICarFunction non connecté ; aucune commande envoyée.";
 
+            if (guard == null || !guard.canProceed() || Thread.currentThread().isInterrupted())
+                return "ESSAI A/C annulé avant écriture : aucune commande envoyée.";
+
             // La signature à 3 paramètres (fonction, zone, valeur) est connue
             // pour ICarFunction. Aucun ID variable ni repli sur une autre méthode.
             Method write = function.getClass().getMethod("setFunctionValue",
@@ -67,7 +73,7 @@ public final class ManualAcTrial {
             return "ESSAI A/C " + desired + " : appel terminé, retour="
                     + (result == null ? "void/null" : result.getClass().getSimpleName())
                     + ". VÉRIFIER LE TÉMOIN A/C ; état physique NON prouvé.";
-        } catch (Throwable raw) {
+        } catch (Exception | LinkageError raw) {
             Throwable e = raw instanceof InvocationTargetException && raw.getCause() != null
                     ? raw.getCause() : raw;
             final String name = e.getClass().getSimpleName();
