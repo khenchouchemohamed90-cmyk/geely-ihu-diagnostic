@@ -26,6 +26,10 @@ public final class Car implements IConnectable {
     public static boolean failUnregister;
     public static boolean failSupport;
     public static boolean failRead;
+    public static boolean manualTrialAllowed;
+    public static boolean manualTrialReturn;
+    public static boolean manualTrialSecurityException;
+    public static int lastManualId, lastManualZone, lastManualValue;
     public static int connectionDelay;
     public static Object status;
     public static Object functions;
@@ -41,6 +45,8 @@ public final class Car implements IConnectable {
         failSensor = false;
         returnNullCar = failCreate = failRegister = failUnregister = failSupport = failRead = false;
         connectionDelay = 0;
+        manualTrialAllowed = manualTrialReturn = manualTrialSecurityException = false;
+        lastManualId = lastManualZone = lastManualValue = -1;
         status = "active";
         functions = new FakeFunctions();
         lastWatcher = null;
@@ -131,6 +137,16 @@ public final class Car implements IConnectable {
         public boolean setFunctionValue(int id, int value) {
             writeCount++;
             throw new AssertionError("Writes are prohibited");
+        }
+        /** Limité au test explicite isolé ; la lecture seule n'utilise jamais cet appel. */
+        public boolean setFunctionValue(int id, int zone, int value) {
+            if (!manualTrialAllowed) throw new AssertionError("Physical mock writes disabled");
+            if (id != 0x10010300 || zone != 0 || (value != 0 && value != 1))
+                throw new AssertionError("Unexpected AC function/zone/value");
+            writeCount++;
+            lastManualId = id; lastManualZone = zone; lastManualValue = value;
+            if (manualTrialSecurityException) throw new SecurityException("OEM signature required");
+            return manualTrialReturn;
         }
     }
     public static final class NoSupport {
