@@ -3,7 +3,7 @@
   <uses-permission android:name="android.permission.RECORD_AUDIO"/>
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-feature android:name="android.hardware.microphone" android:required="false"/>
-  <application android:allowBackup="false" android:label="Jarvis FR 0.9.5 - EAS" android:icon="@drawable/ic_jarvis" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
+  <application android:allowBackup="false" android:label="Jarvis FR 0.9.6 - Essai AC" android:icon="@drawable/ic_jarvis" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
     <provider android:name=".DiagnosticExportProvider" android:authorities="${applicationId}.diagnostic"
         android:exported="false" android:grantUriPermissions="true">
       <grant-uri-permission android:path="/export/jarvis-fr-diagnostic.txt"/>
