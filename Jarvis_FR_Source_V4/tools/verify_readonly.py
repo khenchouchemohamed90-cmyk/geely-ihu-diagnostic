@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Garde-fou de revue des sources, pas une preuve de sûreté du binaire.
+"""Garde-fou statique de revue des sources, pas une preuve de sûreté du binaire.
+
+La version 0.9.6 n'admet que le seul appel A/C manuel, explicite et cadré
+dans ManualAcTrial. Tout autre point d'écriture reste interdit.
 
 Détecte les noms d'écritures ECARX connus, en appel direct, référence de méthode
 ou chaîne réflexive (y compris échappements et concaténations littérales).
@@ -96,6 +99,31 @@ def self_test():
     print(f'{len(cases)} tests du garde-fou statique PASSÉS')
 
 
+def validate_manual_ac_trial(source):
+    """Contrôle statique STRICT du seul point d'écriture explicitement accepté."""
+    errors = []
+    exact = {
+        'signature setFunctionValue': '"setFunctionValue"',
+        'ID A/C constructeur': 'static final int AC_ID = 0x10010300;',
+        'zone constructeur': 'static final int ZONE = 0;',
+        'appel unique A/C': 'write.invoke(function, AC_ID, ZONE, value)',
+        'garde de présence en premier plan': 'guard.canProceed()',
+        'vérification des refus': 'InvocationTargetException',
+    }
+    for label, marker in exact.items():
+        if source.count(marker) != 1 and label != 'garde de présence en premier plan':
+            errors.append(label + ' absent ou répété dans ManualAcTrial')
+        if label == 'garde de présence en premier plan' and source.count(marker) < 2:
+            errors.append('garde de présence insuffisante dans ManualAcTrial')
+    forbidden = [(line, name) for line, name in violations(source)
+                 if name != 'setFunctionValue']
+    errors += ['écriture supplémentaire dans ManualAcTrial ligne ' + str(line) + ': ' + name
+               for line, name in forbidden]
+    if sum(1 for line, name in violations(source) if name == 'setFunctionValue') != 1:
+        errors.append('setFunctionValue doit être référencé exactement une fois dans ManualAcTrial')
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--self-test', action='store_true')
@@ -108,11 +136,15 @@ def main():
         raise SystemExit('ERREUR : aucun fichier Java à contrôler')
     errors = []
     for file in files:
-        for line, name in violations(file.read_text(encoding='utf-8')):
-            errors.append(f'{file}:{line}: écriture ECARX potentielle ({name})')
+        source = file.read_text(encoding='utf-8')
+        if file.name == 'ManualAcTrial.java':
+            errors.extend(str(file) + ': ' + issue for issue in validate_manual_ac_trial(source))
+        else:
+            for line, name in violations(source):
+                errors.append(f'{file}:{line}: écriture ECARX potentielle ({name})')
     if errors:
-        raise SystemExit('ERREUR :\n' + '\n'.join(errors))
-    print(f'Contrôle statique : aucune écriture ECARX connue dans {len(files)} sources Java')
+        raise SystemExit('ERREUR :\\n' + '\\n'.join(errors))
+    print(f'Contrôle statique : 1 essai A/C manuel limité ; aucune autre écriture ECARX dans {len(files)} sources Java')
 
 
 if __name__ == '__main__':
