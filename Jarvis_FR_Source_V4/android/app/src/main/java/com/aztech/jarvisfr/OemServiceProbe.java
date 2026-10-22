@@ -23,9 +23,14 @@ import android.os.Looper;
 public final class OemServiceProbe {
     public interface ResultListener { void onResult(String message); }
 
-    private static final ComponentName TARGET =
-            new ComponentName("com.ecarx.sdk.openapi",
-                    "com.ecarx.sdk.openapi.ServicePoolService");
+    /** Deux services documentés dans XSFOpenAPIService_547 ; aucune écriture. */
+    public enum Endpoint {
+        SERVICE_POOL("com.ecarx.sdk.openapi.ServicePoolService"),
+        EAS_FRAMEWORK("com.ecarx.sdk.openapi.EASFrameworkService");
+        final String className;
+        Endpoint(String name) { className = name; }
+        ComponentName component() { return new ComponentName("com.ecarx.sdk.openapi", className); }
+    }
     private static final long TIMEOUT_MS = 3500;
 
     private final Context context;
@@ -41,7 +46,13 @@ public final class OemServiceProbe {
     }
 
     /** Doit être appelé depuis le fil UI, exclusivement après appui explicite. */
-    public void start(ResultListener listener) {
+    public void start(ResultListener listener) { start(Endpoint.SERVICE_POOL, listener); }
+
+    /** Liaison de service seulement : ni transaction vers l'interface AIDL, ni écriture. */
+    public void start(Endpoint endpoint, ResultListener listener) {
+        if (endpoint == null) throw new IllegalArgumentException("Service absent");
+        final ComponentName target = endpoint.component();
+        final String label = endpoint.name();
         if (Looper.myLooper() != Looper.getMainLooper())
             throw new IllegalStateException("Diagnostic sur fil UI uniquement");
         if (running) {
@@ -52,9 +63,9 @@ public final class OemServiceProbe {
 
         ServiceInfo info;
         try {
-            info = context.getPackageManager().getServiceInfo(TARGET, 0);
+            info = context.getPackageManager().getServiceInfo(target, 0);
         } catch (PackageManager.NameNotFoundException e) {
-            listener.onResult("ECARX ServicePoolService absent ou invisible ; aucune connexion.");
+            listener.onResult("ECARX " + label + " absent ou invisible ; aucune connexion.");
             return;
         } catch (RuntimeException e) {
             listener.onResult("Impossible de lire le service : " + e.getClass().getSimpleName());
@@ -75,8 +86,8 @@ public final class OemServiceProbe {
         connection = new ServiceConnection() {
             @Override public void onServiceConnected(ComponentName name, IBinder binder) {
                 finish(binder == null
-                        ? "Service ECARX lié mais Binder nul ; aucun appel de fonction."
-                        : "Binder ECARX reçu : liaison possible. AUCUNE méthode appelée. "
+                        ? label + " : Binder nul ; aucun appel de fonction."
+                        : label + " : Binder reçu. Liaison possible ; aucune méthode appelée. "
                           + "Permissions de contrôle automobile non prouvées.");
             }
             @Override public void onServiceDisconnected(ComponentName name) {
@@ -92,7 +103,7 @@ public final class OemServiceProbe {
 
         try {
             // Flags = 0 : ne JAMAIS démarrer automatiquement le service.
-            bound = context.bindService(new Intent().setComponent(TARGET), connection, 0);
+            bound = context.bindService(new Intent().setComponent(target), connection, 0);
             if (!bound) {
                 finish("bindService=false : service non actif ou connexion refusée. "
                         + "Ce résultat n'établit pas les permissions internes.");

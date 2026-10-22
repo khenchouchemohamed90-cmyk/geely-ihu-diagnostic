@@ -268,6 +268,8 @@ public class MainActivity extends Activity {
                 .setOnClickListener(v -> dispatchDiagnostic("prevalidation climatisation"));
         button(diagnosticsPanel, "Tester liaison SDK ECARX (sans commande)")
                 .setOnClickListener(v -> dispatchDiagnostic("tester liaison ecarx"));
+        button(diagnosticsPanel, "Tester liaison Xiaoka / EAS (sans commande)")
+                .setOnClickListener(v -> dispatchDiagnostic("tester liaison xiaoka"));
         button(diagnosticsPanel, "Scanner les 32 fonctions Xiaoka / SS11 (lecture seule)")
                 .setOnClickListener(v -> dispatchDiagnostic("diagnostic xiaoka"));
         button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
@@ -918,6 +920,21 @@ public class MainActivity extends Activity {
                         : DiagnosticSpeechService.InputPreset.AUTO;
                 journal.record("MIC", "Préréglage explicite=" + microphonePreset);
                 result.setText(getString(R.string.microphone_preset_selected, microphonePreset.name()));
+                break;
+            case EAS_BIND_PROBE:
+                // Liaison explicitement demandée, sans démarrer de service constructeur,
+                // sans transaction AIDL et sans accès à une commande de véhicule.
+                result.setText("Test de connexion EASFrameworkService ; aucune méthode appelée…");
+                status.setText("Liaison Xiaoka / EAS — diagnostic sans écriture");
+                if (serviceProbe == null) serviceProbe = new OemServiceProbe(getApplicationContext());
+                serviceProbe.start(OemServiceProbe.Endpoint.EAS_FRAMEWORK, message -> {
+                    journal.record("XIAOKA_EAS_BIND", message);
+                    if (alive() && foreground && diagnosticToken == resultGeneration) {
+                        result.setText("TEST LIAISON XIAOKA / EAS (sans écriture)\n" + message
+                                + "\nAucun droit automobile transmis à Jarvis ; aucune commande exécutée.");
+                        status.setText("Test EAS terminé — aucune commande envoyée");
+                    }
+                });
                 break;
             case OEM_BIND_PROBE:
                 // Bouton ou saisie explicite uniquement : jamais déclenché par une

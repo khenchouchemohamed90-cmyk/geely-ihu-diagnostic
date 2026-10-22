@@ -26,7 +26,7 @@ def main():
 
     apk = args.apk.resolve()
     badging = run(tools / 'aapt', 'dump', 'badging', apk)
-    for expected in ("package: name='com.aztech.jarvisfr.xiaoka.mic547'", "sdkVersion:'28'", "targetSdkVersion:'28'"):
+    for expected in ("package: name='com.aztech.jarvisfr.xiaoka.eas547'", "sdkVersion:'28'", "targetSdkVersion:'28'"):
         if expected not in badging:
             raise ValueError('Déclaration APK inattendue : ' + expected)
     alignment = run(tools / 'zipalign', '-c', '-v', '4', apk)

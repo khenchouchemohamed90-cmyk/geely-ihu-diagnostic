@@ -2,7 +2,7 @@ package com.aztech.jarvisfr;
 
 /** Commandes explicites dans la saisie existante ; aucune activation depuis une hypothèse vocale. */
 public final class DiagnosticCommands {
-    public enum Action { NONE, SILENT, TEST_VOICE, ENABLE_VOICE, VOICE_REPORT, ECARX_REPORT, XIAOKA_REPORT, HVAC_PREFLIGHT, OEM_BIND_PROBE, EXPORT, MIC_AUTO, MIC_STANDARD, MIC_RECOGNITION, MIC_SYSTEM }
+    public enum Action { NONE, SILENT, TEST_VOICE, ENABLE_VOICE, VOICE_REPORT, ECARX_REPORT, XIAOKA_REPORT, HVAC_PREFLIGHT, OEM_BIND_PROBE, EAS_BIND_PROBE, EXPORT, MIC_AUTO, MIC_STANDARD, MIC_RECOGNITION, MIC_SYSTEM }
     private DiagnosticCommands() { }
     public static Action parse(String phrase) {
         switch (FrenchIntentParser.normalize(phrase)) {
@@ -15,6 +15,9 @@ public final class DiagnosticCommands {
             case "diagnostic climatisation": return Action.HVAC_PREFLIGHT;
             case "tester liaison ecarx":
             case "diagnostic liaison ecarx": return Action.OEM_BIND_PROBE;
+            case "tester liaison xiaoka":
+            case "tester liaison eas":
+            case "diagnostic liaison xiaoka": return Action.EAS_BIND_PROBE;
             case "diagnostic xiaoka":
             case "compatibilite ss11":
             case "diagnostic des fonctions xiaoka": return Action.XIAOKA_REPORT;

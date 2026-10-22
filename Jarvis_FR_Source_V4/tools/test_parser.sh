@@ -6,6 +6,10 @@ trap 'rm -rf "$WORK"' EXIT
 javac -d "$WORK" "$BASE/android/app/src/main/java/com/aztech/jarvisfr/FrenchIntentParser.java" "$BASE/tools/TestParser.java"
 java -cp "$WORK" TestParser
 javac -encoding UTF-8 -cp "$WORK" -d "$WORK" \
+  "$BASE/android/app/src/main/java/com/aztech/jarvisfr/DiagnosticCommands.java" \
+  "$BASE/tools/TestDiagnosticCommands.java"
+java -cp "$WORK" TestDiagnosticCommands
+javac -encoding UTF-8 -cp "$WORK" -d "$WORK" \
   "$BASE/android/app/src/main/java/com/aztech/jarvisfr/FrenchConversation.java" \
   "$BASE/tools/TestFrenchConversation.java"
 java -cp "$WORK" TestFrenchConversation
