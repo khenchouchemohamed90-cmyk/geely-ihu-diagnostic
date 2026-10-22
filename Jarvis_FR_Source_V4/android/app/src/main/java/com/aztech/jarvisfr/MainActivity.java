@@ -33,7 +33,7 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/** Diagnostic francophone Android 9 ; toutes les écritures ECARX restent désactivées. */
+/** Assistant FR Android 9 ; seul l'essai A/C manuel avec confirmation peut écrire. */
 public class MainActivity extends Activity {
     private static final int REQUEST_MIC = 11;
     private static final int LISTENING_TIMEOUT_MS = 15000;
@@ -70,7 +70,9 @@ public class MainActivity extends Activity {
     private EcarxReadOnly ecarx;
     private OemServiceProbe serviceProbe;
     private volatile boolean destroyed;
-    private boolean foreground, readInProgress;
+    private volatile boolean foreground;
+    private boolean readInProgress, acTrialBusy;
+    private long lastAcTrialAt;
     private long resultGeneration;
     // Invalide toute ouverture OEM en attente si l'utilisateur reprend la main.
     private long micHandoffGeneration;
@@ -270,6 +272,13 @@ public class MainActivity extends Activity {
                 .setOnClickListener(v -> dispatchDiagnostic("tester liaison ecarx"));
         button(diagnosticsPanel, "Tester liaison Xiaoka / EAS (sans commande)")
                 .setOnClickListener(v -> dispatchDiagnostic("tester liaison xiaoka"));
+        TextView physicalLabel = text(diagnosticsPanel,
+                "ESSAI A/C MANUEL — véhicule stationné, jamais par la voix", 13);
+        physicalLabel.setTextColor(0xffffcf87);
+        button(diagnosticsPanel, "Essai A/C MARCHE (confirmation obligatoire)")
+                .setOnClickListener(v -> confirmManualAcTrial(true));
+        button(diagnosticsPanel, "Essai A/C ARRÊT (confirmation obligatoire)")
+                .setOnClickListener(v -> confirmManualAcTrial(false));
         button(diagnosticsPanel, "Scanner les 32 fonctions Xiaoka / SS11 (lecture seule)")
                 .setOnClickListener(v -> dispatchDiagnostic("diagnostic xiaoka"));
         button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
@@ -277,7 +286,7 @@ public class MainActivity extends Activity {
         button(diagnosticsPanel, "Activer réponses vocales après test").setOnClickListener(v -> dispatchDiagnostic("activer les reponses vocales"));
         button(diagnosticsPanel, "Exporter le journal").setOnClickListener(v -> dispatchDiagnostic("exporter le diagnostic"));
 
-        TextView safety = text(content, "ACTIONS AUTOMOBILES : lecture seule. Vitres, climatisation et appels non autorisés tant que leur compatibilité n'est pas validée.", 12);
+        TextView safety = text(content, "ACTIONS AUTOMOBILES : essai manuel A/C uniquement après confirmation. Vitres, portes, coffre, toit et fonctions de conduite désactivés. Aucun contrôle physique par la voix.", 12);
         safety.setTextColor(0xff8fa5b8);
 
         ScrollView scroll = new ScrollView(this);
@@ -360,6 +369,64 @@ public class MainActivity extends Activity {
         params.setMargins(dp(3), dp(5), dp(3), dp(5));
         parent.addView(view, params);
         view.setOnClickListener(v -> action.run());
+    }
+
+
+    /** Les essais de climatisation ne sont déclenchables que par ces boutons. */
+    private void confirmManualAcTrial(boolean enable) {
+        if (!alive() || !foreground || acTrialBusy || readInProgress) return;
+        final String action = enable ? "ACTIVER" : "DÉSACTIVER";
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("ESSAI RÉEL A/C — " + action)
+                .setMessage("Véhicule STATIONNÉ, frein de stationnement serré et moteur "
+                        + "dans un état adapté à la climatisation. "
+                        + "Confirmer un appel UNIQUE à la fonction constructeur A/C "
+                        + "0x10010300, zone 0, valeur " + (enable ? "1 (marche)" : "0 (arrêt)")
+                        + ". L'API peut refuser cette demande faute de permission. "
+                        + "Une réponse TRUE ne prouve PAS que le compresseur fonctionne. "
+                        + "Observer le témoin A/C et vérifier soi-même le résultat.")
+                .setNegativeButton("ANNULER", (dialog, which) -> { })
+                .setPositiveButton("JE CONFIRME : " + action,
+                        (dialog, which) -> runManualAcTrial(enable))
+                .show();
+    }
+
+    private void runManualAcTrial(boolean enable) {
+        if (!alive() || !foreground || acTrialBusy || readInProgress) return;
+        long now = SystemClock.elapsedRealtime();
+        if (lastAcTrialAt != 0 && now - lastAcTrialAt < 5000L) {
+            result.setText("Patiente 5 secondes entre les essais A/C.");
+            return;
+        }
+        acTrialBusy = true;
+        lastAcTrialAt = now;
+        final long token = ++resultGeneration;
+        stopSpeech();
+        stopTts();
+        journal.record("AC_PHYSICAL_TRIAL", "confirmation manuelle, demande="
+                + (enable ? "ON" : "OFF") + ", fonction=0x10010300, zone=0");
+        result.setText("Appel manuel A/C " + (enable ? "ON" : "OFF")
+                + " en cours ; ne pas multiplier les appuis.");
+        status.setText("Essai A/C : requête ECARX unique, contrôle physique à vérifier");
+        try {
+            worker.execute(() -> {
+                String report = ManualAcTrial.execute(getApplicationContext(), enable,
+                        () -> !destroyed && foreground,
+                        message -> journal.record("AC_PHYSICAL_TRIAL", message));
+                mainHandler.post(() -> {
+                    acTrialBusy = false;
+                    journal.record("AC_PHYSICAL_TRIAL", "résultat=" + report);
+                    if (alive() && foreground && token == resultGeneration) {
+                        result.setText(report + "\\nPour comparer, ouvrir CLIM OEM et vérifier le témoin A/C.");
+                        status.setText("Essai A/C terminé — résultat API, confirmation physique requise");
+                    }
+                });
+            });
+        } catch (RejectedExecutionException error) {
+            acTrialBusy = false;
+            result.setText("Exécuteur occupé : aucun appel A/C envoyé.");
+            journal.record("AC_PHYSICAL_TRIAL", "exécuteur occupé — aucun appel");
+        }
     }
 
     private void runQuick(String command) {
