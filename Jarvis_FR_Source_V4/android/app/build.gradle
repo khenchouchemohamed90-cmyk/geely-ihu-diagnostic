@@ -3,11 +3,11 @@ android {
     namespace 'com.aztech.jarvisfr'
     compileSdk 34
     defaultConfig {
-        applicationId 'com.aztech.jarvisfr.xiaoka.eas547'
+        applicationId 'com.aztech.jarvisfr.xiaoka.acmanual547'
         minSdk 28
         targetSdk 28
-        versionCode 20
-        versionName '0.9.5-xiaoka-eas-readonly-547'
+        versionCode 21
+        versionName '0.9.6-manual-ac-trial-547'
         ndk { abiFilters 'armeabi-v7a', 'arm64-v8a' }
     }
     buildFeatures { buildConfig true }
