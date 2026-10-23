@@ -43,3 +43,6 @@ java -cp "$WORK" TestXiaokaFeatureCatalog
 
 # Aucun appel direct de commande physique n'est autorisé dans cette V4.
 python3 "$BASE/tools/verify_readonly.py" --self-test
+
+# Passerelle audio : aucune commande véhicule directe, confirmation obligatoire.
+python3 "$BASE/tools/verify_mandarin_relay.py"
