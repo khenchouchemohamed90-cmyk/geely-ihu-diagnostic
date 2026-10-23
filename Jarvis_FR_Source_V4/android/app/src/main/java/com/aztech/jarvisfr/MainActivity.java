@@ -69,6 +69,8 @@ public class MainActivity extends Activity {
     private String lastPartial = "", lastAudioDiagnostic = "Aucune capture effectuée";
     private EcarxReadOnly ecarx;
     private OemServiceProbe serviceProbe;
+    private MandarinRelay mandarinRelay;
+    private long mandarinRelayToken;
     private volatile boolean destroyed;
     private boolean foreground, readInProgress;
     private long resultGeneration;
@@ -270,6 +272,15 @@ public class MainActivity extends Activity {
                 .setOnClickListener(v -> dispatchDiagnostic("tester liaison ecarx"));
         button(diagnosticsPanel, "Tester liaison Xiaoka / EAS (sans commande)")
                 .setOnClickListener(v -> dispatchDiagnostic("tester liaison xiaoka"));
+        section(diagnosticsPanel, "PASSERELLE AUDIO FR → XIAOKA — ESSAI MANUEL");
+        text(diagnosticsPanel, "Après un ordre français reconnu, la version finale pourra "
+                + "prononcer son équivalent chinois à Xiaoka. Pour l'instant, ces boutons "
+                + "font un test manuel ; une synthèse vocale chinoise Android est nécessaire. "
+                + "La reconnaissance par Xiaoka n'est PAS garantie.", 12);
+        button(diagnosticsPanel, "Test relais Xiaoka : A/C MARCHE (chinois)")
+                .setOnClickListener(v -> confirmMandarinRelay(true));
+        button(diagnosticsPanel, "Test relais Xiaoka : A/C ARRÊT (chinois)")
+                .setOnClickListener(v -> confirmMandarinRelay(false));
         button(diagnosticsPanel, "Scanner les 32 fonctions Xiaoka / SS11 (lecture seule)")
                 .setOnClickListener(v -> dispatchDiagnostic("diagnostic xiaoka"));
         button(diagnosticsPanel, "Diagnostic vocal").setOnClickListener(v -> dispatchDiagnostic("diagnostic vocal"));
@@ -360,6 +371,71 @@ public class MainActivity extends Activity {
         params.setMargins(dp(3), dp(5), dp(3), dp(5));
         parent.addView(view, params);
         view.setOnClickListener(v -> action.run());
+    }
+
+
+    /**
+     * Test volontaire du canal AUDIO uniquement : 0 appel direct à l'API voiture.
+     * Le micro Jarvis est libéré avant d'ouvrir l'interface Xiaoka.
+     */
+    private void confirmMandarinRelay(boolean enable) {
+        if (!alive() || !foreground) return;
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Essai relais Xiaoka A/C " + (enable ? "MARCHE" : "ARRÊT"))
+                .setMessage("Véhicule stationné et frein serré. "
+                        + "Jarvis va ouvrir Xiaoka puis prononcer "
+                        + (enable ? "打开空调 (allumer la climatisation)" : "关闭空调 (éteindre la climatisation)")
+                        + " dans les HAUT-PARLEURS de la tablette. "
+                        + "Xiaoka peut ne PAS entendre ce son à cause de l'annulation d'écho. "
+                        + "Vérifier personnellement l'effet, ne pas répéter en boucle.")
+                .setNegativeButton("ANNULER", (d, w) -> {})
+                .setPositiveButton("CONFIRMER LE TEST", (d, w) -> beginMandarinRelay(enable))
+                .show();
+    }
+
+    private void beginMandarinRelay(boolean enable) {
+        if (!alive() || !foreground) return;
+        final long token = ++mandarinRelayToken;
+        ++resultGeneration;
+        ++micHandoffGeneration;
+        stopSpeech();
+        stopTts();
+        journal.record("MANDARIN_RELAY", "Bouton confirmé A/C " + (enable ? "ON" : "OFF")
+                + " ; moteur TTS standard ; aucun API véhicule.");
+        status.setText("Transfert audio vers Xiaoka — test en cours");
+        result.setText("Libération du micro, lancement Xiaoka puis prononciation chinoise…");
+        if (captures.isEmpty()) {
+            startMandarinAfterRelease(enable, token);
+            return;
+        }
+        // La capture audio a sa propre thread. Nous attendons AudioRecord.release()
+        // (callback sur le fil UI), sans ouvrir Xiaoka alors qu'il manque le micro.
+        final Set<DiagnosticSpeechService> pending = new HashSet<>(captures);
+        for (DiagnosticSpeechService capture : pending) {
+            capture.whenStopped(() -> {
+                if (!alive() || !foreground || mandarinRelayToken != token) return;
+                if (captures.isEmpty()) startMandarinAfterRelease(enable, token);
+            });
+        }
+    }
+
+    private void startMandarinAfterRelease(boolean enable, long token) {
+        if (!alive() || !foreground || token != mandarinRelayToken) return;
+        // Rend un deuxième callback inopérant. Les événements TTS ne s'annulent
+        // pas lors de onPause(), car Xiaoka doit rester à l'avant-plan.
+        mandarinRelayToken++;
+        if (mandarinRelay == null) mandarinRelay = new MandarinRelay(getApplicationContext());
+        mandarinRelay.start(enable,
+                () -> AndroidActions.perform(this, FrenchIntentParser.Intent.OUVRIR_XIAOKA)
+                        .startsWith("Ouverture demandée : Xiaoka"),
+                event -> {
+                    journal.record("MANDARIN_RELAY", event);
+                    if (alive()) {
+                        result.setText(event + "\n"
+                                + "Écouter Xiaoka et contrôler le témoin A/C d'origine ; "
+                                + "le retour TTS n'est pas une preuve d'activation.");
+                    }
+                });
     }
 
     private void runQuick(String command) {
@@ -1058,6 +1134,7 @@ public class MainActivity extends Activity {
         worker.shutdownNow();
         cloudWorker.shutdownNow();
         if (serviceProbe != null) serviceProbe.close();
+        if (mandarinRelay != null) mandarinRelay.close();
         cloudGeneration++;
         cloudBusy = false;
         // Un Binder propriétaire bloqué ne peut pas être annulé de force. Son
